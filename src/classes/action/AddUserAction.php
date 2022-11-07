@@ -1,10 +1,12 @@
 <?php
 
-namespace iutnc\netvod\Action;
+namespace iutnc\netvod\action;
 
-use iutnc\netvod\Auth\Auth;
+use iutnc\netvod\auth\Auth;
+
 class AddUserAction extends Action
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -12,27 +14,61 @@ class AddUserAction extends Action
 
     public function execute(): string
     {
-        if ($this->http_method == "GET") {
-            return "
-            <h1>Inscription</h1>
-            <form method='post' action='?action=add-user'>
-                                <label>Email : <input type='email' name='email' placeholder='email'></label>
-                                <label>mot de passe : <input type='password' name='pass' placeholder='mot de passe'></label>
-                                <label>Retaper mot de passe : <input type='password' name='passBis' placeholder='Retaper mot de passe'></label>
-                                <button type='submit'>Valide</button>
-            </form> ";
-        }
+        $res ="";
+        if($this->http_method == 'GET') $res = $this->inscription();
+        else if ($this->http_method == 'POST') $res = $this->inscrit();
+        return $res;
+    }
 
-        else if ($this->http_method == "POST") {
-            $r = "<p style='color:red'>Votre mot de passe doit faire au moins 4 caractères avec un nombre et une minuscule ou votre mot de passe est différent</p><br>";
-            $mail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-            $pass = filter_var($_POST['pass'], FILTER_SANITIZE_STRING);
-            $passBis = filter_var($_POST['passBis'], FILTER_SANITIZE_STRING);
-            if (Auth::register($mail, $pass) && $pass == $passBis) {
-                $r = "Vous êtes inscrit";
-            };
-            return $r;
+    function inscrit(): string
+    {
+        $mail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $pass = $_POST['pass'];
+        $pass2 = $_POST['pass2'];
+        $res = Auth::register($mail, $pass,$pass2);
+        switch ($res) {
+            case "EmailExist":
+                header("Location: ?action=add-user&error=1");
+                break;
+            case "MdpWrong":
+                header("Location: ?action=add-user&error=2");
+                break;
+            case "NotSameMdp":
+                header("Location: ?action=add-user&error=3");
+                break;
+            case "Log":
+                $res="Vous êtes connecté";
+                break;
         }
-        return "";
+        return $res;
+    }
+
+
+    function inscription(): string
+    {
+        $res = "
+<h1>Inscription</h1>
+<form method='post' action='?action=add-user'>
+                    <label>Email : <input type='email' name='email' placeholder='email'></label>
+                    <label>mot de passe : <input type='password' name='pass' placeholder='mot de passe'></label>
+                    <label>Entrer à nouveau votre mot de passe : <input type='password' name='pass2' placeholder='mot de passe'></label>
+                    <button type='submit'>Valide</button>";
+        if (isset($_GET['error'])) {
+            switch ($_GET['error']) {
+                case 1:
+                    $res .= "<p style='color:red'>Vous avez déjà un compte avec cette adresse mail</p><br>";
+                    break;
+
+                case 2:
+                    $res .= "<p style='color:red'>Votre mot de passe doit faire au moins 10 caractères avec un nombre, une minuscule et une majuscule</p><br>";
+                    break;
+
+                case 3:
+                    $res .= "<p style='color:red'>Votre mot de passe est different entre les 2 champs</p><br>";
+                    break;
+            }
+        }
+        $res .= "</form>";
+        return $res;
     }
 }
