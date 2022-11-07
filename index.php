@@ -1,7 +1,7 @@
 <?php
 
 use iutnc\netvod\db\ConnectionFactory;
-use iutnc\netvod\dispatch\Dispatcher;
+use iutnc\netvod\Dispatcher\Dispatcher;
 
 require_once 'vendor/autoload.php';
 

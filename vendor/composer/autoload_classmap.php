@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'iutnc\\netvod\\db\\ConnectionFactory' => $baseDir . '/src/classes/db/ConnectionFactory.php',
 );

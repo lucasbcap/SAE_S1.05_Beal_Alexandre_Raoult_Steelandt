@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\dispatch;
+namespace iutnc\netvod\Dispatcher;
 
 use iutnc\deefy\action\DisplayPlaylistAction;
 use iutnc\deefy\action\SigninAction;
