@@ -4,7 +4,7 @@ namespace iutnc\netvod\video;
 
 class Episode
 {
-    protected string $titre,$source,$image,$resume,$genre,$publiqueVise;
+    protected string $titre,$source,$image,$resume;
     protected int $numero,$duree;
 
     /**
@@ -15,7 +15,7 @@ class Episode
      * @param int $numero
      * @param int $duree
      */
-    public function __construct(string $titre, string $source, string $image, string $resume, int $numero, int $duree,string $genre,$publiqueVise)
+    public function __construct(string $titre, string $source, string $image, string $resume, int $numero, int $duree)
     {
         $this->titre = $titre;
         $this->source = $source;
@@ -23,8 +23,6 @@ class Episode
         $this->resume = $resume;
         $this->numero = $numero;
         $this->duree = $duree;
-        $this->genre=$genre;
-        $this->publiqueVise=$publiqueVise;
     }
 
 

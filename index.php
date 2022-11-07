@@ -9,7 +9,7 @@ session_start();
 
 ConnectionFactory::setConfig("config.ini");
 
-$v = new \iutnc\netvod\video\videotrack\episode("test","video/beach.mp4","Image/beach.jpg","test",0,0);
+$v = new \iutnc\netvod\video\episode("test","video/beach.mp4","Image/beach.jpg","test",0,0);
 $vRender = new \iutnc\netvod\render\EpisodeRender($v);
 
 echo $vRender->render(1);
