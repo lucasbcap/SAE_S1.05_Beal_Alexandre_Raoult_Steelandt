@@ -32,7 +32,7 @@ body{
 
 /* Bordered form */
 form {
-    width:20%;
+    width:400px;
     padding: 30px;
     border: 1px solid #f1f1f1;
     background: #fff;
@@ -45,7 +45,7 @@ form {
 }
 
 /* Full-width inputs */
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
