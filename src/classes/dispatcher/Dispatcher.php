@@ -3,8 +3,8 @@
 namespace iutnc\netvod\Dispatcher;
 
 //use iutnc\netvod\action\DisplayPlaylistAction;
-use iutnc\netvod\Action\SigninAction;
-use iutnc\netvod\Action\AddUserAction;
+use iutnc\netvod\action\SigninAction;
+use iutnc\netvod\action\AddUserAction;
 
 class Dispatcher
 {
