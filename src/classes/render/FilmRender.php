@@ -12,12 +12,21 @@ class FilmRender extends Render
         $this->film = $film;
     }
 
-    public function render(): string
+    public function render(int $selector=1): string
     {
-        return "<div class='track'>".
-            "<h1>{$this->film->titre}</h1>".
-            "<h2>{$this->film->resume}</h2>".
-            "<p><video controls src='{$this->film->source}'></video></p>".
+        $html = "";
+        if($selector===1) {
+            $html .=  "<div class='track'>" .
+                "<p><video controls src='{$this->ep->source}'></video></p>";
+        }
+        if($selector===2){
+            $html .= "<div class='track'>" .
+                "<p><img controls src='{$this->ep->image}'></img></p>";
+        }
+        $html .=
+            "<h1>Titre : {$this->ep->titre}</h1>" .
+            "<p>Résumé :{$this->ep->resume} Durée :{$this->ep->duree}</p>".
             "</div>";
+        return $html;
     }
 }
