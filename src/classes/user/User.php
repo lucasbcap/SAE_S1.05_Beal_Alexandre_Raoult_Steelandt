@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\user;
+namespace iutnc\netvod\User;
 
 use iutnc\netvod\db\ConnectionFactory as ConnectionFactory;
 class User

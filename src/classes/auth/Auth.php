@@ -2,7 +2,7 @@
 
 namespace iutnc\netvod\auth;
 
-use iutnc\netvod\User as User;
+use iutnc\netvod\User\User;
 use iutnc\netvod\db\ConnectionFactory as ConnectionFactory;
 
 class Auth
@@ -13,7 +13,7 @@ class Auth
         $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
         $pass = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
         $bdd = ConnectionFactory::makeConnection();
-        $c1 = $bdd->prepare("Select passwd, role from user where email=:mail");
+        $c1 = $bdd->prepare("Select passwd from user where email=:mail");
         $c1->bindParam(":mail", $username);
         $_SESSION['mdp'] = $pass;
         $c1->execute();
@@ -21,10 +21,9 @@ class Auth
         $role=1;
         while ($d = $c1->fetch()) {
             $mdpbdd = $d['passwd'];
-            $role = $d['role'];
         }
         if (password_verify($pass, $mdpbdd)) {
-            $_SESSION['user'] = serialize(new User($username, $mdpbdd, $role));
+            $_SESSION['user'] = serialize(new User($username, $mdpbdd));
         }else {
             $_SESSION['user'] = null;
         }
@@ -34,20 +33,31 @@ class Auth
         $r = "Log";
         if ($pass==$pass2) {
             if (self::checkPasswordStrength($pass,4)) {
+                if(!self::verifUser($email)) {
+                    $bdd = ConnectionFactory::makeConnection();
+
+                    $c = $bdd->prepare("select count(*)+1 as compte from user");
+                    $c->execute();
+                    $compte = 0;
+                    while ($d = $c->fetch()) {
+                        $compte = $d['compte'];
+                    }
+                }
                 $bdd = ConnectionFactory::makeConnection();
-                $c = $bdd->prepare("Select * from user where email=:mail");
-                $c->bindParam(":mail", $email);
-                $c->execute();
+                $c1 = $bdd->prepare("Select * from user where email=:mail");
+                $c1->bindParam(":mail", $email);
+                $c1->execute();
                 $verif = true;
-                while ($d = $c->fetch()) {
+                while ($d = $c1->fetch()) {
                     $verif = false;
                 }
                 if ($verif) {
-                    $c1 = $bdd->prepare("insert into user (email, passwd) values(:email,:pass);");
-                    $c1->bindParam(":email", $email,);
+                    $c2 = $bdd->prepare("insert into user (id, email, passwd) values(:compte,:email,:pass);");
+                    $c2->bindParam(":compte", $compte,);
+                    $c2->bindParam(":email", $email,);
                     $pass = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 12]);
-                    $c1->bindParam(":pass", $pass);
-                    $c1->execute();
+                    $c2->bindParam(":pass", $pass);
+                    $c2->execute();
                 } else {
                     $r = "EmailExist";
                 }
@@ -71,31 +81,20 @@ class Auth
 
     }
 
-    public static function verifPl(int $id):bool
-    {
-        $res = false;
-        if (isset($_SESSION['user']) && unserialize($_SESSION['user']) != null) {
-            $user = unserialize($_SESSION['user']);
-            if ($user->getRole() == 100){
-                $res=true;
-            }else {
-                $bdd = ConnectionFactory::makeConnection();
-                $user = unserialize($_SESSION['user']);
-                $c1 = $bdd->prepare("Select id_pl from user 
-            inner join user2playlist on user.id=user2playlist.id_user 
-                where email=:mail;");
-                $mail = $user->getEmail();
-                $c1->bindParam(':mail',$mail);
-                $c1->execute();
-                while($d = $c1->fetch()){
-                    if ($d['id_pl'] == $id){
-                        $res=true;
-                    }
-                }
-            }
-
+    public static function verifUser(string $mailUser):bool{
+        $bdd = ConnectionFactory::makeConnection();
+        $r=false;
+        $c3 = $bdd->prepare("select count(*) as compte from user 
+                            where email=?");
+        $c3->bindParam(1,$mailUser);
+        $c3->execute();
+        $compte = 0;
+        while ($d = $c3->fetch()) {
+            $compte = $d['compte'];
         }
-        return $res;
+
+        if($compte !=0 || $mailUser==="admin@mail.com") $r = true;
+        return $r;
     }
 
 }
