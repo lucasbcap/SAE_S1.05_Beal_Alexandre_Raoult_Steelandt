@@ -2,13 +2,13 @@
 
 namespace iutnc\netvod\render;
 
-use iutnc\netvod\video\videotrack\episode;
+use iutnc\netvod\video\episode;
 
 class EpisodeRender extends Render
 {
-    protected episode $ep;
+    protected Episode $ep;
 
-    public function __construct(episode $ep){
+    public function __construct(Episode $ep){
         $this->ep = $ep;
     }
 
