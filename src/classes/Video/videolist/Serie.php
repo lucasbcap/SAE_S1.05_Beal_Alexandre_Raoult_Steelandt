@@ -1,11 +1,11 @@
 <?php
 
-namespace iutnc\netvod\Video;
+namespace iutnc\netvod\Video\videolist;
 
 class Serie
 {
 
-    protected array $episode;
+    protected array $saison;
     protected int $nbsaison;
     protected string $genre,$type;
 
@@ -16,14 +16,14 @@ class Serie
      */
     public function __construct(int $nbsaison, string $genre, string $type)
     {
-        $this->episode = [];
+        $this->saison = [];
         $this->nbsaison = $nbsaison;
         $this->genre = $genre;
         $this->type = $type;
     }
 
-    public function ajouterSerie(array $d):void{
-        array_push($this->episode,$d);
+    public function ajouterSaison(Saison $d):void{
+        array_push($this->saison,$d);
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\Video;
+namespace iutnc\netvod\Video\videotrack;
 
 class Film extends Video
 {

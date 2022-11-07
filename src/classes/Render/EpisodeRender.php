@@ -2,7 +2,7 @@
 
 namespace iutnc\netvod\Render;
 
-use iutnc\netvod\Video\episode;
+use iutnc\netvod\Video\videotrack\episode;
 
 class EpisodeRender extends Render
 {
