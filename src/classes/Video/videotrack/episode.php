@@ -2,7 +2,6 @@
 
 namespace iutnc\netvod\Video\videotrack;
 
-use iutnc\netvod\vidéo\Video;
 
 class episode extends Video
 {
