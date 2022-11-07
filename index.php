@@ -9,8 +9,5 @@ session_start();
 
 ConnectionFactory::setConfig("config.ini");
 
-$v = new \iutnc\netvod\vidéo\Video("test","test","test","test",0,0);
-var_dump($v);
-
 $html = new Dispatcher();
 $html->run();
