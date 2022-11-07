@@ -1,8 +1,8 @@
 <?php
 
-namespace iutnc\netvod\Video\videolist;
+namespace iutnc\netvod\video\videolist;
 
-use iutnc\netvod\Video\videotrack\Video;
+use iutnc\netvod\video\videotrack\Video;
 
 class Saison
 {
