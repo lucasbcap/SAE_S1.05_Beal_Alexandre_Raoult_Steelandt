@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\Video\videotrack;
+namespace iutnc\netvod\video\videotrack;
 
 abstract class Video
 {
@@ -26,7 +26,7 @@ abstract class Video
     }
 
 
-    public function __get(string $at):mixed {
+    public function __get(string $at)  {
         if (property_exists($this, $at)) {
             return $this->$at;
         }else {

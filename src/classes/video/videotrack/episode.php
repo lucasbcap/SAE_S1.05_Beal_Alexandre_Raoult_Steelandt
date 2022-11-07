@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\Video\videotrack;
+namespace iutnc\netvod\video\videotrack;
 
 
 class episode extends Video
