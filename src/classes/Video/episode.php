@@ -1,8 +1,10 @@
 <?php
 
-namespace iutnc\netvod\vidéo;
+namespace iutnc\netvod\Video;
 
-class episode extends Video
+use iutnc\netvod\vidéo\Video;
+
+class pisode extends Video
 {
 
     public function __construct(string $titre, string $source, string $image, string $resume, int $numero, int $duree)

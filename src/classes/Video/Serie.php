@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\vidéo;
+namespace iutnc\netvod\Video;
 
 class Serie
 {
@@ -22,7 +22,7 @@ class Serie
         $this->type = $type;
     }
 
-    public function ajouterSerie(array $d){
+    public function ajouterSerie(array $d):void{
         array_push($this->episode,$d);
     }
 

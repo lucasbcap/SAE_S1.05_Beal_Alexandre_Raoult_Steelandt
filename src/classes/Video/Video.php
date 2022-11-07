@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\vidéo;
+namespace iutnc\netvod\Video;
 
 abstract class Video
 {
