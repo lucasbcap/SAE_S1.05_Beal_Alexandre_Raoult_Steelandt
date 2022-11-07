@@ -28,7 +28,7 @@ class AddUserAction extends Action
             $mail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $pass = filter_var($_POST['pass'], FILTER_SANITIZE_STRING);
             $passBis = filter_var($_POST['passBis'], FILTER_SANITIZE_STRING);
-            if (Auth::register($mail, $pass, $passBis)) {
+            if (Auth::register($mail, $pass) && $pass == $passBis) {
                 $r = "Vous êtes inscrit";
             };
             return $r;

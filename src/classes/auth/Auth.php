@@ -8,7 +8,7 @@ use iutnc\netvod\db\ConnectionFactory as ConnectionFactory;
 class Auth
 {
 
-    public static function authenticate()
+    public static function authenticate(): ?User
     {
         $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
         $pass = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
@@ -22,80 +22,60 @@ class Auth
             $mdpbdd = $d['passwd'];
         }
         if (password_verify($pass, $mdpbdd)) {
-            $_SESSION['user'] = serialize(new User($username, $mdpbdd));
-        }else {
-            $_SESSION['user'] = null;
+            return new User($username, $mdpbdd, 1);
         }
+        return null;
     }
 
-    public static function register(string $email, string $pass, string $pass2):string{
-        $r = "Log";
-        if ($pass==$pass2) {
-            if (self::checkPasswordStrength($pass,9)) {
+    public static function register(string $email, string $pass):bool{
+        $r=false;
+        if (self::checkPasswordStrength($pass)){
+            if(!self::verifUser($email)) {
                 $bdd = ConnectionFactory::makeConnection();
-                $c = $bdd->prepare("Select * from user where email=:mail");
-                $c->bindParam(":mail", $email);
+
+                $c = $bdd->prepare("select count(*)+1 as compte from user");
                 $c->execute();
-                $verif = true;
+                $compte = 0;
                 while ($d = $c->fetch()) {
-                    $verif = false;
+                    $compte = $d['compte'];
                 }
-                if ($verif) {
-                    $c1 = $bdd->prepare("insert into user (email, passwd) values(:email,:pass);");
-                    $c1->bindParam(":email", $email,);
-                    $pass = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 12]);
-                    $c1->bindParam(":pass", $pass);
-                    $c1->execute();
-                } else {
-                    $r = "EmailExist";
-                }
-            } else {
-                $r = "MdpWrong";
+
+                $c1 = $bdd->prepare("insert into user (id,email, passwd) values(:id,:email,:pass);");
+                $c1->bindParam(":id", $compte);
+                $c1->bindParam(":email", $email);
+                $pass = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 12]);
+                $c1->bindParam(":pass", $pass);
+                $c1->execute();
+                $r = true;
             }
-        }else{
-            $r= "NotSameMdp";
         }
         return $r;
     }
 
-    public  static function checkPasswordStrength(string $pass, int $minimumLength): bool {
+    public static function verifUser(string $mailUser):bool{
+        $bdd = ConnectionFactory::makeConnection();
+        $r=false;
+        $c3 = $bdd->prepare("select count(*) as compte from user 
+                            where email=?");
+        $c3->bindParam(1,$mailUser);
+        $c3->execute();
+        $compte = 0;
+        while ($d = $c3->fetch()) {
+            $compte = $d['compte'];
+        }
 
-        $length = (strlen($pass) < $minimumLength); // longueur minimale
+        if($compte !=0 || $mailUser==="admin@mail.com") $r = true;
+        return $r;
+    }
+
+
+    public  static function checkPasswordStrength(string $pass): bool {
+
+        $length = (strlen($pass) < 4); // longueur minimale
         $digit = preg_match("#[\d]#", $pass); // au moins un digit
         $lower = preg_match("#[a-z]#", $pass); // au moins une minuscule
-        $upper = preg_match("#[A-Z]#", $pass); // au moins une majuscule
-        if ($length || !$digit || !$lower || !$upper)return false;
+        if ($length || !$digit || !$lower)return false;
         return true;
-
     }
-
-    /**
-    public static function verifPl(int $id):bool
-    {
-        $res = false;
-        if (isset($_SESSION['user']) && unserialize($_SESSION['user']) != null) {
-            $user = unserialize($_SESSION['user']);
-            if ($user->getRole() == 100){
-                $res=true;
-            }else {
-                $bdd = ConnectionFactory::makeConnection();
-                $user = unserialize($_SESSION['user']);
-                $c1 = $bdd->prepare("Select id_pl from user 
-            inner join user2playlist on user.id=user2playlist.id_user 
-                where email=:mail;");
-                $mail = $user->getEmail();
-                $c1->bindParam(':mail',$mail);
-                $c1->execute();
-                while($d = $c1->fetch()){
-                    if ($d['id_pl'] == $id){
-                        $res=true;
-                    }
-                }
-            }
-
-        }
-        return $res;
-    }
-     * */
 
 }
