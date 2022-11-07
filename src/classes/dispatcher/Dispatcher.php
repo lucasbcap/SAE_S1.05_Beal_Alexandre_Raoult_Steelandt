@@ -63,7 +63,7 @@ class Dispatcher
 </head>
 <header>
 <ul>
-    <li><a href='./'>NetVod</a></li>
+    <li><a href='./' id='Netvod'>NetVod</a></li>
     <li><a href='?action=sign-in'>Connexion</a></li>
     <li><a href='?action=add-user'>Inscription</a></li>
     <li><a href='?action=display-catalogue'>Afficher Catalogue</a></li>
