@@ -37,5 +37,13 @@ class Serie
         array_push($this->saison, $d);
     }
 
+    public function __get(string $at):mixed {
+        if (property_exists($this, $at)) {
+            return $this->$at;
+        }else {
+            throw new \Exception("$at: invalid property");
+        }
+    }
+
 
 }

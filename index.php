@@ -10,9 +10,16 @@ session_start();
 ConnectionFactory::setConfig("config.ini");
 
 $v = new \iutnc\netvod\video\episode("test","video/beach.mp4","Image/beach.jpg","test",0,0);
-$vRender = new \iutnc\netvod\render\EpisodeRender($v);
+$v1 = new \iutnc\netvod\video\episode("test","video/horses.mp4","Image/horses.jpg","test",0,0);
 
-echo $vRender->render(1);
+
+$a = array($v,$v1);
+
+$serie = new \iutnc\netvod\video\Serie($a,"Titre","genre","Famille","Descriptif","sortie");
+
+$serieRender = new \iutnc\netvod\render\SerieRender($serie);
+
+echo $serieRender->render(1);
 
 $html = new Dispatcher();
 $html->run();
