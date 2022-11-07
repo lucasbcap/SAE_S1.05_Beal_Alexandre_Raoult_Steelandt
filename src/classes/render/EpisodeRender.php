@@ -1,8 +1,8 @@
 <?php
 
-namespace iutnc\netvod\Render;
+namespace iutnc\netvod\render;
 
-use iutnc\netvod\Video\videotrack\episode;
+use iutnc\netvod\video\videotrack\episode;
 
 class EpisodeRender extends Render
 {
