@@ -2,9 +2,9 @@
 
 namespace iutnc\netvod\Dispatcher;
 
-use iutnc\deefy\action\DisplayPlaylistAction;
-use iutnc\deefy\action\SigninAction;
-use iutnc\deefy\action\AddUserAction;
+use iutnc\netvod\action\DisplayPlaylistAction;
+use iutnc\netvod\action\SigninAction;
+use iutnc\netvod\action\AddUserAction;
 
 class Dispatcher
 {
