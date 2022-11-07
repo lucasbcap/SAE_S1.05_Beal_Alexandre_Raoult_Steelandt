@@ -2,7 +2,7 @@
 
 namespace iutnc\netvod\vidéo;
 
-class Video
+abstract class Video
 {
     protected string $titre,$source,$image,$resume;
     protected int $numero,$duree;

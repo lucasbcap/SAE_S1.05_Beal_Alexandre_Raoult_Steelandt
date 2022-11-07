@@ -9,5 +9,6 @@ session_start();
 
 ConnectionFactory::setConfig("config.ini");
 
+
 $html = new Dispatcher();
 $html->run();
