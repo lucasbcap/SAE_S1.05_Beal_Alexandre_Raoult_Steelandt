@@ -32,7 +32,7 @@ class User
     }
 
     /**
-     * @return string
+     * @return string email
      */
     public function getEmail(): string
     {
