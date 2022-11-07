@@ -47,11 +47,11 @@ class Dispatcher
         return "<!DOCTYPE html>
 <html lang='fr'>
 <head>
-    <title>Deefy</title>
+    <title>NetVOD</title>
     <meta charset='UTF-8' />
 </head>
 <body>
-<h1>Deefy</h1>
+<h1>NetVOD</h1>
 <nav>
     <li><a href='./'>Accueil</a></li>
     <li><a href='?action=sign-in'>Connexion</a></li>
