@@ -1,8 +1,8 @@
 <?php
 
-namespace iutnc\netvod\vidéo;
+namespace iutnc\netvod\Video\videotrack;
 
-class Video
+abstract class Video
 {
     protected string $titre,$source,$image,$resume;
     protected int $numero,$duree;
