@@ -1,10 +1,10 @@
 <?php
 
-namespace iutnc\netvod\Video\videotrack;
+namespace iutnc\netvod\Video;
 
-abstract class Video
+class Episode
 {
-    protected string $titre,$source,$image,$resume;
+    protected string $titre,$source,$image,$resume,$genre,$publiqueVise;
     protected int $numero,$duree;
 
     /**
@@ -15,7 +15,7 @@ abstract class Video
      * @param int $numero
      * @param int $duree
      */
-    public function __construct(string $titre, string $source, string $image, string $resume, int $numero, int $duree)
+    public function __construct(string $titre, string $source, string $image, string $resume, int $numero, int $duree,string $genre,$publiqueVise)
     {
         $this->titre = $titre;
         $this->source = $source;
@@ -23,6 +23,8 @@ abstract class Video
         $this->resume = $resume;
         $this->numero = $numero;
         $this->duree = $duree;
+        $this->genre=$genre;
+        $this->publiqueVise=$publiqueVise;
     }
 
 

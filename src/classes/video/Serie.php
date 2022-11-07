@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\video\videolist;
+namespace iutnc\netvod\video;
 
 class Serie
 {
