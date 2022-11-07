@@ -61,15 +61,14 @@ class Dispatcher
     <link rel='stylesheet' href='css/style.css'>
 </head>
 <header>
-<nav>
-    <li><a href='./'>Accueil</a></li>
+<ul>
+    <li><a href='./'>NetVod</a></li>
     <li><a href='?action=sign-in'>Connexion</a></li>
     <li><a href='?action=add-user'>Inscription</a></li>
     <li><a href='?action=display-catalogue'>Afficher Catalogue</a></li>
-</nav>
+</ul>
 </header>
 <body>
-<h1>NetVOD</h1>
 $res
 </body>
 </html>";

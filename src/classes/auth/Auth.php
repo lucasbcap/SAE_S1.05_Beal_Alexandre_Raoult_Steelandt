@@ -7,7 +7,6 @@ use iutnc\netvod\db\ConnectionFactory as ConnectionFactory;
 
 class Auth
 {
-
     public static function authenticate()
     {
         $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
