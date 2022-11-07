@@ -7,10 +7,9 @@ use iutnc\netvod\db\ConnectionFactory as ConnectionFactory;
 
 class Auth
 {
-
     public static function authenticate()
     {
-        $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+        $username = filter_var($_POST['mail'], FILTER_SANITIZE_STRING);
         $pass = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
         $bdd = ConnectionFactory::makeConnection();
         $c1 = $bdd->prepare("Select passwd from user where email=:mail");
