@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\Video;
+namespace iutnc\netvod\video;
 
 class Episode
 {
