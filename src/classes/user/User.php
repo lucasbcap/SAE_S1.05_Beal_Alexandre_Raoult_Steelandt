@@ -18,7 +18,7 @@ class User
     }
 
 
-    function getPlaylist(): array
+    function getSeries(): array
     {
         ConnectionFactory::setConfig("config.ini");
         $bdd = ConnectionFactory::makeConnection();
@@ -26,7 +26,7 @@ class User
         $c1->execute();
         $array = [];
         while ($d = $c1->fetch()) {
-            $array[] = $d['titre'];
+            array_push($array, $d['titre']);$array[] = $d['titre'];
         }
         return $array;
     }
