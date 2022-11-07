@@ -3,6 +3,7 @@
 namespace iutnc\netvod\Dispatcher;
 
 use iutnc\netvod\action\DisplayCatalogueAction;
+use iutnc\netvod\action\DisplayEpisodeAction;
 use iutnc\netvod\action\DisplaySerieAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\AddUserAction;
