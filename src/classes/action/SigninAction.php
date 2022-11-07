@@ -1,9 +1,9 @@
 <?php
 
 namespace iutnc\netvod\Action;
-use iutnc\netvod\auth\Auth;
+use iutnc\netvod\Auth\Auth;
 
-class SigninAction extends \iutnc\netvod\action\Action
+class SigninAction extends \iutnc\netvod\Action\Action
 {
 
     public function __construct()
