@@ -33,7 +33,16 @@ class Episode
         $requete->bindParam(":id",$id);
         $requete->execute();
         $d = $requete->fetch();
-        return new Episode($d['titre'],$d['file'],"Image/beach.jpg",$d['resume'],$d['numero'],$d['duree']);
+        return new Episode($d['titre'],"video/".$d['file'],"Image/beach.jpg",$d['resume'],$d['numero'],$d['duree']);
+    }
+
+    public static function chercherEpisodeTitre(string $titre):int {
+        $bdd = ConnectionFactory::makeConnection();
+        $requete = $bdd->prepare("Select id from episode where titre=?");
+        $requete->bindParam(1,$titre);
+        $requete->execute();
+        $d = $requete->fetch();
+        return $d['id'];
     }
 
 
