@@ -2,6 +2,8 @@
 
 namespace iutnc\netvod\video;
 
+use iutnc\netvod\db\ConnectionFactory;
+
 class Episode
 {
     protected string $titre,$source,$image,$resume;
@@ -23,6 +25,15 @@ class Episode
         $this->resume = $resume;
         $this->numero = $numero;
         $this->duree = $duree;
+    }
+
+    public static function chercherEpisode(int $id):Episode{
+        $bdd = ConnectionFactory::makeConnection();
+        $requete = $bdd->prepare("Select * from episode where id=:id");
+        $requete->bindParam(":id",$id);
+        $requete->execute();
+        $d = $requete->fetch();
+        return new Episode($d['titre'],$d['file'],"Image/beach.jpg",$d['resume'],$d['numero'],$d['duree']);
     }
 
 
