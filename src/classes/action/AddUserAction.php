@@ -49,10 +49,10 @@ class AddUserAction extends Action
         $res = "
 <form method='post' action='?action=add-user'>
 <h1>Inscription</h1>
-                    <label>Email : <input type='email' name='email' placeholder='email'></label>
-                    <label>mot de passe : <input type='password' name='pass' placeholder='mot de passe'></label>
-                    <label>Entrer à nouveau votre mot de passe : <input type='password' name='pass2' placeholder='mot de passe'></label>
-                    <button type='submit'>Valide</button>";
+                    <label><b>Email</b><input type='email' name='email' placeholder='Email'></label>
+                    <label><b>Mot de passe</b> <input type='password' name='pass' placeholder='Mot de passe'></label>
+                    <label><b>Entrer à nouveau votre mot de passe</b> <input type='password' name='pass2' placeholder='Entrer à nouveau votre mot de passe'></label>
+                    <input type='submit' id='log' value='INSCRIPTION'>";
         if (isset($_GET['error'])) {
             switch ($_GET['error']) {
                 case 1:
