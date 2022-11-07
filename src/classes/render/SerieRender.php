@@ -19,10 +19,12 @@ class SerieRender extends Render
             "<p>Description : {$this->list->descriptif}</p>".
             "<p>Genre : {$this->list->genre} /  Public visé : {$this->list->publiqueVise}</p>";
         $html.="<p>Nombre d'épisodes :{$this->list->nmbEpisode} / Année de sortie :{$this->list->sortie} </p>";
-        $html .="Listes des série : <br>";
+        $html .="Listes des épisodes : <br>";
+        $i = 1;
         foreach($this->list->listEpisode as $track){
             $episodeRender = new EpisodeRender($track);
-            $html .= $episodeRender->render(2)."\n";
+            $html .= $i.". ".$episodeRender->render($selector)."\n";
+            $i++;
         }
 
         $this->render = $html;

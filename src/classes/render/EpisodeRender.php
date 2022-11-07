@@ -16,17 +16,18 @@ class EpisodeRender extends Render
     {
         $html = "";
         if($selector===1) {
+            $html .=
+                "<h1>Titre : {$this->ep->titre}</h1>" .
+                "<p>Résumé : {$this->ep->resume} Durée :{$this->ep->duree}</p>".
+                "</div>";
             $html .=  "<div class='track'>" .
                 "<p><video controls src='{$this->ep->source}'></video></p>";
         }
         if($selector===2){
-            $html .= "<div class='track'>" .
-                "<p><img controls src='{$this->ep->image}'></img></p>";
+            $html .=
+                "<p>Titre : {$this->ep->titre}      Durée :{$this->ep->duree}</p>";
         }
-        $html .=
-            "<h1>Titre : {$this->ep->titre}</h1>" .
-            "<p>Résumé :{$this->ep->resume} Durée :{$this->ep->duree}</p>".
-            "</div>";
+
         return $html;
     }
 }
