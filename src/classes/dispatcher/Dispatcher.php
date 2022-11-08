@@ -44,6 +44,9 @@ class Dispatcher
                 $act = new DisplayEpisodeAction();
                 $html = $act->execute();
                 break;
+            case'profil':
+                $act = new ProfilAction();
+                $html = $act->execute();
             default:
                 $html = '<h2>Bienvenue !</h2>';
                 if(!isset($_SESSION['user']))  $html .= "<p>Veuillez vous connecter pour accéder au catalogue</p>";
@@ -66,10 +69,11 @@ class Dispatcher
                     </head>
                     <header>
                     <ul>
-                        <li><a href='./' id='Netvod'>NetVod</a></li>
-                     
-                      
-                        <li><a href='?action=display-catalogue'>Afficher Catalogue</a></li>
+                        <li><a href='./' id='Netvod'>NetVod</a></li>                    
+                        <li><a href='?action=display-catalogue'>Afficher Catalogue</a></li>   
+                        <li><a href='?action=profil'>Profil</a></li>
+
+                        
                     </ul>
                     </header>
                     <body>
@@ -88,7 +92,6 @@ class Dispatcher
                     <header>
                     <ul>
                         <li><a href='./' id='Netvod'>NetVod</a></li>
-                        
                         <li><a href='?action=sign-in'>Connexion</a></li>
                         <li><a href='?action=add-user'>Inscription</a></li>
                     </ul>

@@ -27,7 +27,7 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
                 while ($data2 = $c1->fetch()) {
                     $res .= "<a href='?action=display-serie&id=" . $data2['id'] . "'>";
                     $res .= "<h4><center>". $data2['titre'] . "</h4>";
-                    $res .= "<center><a href='?action=display-serie&id=" . $data2['id'] . "'><div class=zoom>
+                    $res .= "<center><a href='?action=display-serie&id=" . $data2['id'] . "' id='lien'><div class=zoom>
                     <div class=image>
                     <img src='Image/beach.jpg' width='600' height='380'></a></center><br>
                     </div>
