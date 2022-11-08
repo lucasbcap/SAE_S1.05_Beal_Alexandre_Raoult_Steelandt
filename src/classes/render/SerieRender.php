@@ -15,7 +15,8 @@ class SerieRender extends Render
 
     public function render(int $selector): string
     {
-        $html = "<h1>{$this->list->titre}</h1>".
+        $html = "
+            <div><h1>{$this->list->titre}</h1>".
             "<p>Description : {$this->list->descriptif}</p>".
             "<p>Genre : {$this->list->genre} /  Public visé : {$this->list->publiqueVise}</p>";
         $html.="<p>Nombre d'épisodes : {$this->list->nmbEpisode} / Année de sortie : {$this->list->sortie} </p>";
@@ -26,6 +27,7 @@ class SerieRender extends Render
             $html .= "<p>" .$i.". ".$episodeRender->render($selector)."</p>";
             $i++;
         }
+        $html.="</div>";
 
         $this->render = $html;
         return $this->render;

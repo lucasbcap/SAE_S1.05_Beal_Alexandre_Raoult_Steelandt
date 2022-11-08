@@ -69,6 +69,11 @@ class Dispatcher
     {
 
         if(isset($_SESSION['user'])) {
+            $search ="";
+            if ($this->action == 'display-catalogue'){
+                $search = "<li id='searchbar'> <input size='30%' type ='search' 
+                            name='search' placeholder='Série'>   </li>"    ;
+            }
             return "<!DOCTYPE html>
                     <html lang='fr'>
                     <head>
@@ -80,7 +85,9 @@ class Dispatcher
                     <ul>
                         <li><a href='./' id='Netvod'>NetVod</a></li>                    
                         <li><a href='?action=display-catalogue'>Afficher Catalogue</a></li>   
-                        <li><a href='?action=profil'>Profil</a></li>                        
+                        <li><a href='?action=profil'>Profil</a></li>  
+                        $search
+                             
                     </ul>
                     </header>
                     <body>

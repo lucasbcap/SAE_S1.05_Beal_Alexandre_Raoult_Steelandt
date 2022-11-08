@@ -28,7 +28,7 @@ class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
                     $res .= $serieCouranteRenderer->render(2);
                 }
             }else{
-                $res = "Aucune Série en favorie";
+                $res .= "Aucune Série en favorie";
             }
 
         }
@@ -43,7 +43,7 @@ class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
                     $res .= $serieCouranteRenderer->render(2);
                 }
             }else{
-                $res = "Aucune Série en cour";
+                $res .= "Aucune Série en cour";
             }
 
         }
