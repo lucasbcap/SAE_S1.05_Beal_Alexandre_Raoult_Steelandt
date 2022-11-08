@@ -19,24 +19,28 @@ class User
         $this->passwrd = $passwrd;
     }
 
-    function addFavorie(int $idSerie):void{
+    function addSQL(int $id, string $table):void{
         $bdd = ConnectionFactory::makeConnection();
-        $c1 = $bdd->prepare("insert into favori values (:email,:idSerie)");
+        $c1 = $bdd->prepare("insert into $table values (:email,:id)");
         $c1->bindParam(":email",$this->email);
-        $c1->bindParam(":email",$idSerie);
+        $c1->bindParam(":email",$id);
         $c1->execute();
     }
 
 
-    function getFavorie(): ?array
+    function getSQL(string $table): ?array
     {
         $bdd = ConnectionFactory::makeConnection();
-        $c1 = $bdd->prepare("select idSerie from favori where email = :email");
+        $val = "idSerie";
+        if ($table=="estvisionne"){
+            $val = "idVideo";
+        }
+        $c1 = $bdd->prepare("select $val from $table where email = :email");
         $c1->bindParam(":email",$this->email);
         $c1->execute();
         $array = null;
         while ($d = $c1->fetch()) {
-            $serie = Serie::creerSerie($d['idSerie']);
+            $serie = Serie::creerSerie($d[$val]);
             if ($serie!=null) {
                 $array[] = $serie;
             }
