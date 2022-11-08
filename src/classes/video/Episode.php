@@ -7,7 +7,7 @@ use iutnc\netvod\db\ConnectionFactory;
 class Episode
 {
     protected string $titre,$source,$image,$resume;
-    protected int $numero,$duree;
+    protected int $numero,$duree,$serie;
 
     /**
      * @param string $titre
@@ -16,8 +16,9 @@ class Episode
      * @param string $resume
      * @param int $numero
      * @param int $duree
+     * @param int $serie
      */
-    public function __construct(string $titre, string $source, string $image, string $resume, int $numero, int $duree)
+    public function __construct(string $titre, string $source, string $image, string $resume, int $numero, int $duree,int $serie)
     {
         $this->titre = $titre;
         $this->source = $source;
@@ -25,6 +26,7 @@ class Episode
         $this->resume = $resume;
         $this->numero = $numero;
         $this->duree = $duree;
+        $this->serie = $serie;
     }
 
     public static function chercherEpisode(int $id):Episode{
@@ -33,7 +35,7 @@ class Episode
         $requete->bindParam(":id",$id);
         $requete->execute();
         $d = $requete->fetch();
-        return new Episode($d['titre'],"video/".$d['file'],"Image/beach.jpg",$d['resume'],$d['numero'],$d['duree']);
+        return new Episode($d['titre'],"video/".$d['file'],"Image/beach.jpg",$d['resume'],$d['numero'],$d['duree'],$d['serie_id']);
     }
 
     public static function chercherEpisodeTitre(string $titre):int {
