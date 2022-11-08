@@ -53,7 +53,7 @@ class Dispatcher
             default:
                 $act = new DisplayFavoriAction();
                 $html = $act->execute();
-                if(!isset($_SESSION['user']))  $html .= "<p>Veuillez vous connecter pour accéder au catalogue</p>";
+                if(!isset($_SESSION['user']))  $html = "<p>Veuillez vous connecter pour accéder au catalogue</p>";
                 break;
         }
         print($this->renderPage($html));

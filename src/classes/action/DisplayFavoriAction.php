@@ -25,10 +25,25 @@ class DisplayFavoriAction extends \iutnc\netvod\action\Action
             if ($array!=null) {
                 foreach ($array as $d) {
                     $serieCouranteRenderer = new CatalogueRender($d);
-                    $res .= $serieCouranteRenderer->render();
+                    $res .= $serieCouranteRenderer->render(2);
                 }
             }else{
                 $res = "Aucune Série en favorie";
+            }
+
+        }
+
+        $res .= "<h2>Liste des séries en cours : </h2><br>";
+        $user = unserialize($_SESSION['user']);
+        if ($this->http_method == "GET") {
+            $array = $user->getSQL("encours");
+            if ($array!=null) {
+                foreach ($array as $d) {
+                    $serieCouranteRenderer = new CatalogueRender($d);
+                    $res .= $serieCouranteRenderer->render(2);
+                }
+            }else{
+                $res = "Aucune Série en cour";
             }
 
         }
