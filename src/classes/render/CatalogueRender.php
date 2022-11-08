@@ -32,14 +32,13 @@ class CatalogueRender extends Render
             foreach ( $array as $serie){
                 if ($this->serie->id === $serie->id) $trouve = true;
             }
-
-
              if($trouve){
                  $res .= "<center><a href='?action=prefere&id=" . $this->serie->id . "'><img src='Image/coeurplein.png' width='70' height='70'></a></center>";
              }else {
                  $res .= "<center><a href='?action=prefere&id=" . $this->serie->id . "'><img src='Image/coeurvide.png' width='70' height='70'></a></center>";
              }
         }
+
         if($selector===2){
             $res = "<div class='liste'><a href='?action=display-serie&id=" . $this->serie->id . "'>";
             $res .= "<h4>" . $this->serie->titre . "</h4>";

@@ -114,9 +114,13 @@ body{
 #input{
     width: 40%;
     padding: 8px 14px;
-
 }
-
+#input2{
+    height: 100px;
+}
+#profil{
+    height: 100px;
+}
 #formPro{
     background: #fff;
     padding :30px;
