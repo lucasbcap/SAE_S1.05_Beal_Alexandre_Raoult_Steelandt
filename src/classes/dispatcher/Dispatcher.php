@@ -71,11 +71,11 @@ class Dispatcher
         if(isset($_SESSION['user'])) {
             $search ="";
             if ($this->action == 'display-catalogue'){
-                $search = "<li id='searchbar'> <input size='30%' type ='search' 
-                            name='search' placeholder='Série'>   </li>"    ;
+                $search = "<form id='searchbar'><li id='searchbar'> <input size='30%' type ='search' 
+                            name='search' placeholder='Rechercher une série'></li></form>"    ;
             }
             return "<!DOCTYPE html>
-                    <html lang='fr'>
+                    <html lang='fr'>    
                     <head>
                         <title>NetVOD</title>
                         <meta charset='UTF-8' />
