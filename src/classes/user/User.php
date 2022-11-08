@@ -26,8 +26,8 @@ class User
             $val = "idVideo";
         }
 
-        $c1 = $bdd->prepare("DELETE FROM encours WHERE email=:mail AND $val=:id;");
-        $c1->bindParam(":email", $this->email);
+        $c1 = $bdd->prepare("DELETE FROM $table WHERE email=:mail AND $val=:id;");
+        $c1->bindParam(":mail", $this->email);
         $c1->bindParam(":id", $id);
         $c1->execute();
     }
