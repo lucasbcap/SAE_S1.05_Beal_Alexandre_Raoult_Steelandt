@@ -18,7 +18,7 @@ class DisplayFavoriAction extends \iutnc\netvod\action\Action
 
     public function execute(): string
     {
-        $res = "<p>Liste de Favoris : </p><br>";
+        $res = "<h2>Liste de Favoris : </h2><br>";
         $user = unserialize($_SESSION['user']);
         if ($this->http_method == "GET") {
             $array = $user->getSQL("favori");
