@@ -25,8 +25,14 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
                 $c1 = $bdd->query("SELECT titre,id from serie");
                 $c1->execute();
                 while ($data2 = $c1->fetch()) {
-                    $res .= $data2['titre'];
-                    $res .= "<a href='?action=display-serie&id=" . $data2['id'] . "'><img src='Image/beach.jpg' width='300' height='300'></a><br>";
+                    $res .= "<a href='?action=display-serie&id=" . $data2['id'] . "'>";
+                    $res .= "<h4><center>". $data2['titre'] . "</h4>";
+                    $res .= "<center><a href='?action=display-serie&id=" . $data2['id'] . "'><div class=zoom>
+                    <div class=image>
+                    <img src='Image/beach.jpg' width='600' height='380'></a></center><br>
+                    </div>
+                    </div>";
+
                 }
             }
 

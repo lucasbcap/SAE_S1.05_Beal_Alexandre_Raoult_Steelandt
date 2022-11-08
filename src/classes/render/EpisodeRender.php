@@ -18,13 +18,13 @@ class EpisodeRender extends Render
         if($selector===1) {
             $html =
                 "<h1>Titre : {$this->ep->titre}</h1>" .
-                "<p>Résumé : {$this->ep->resume} Durée :{$this->ep->duree}</p>".
+                "<div class = 'resume'>Résumé : {$this->ep->resume}</div>  <div class='duree'> Durée : {$this->ep->duree} min </div><br>".
                 "</div>";
             $html .=  "<div class='track'>" .
                 "<p><video controls src='{$this->ep->source}' type='video/mp4'></video></p>";
         }
         if($selector===2){
-            $html = "<a href='?action=display-episode&id=" . Episode::chercherEpisodeTitre($this->ep->titre) . "'>{$this->ep->titre}    | Durée : {$this->ep->duree}</a>";
+            $html = "<a href='?action=display-episode&id=" . Episode::chercherEpisodeTitre($this->ep->titre) . "'>{$this->ep->titre}    | Durée : {$this->ep->duree} min</a>";
         }
 
         return $html;
