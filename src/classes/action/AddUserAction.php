@@ -47,7 +47,7 @@ class AddUserAction extends Action
     function inscription(): string
     {
         $res = "
-<form method='post' action='?action=add-user'>
+<form id='sign' method='post' action='?action=add-user'>
 <h1>Inscription</h1>
                     <label><b>Email</b><input type='email' name='email' placeholder='Email'></label>
                     <label><b>Mot de passe</b> <input type='password' name='pass' placeholder='Mot de passe'></label>

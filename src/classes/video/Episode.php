@@ -7,7 +7,7 @@ use iutnc\netvod\db\ConnectionFactory;
 class Episode
 {
     protected string $titre,$source,$image,$resume;
-    protected int $numero,$duree,$serie;
+    protected int $numero,$duree;
 
     /**
      * @param string $titre

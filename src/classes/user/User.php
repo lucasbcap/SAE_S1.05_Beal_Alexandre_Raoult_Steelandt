@@ -33,7 +33,6 @@ class User
     }
 
     function addSQL(int $id, string $table):void{
-
         $bdd = ConnectionFactory::makeConnection();
         $val = "idSerie";
         if ($table=="estvisionne"){
