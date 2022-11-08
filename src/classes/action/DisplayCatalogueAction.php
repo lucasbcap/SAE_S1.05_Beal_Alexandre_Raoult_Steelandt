@@ -22,14 +22,14 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
         $res="";
         if ($this->http_method == "GET") {
                 $res = "<h2>Catalogue : </h2> ";
-                $c1 = $bdd->query("SELECT titre,id from serie");
+                $c1 = $bdd->query("SELECT titre,id,img from serie");
                 $c1->execute();
                 while ($data2 = $c1->fetch()) {
                     $res .= "<a href='?action=display-serie&id=" . $data2['id'] . "'>";
                     $res .= "<h4><center>". $data2['titre'] . "</h4>";
                     $res .= "<center><a href='?action=display-serie&id=" . $data2['id'] . "' id='lien'><div class=zoom>
                     <div class=image>
-                    <img src='Image/beach.jpg' width='600' height='380'></a></center><br>
+                    <img src='Image/".$data2['img']."' width='600' height='380'></a></center><br>
                     </div>
                     </div>";
 

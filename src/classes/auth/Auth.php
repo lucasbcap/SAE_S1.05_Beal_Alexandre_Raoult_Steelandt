@@ -32,16 +32,6 @@ class Auth
         $r = "Log";
         if ($pass==$pass2) {
             if (self::checkPasswordStrength($pass,4)) {
-                if(!self::verifUser($email)) {
-                    $bdd = ConnectionFactory::makeConnection();
-
-                    $c = $bdd->prepare("select count(*)+1 as compte from user");
-                    $c->execute();
-                    $compte = 0;
-                    while ($d = $c->fetch()) {
-                        $compte = $d['compte'];
-                    }
-                }
                 $bdd = ConnectionFactory::makeConnection();
                 $c1 = $bdd->prepare("Select * from user where email=:mail");
                 $c1->bindParam(":mail", $email);
@@ -51,8 +41,7 @@ class Auth
                     $verif = false;
                 }
                 if ($verif) {
-                    $c2 = $bdd->prepare("insert into user (id, email, passwd) values(:compte,:email,:pass);");
-                    $c2->bindParam(":compte", $compte,);
+                    $c2 = $bdd->prepare("insert into user values(:email,:pass,1);");
                     $c2->bindParam(":email", $email,);
                     $pass = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 12]);
                     $c2->bindParam(":pass", $pass);
