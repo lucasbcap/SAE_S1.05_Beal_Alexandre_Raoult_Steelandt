@@ -23,7 +23,7 @@ class SigninAction extends Action
     function register(): string
     {
         $res = "
-    <form action='?action=sign-in' method='POST'>
+    <form id='sign' action='?action=sign-in' method='POST'>
         <h1>Connexion</h1>
 
         <label><b>Email</b></label>
