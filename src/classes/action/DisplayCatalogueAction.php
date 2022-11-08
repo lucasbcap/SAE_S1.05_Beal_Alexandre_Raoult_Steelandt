@@ -45,7 +45,7 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
             if ($array!=null) {
                 foreach ($array as $d) {
                     $serieCouranteRenderer = new CatalogueRender($d);
-                    $res .= $serieCouranteRenderer->render(2);
+                    $res .= $serieCouranteRenderer->render(1);
                 }
             }
 

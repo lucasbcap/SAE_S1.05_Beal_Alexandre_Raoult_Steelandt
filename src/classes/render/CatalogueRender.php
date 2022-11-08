@@ -17,10 +17,22 @@ class CatalogueRender extends Render
 
     public function render(int $selector = 1): string
     {
+        $bdd = ConnectionFactory::makeConnection();
+        $c2 = $bdd->prepare("select AVG(note) as moyenne from Commentaire where  idSerie=?");
+        $id = $this->serie->id;
+        $c2->bindParam(1, $id);
+        $c2 ->execute();
+        $moyenne = $c2->fetch()['moyenne'];
+        if($moyenne === null) $moyenne = "Non notée";
+        else $moyenne =round($moyenne,2) . " sur 5";
+
         $res = "";
         if($selector===1) {
-            $res = "<div class='liste'><a href='?action=display-serie&id=" . $this->serie->id . "'>";
-            $res .= "<h4><center>" . $this->serie->titre . "</h4>";
+            $res = "<div class='liste'><a href='?action=display-serie&id=" . $id . "'>";
+            $res .= "<h4><center>" . $this->serie->titre ."</h4>";
+            $res .= "<h4><center><a href='?action=display-commentaire&id=" . $this->serie->id . "' id='lien' <a>Note moyenne : $moyenne</h4>";
+
+
             $res .= "<center><a href='?action=display-serie&id=" . $this->serie->id . "' id='lien'><div class=zoom>
                     <div class=image>
                     <img src='Image/" . $this->serie->img . "' width='600' height='380'></a></center><br>

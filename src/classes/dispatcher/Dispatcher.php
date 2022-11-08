@@ -3,6 +3,7 @@
 namespace iutnc\netvod\dispatcher;
 
 use iutnc\netvod\action\DisplayCatalogueAction;
+use iutnc\netvod\action\DisplayCommentaireAction;
 use iutnc\netvod\action\DisplayEpisodeAction;
 use iutnc\netvod\action\DisplayPrincipaleAction;
 use iutnc\netvod\action\DisplaySerieAction;
@@ -54,6 +55,10 @@ class Dispatcher
                 break;
             case 'prefere':
                 $act = new PrefereAction();
+                $html =$act->execute();
+                break;
+            case 'display-commentaire':
+                $act = new DisplayCommentaireAction();
                 $html =$act->execute();
                 break;
             default:

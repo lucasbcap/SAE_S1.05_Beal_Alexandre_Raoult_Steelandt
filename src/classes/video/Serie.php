@@ -9,7 +9,8 @@ class Serie
 
     protected array $listEpisode;
     protected string $titre, $genre, $publiqueVise, $descriptif, $sortie, $dateAjout,$img;
-    protected int $nmbEpisode, $id;
+    protected int $nmbEpisode;
+    protected int $id;
 
     /**
      * @param array $listEpisode

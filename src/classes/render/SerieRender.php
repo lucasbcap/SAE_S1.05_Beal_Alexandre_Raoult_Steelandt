@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\render;
 
+use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
 
@@ -15,6 +16,7 @@ class SerieRender extends Render
 
     public function render(int $selector): string
     {
+
         $html = "
             <div><h1>{$this->list->titre}</h1>".
             "<p>Description : {$this->list->descriptif}</p>".
