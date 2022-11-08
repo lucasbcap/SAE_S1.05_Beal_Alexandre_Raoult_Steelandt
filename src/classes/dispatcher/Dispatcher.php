@@ -9,6 +9,8 @@ use iutnc\netvod\action\DisplaySerieAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\AddUserAction;
 use iutnc\netvod\action\ProfilAction;
+use iutnc\netvod\action\PrefereAction;
+
 
 class Dispatcher
 {
@@ -49,6 +51,10 @@ class Dispatcher
             case 'profil':
                 $act = new ProfilAction();
                 $html = $act->execute();
+                break;
+            case 'prefere':
+                $act = new PrefereAction();
+                $html =$act->execute();
                 break;
             default:
 

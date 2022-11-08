@@ -41,7 +41,7 @@ class Auth
                     $verif = false;
                 }
                 if ($verif) {
-                    $c2 = $bdd->prepare("insert into user values(:email,:pass,1);");
+                    $c2 = $bdd->prepare("insert into user values(:email,:pass,null,null,null,1);");
                     $c2->bindParam(":email", $email,);
                     $pass = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 12]);
                     $c2->bindParam(":pass", $pass);

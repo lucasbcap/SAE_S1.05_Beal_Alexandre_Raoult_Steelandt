@@ -24,11 +24,20 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
                 $episode = Episode::chercherEpisode($_GET["id"]);
                 $episodeRender = new EpisodeRender($episode);
                 $res .= $episodeRender->render(1);
+                $res .= "
+                <form id='sign' action='?action=sign-in' method='POST'>
+                <h1>Commentaire</h1>
 
+                <label><b>Email</b></label>
+                <input type='email' placeholder='Entrer votre mail' name='mail' required><br>
+        
+                <input type='submit' id='log' value='LOGIN'>
+                ";
                 $user = unserialize($_SESSION['user']);
-                $user->addSQL($episode->serie,"encours");
+                $user->addSQL($episode->serie,"enCours");
             }
         }
+
 
         return $res;
 

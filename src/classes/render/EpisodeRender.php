@@ -27,6 +27,7 @@ class EpisodeRender extends Render
             $html = "<a href='?action=display-episode&id=" . Episode::chercherEpisodeTitre($this->ep->titre) . "' id='lien'>{$this->ep->titre}    | Durée : {$this->ep->duree} min</a>";
         }
 
+
         return $html;
     }
 }

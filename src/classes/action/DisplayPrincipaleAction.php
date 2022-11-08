@@ -28,7 +28,7 @@ class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
                     $res .= $serieCouranteRenderer->render(2);
                 }
             }else{
-                $res = "Aucune Série en favorie";
+                $res = "Aucune série en favori";
             }
 
         }
@@ -36,14 +36,14 @@ class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
         $res .= "<h2>Liste des séries en cours : </h2><br>";
         $user = unserialize($_SESSION['user']);
         if ($this->http_method == "GET") {
-            $array = $user->getSQL("encours");
+            $array = $user->getSQL("enCours");
             if ($array!=null) {
                 foreach ($array as $d) {
                     $serieCouranteRenderer = new CatalogueRender($d);
                     $res .= $serieCouranteRenderer->render(2);
                 }
             }else{
-                $res = "Aucune Série en cour";
+                $res = "Aucune série en cours";
             }
 
         }

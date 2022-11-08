@@ -26,6 +26,18 @@ class CatalogueRender extends Render
                     <img src='Image/" . $this->serie->img . "' width='600' height='380'></a></center><br>
                     </div>
                     </div>";
+            $array = unserialize($_SESSION['user'])->getSQL("favori");
+            $trouve = false;
+            foreach ( $array as $serie){
+                if ($this->serie->id === $serie->id) $trouve = true;
+            }
+
+
+             if($trouve){
+                 $res .= "<center><a href='?action=prefere&id=" . $this->serie->id . "'><img src='Image/coeurplein.png' width='70' height='70'></a></center>";
+             }else {
+                 $res .= "<center><a href='?action=prefere&id=" . $this->serie->id . "'><img src='Image/coeurvide.png' width='70' height='70'></a></center>";
+             }
         }
         if($selector===2){
             $res = "<a href='?action=display-serie&id=" . $this->serie->id . "'>";
@@ -36,6 +48,7 @@ class CatalogueRender extends Render
                     </div>
                     </div>";
         }
+
         return $res;
     }
 }
