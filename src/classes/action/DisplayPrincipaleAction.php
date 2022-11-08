@@ -7,7 +7,7 @@ use iutnc\netvod\render\CatalogueRender;
 use iutnc\netvod\render\SerieRender;
 use iutnc\netvod\video\Serie;
 
-class DisplayFavoriAction extends \iutnc\netvod\action\Action
+class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
 {
 
 
