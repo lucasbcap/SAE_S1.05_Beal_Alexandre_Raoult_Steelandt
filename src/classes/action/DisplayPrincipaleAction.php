@@ -44,6 +44,7 @@ class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
                 }
             }else{
                 $res = "Aucune série en cours";
+
             }
 
         }

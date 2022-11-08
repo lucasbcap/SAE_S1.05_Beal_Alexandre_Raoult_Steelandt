@@ -71,6 +71,11 @@ li {
     float: left;
 }
 
+#searchbar{
+    float: right;
+    padding-right: 5%;
+}
+
 li a {
     display: block;
     color: white;
@@ -139,7 +144,7 @@ body{
 }
 
 /* Full-width inputs */
-input[type=text], input[type=password], input[type=email] {
+input[type=text], input[type=password], input[type=email], input[type=search]{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
