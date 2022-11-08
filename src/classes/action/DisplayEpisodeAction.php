@@ -25,6 +25,8 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
                 $episodeRender = new EpisodeRender($episode);
                 $res .= $episodeRender->render(1);
 
+                $user = unserialize($_SESSION['user']);
+                $user->addSQL($episode->serie,"encours");
             }
         }
 

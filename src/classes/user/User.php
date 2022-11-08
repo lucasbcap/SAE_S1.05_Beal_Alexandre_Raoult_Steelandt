@@ -19,12 +19,43 @@ class User
         $this->passwrd = $passwrd;
     }
 
+    function suppSQL(int $id,string $table){
+        $bdd = ConnectionFactory::makeConnection();
+        $val = "idSerie";
+        if ($table=="estvisionne"){
+            $val = "idVideo";
+        }
+
+        $c1 = $bdd->prepare("DELETE FROM encours WHERE email=:mail AND $val=:id;");
+        $c1->bindParam(":email", $this->email);
+        $c1->bindParam(":id", $id);
+        $c1->execute();
+    }
+
     function addSQL(int $id, string $table):void{
         $bdd = ConnectionFactory::makeConnection();
-        $c1 = $bdd->prepare("insert into $table values (:email,:id)");
-        $c1->bindParam(":email",$this->email);
-        $c1->bindParam(":id",$id);
-        $c1->execute();
+        $val = "idSerie";
+        if ($table=="estvisionne"){
+            $val = "idVideo";
+        }
+
+        $bdd = ConnectionFactory::makeConnection();
+
+        $c = $bdd->prepare("Select * from $table where email=:mail and $val=:id");
+        $c->bindParam(":mail", $this->email);
+        $c->bindParam(":id", $id);
+        $c->execute();
+        $verif = true;
+        while ($d = $c->fetch()) {
+            $verif = false;
+        }
+
+        if($verif) {
+            $c1 = $bdd->prepare("insert into $table values (:email,:id)");
+            $c1->bindParam(":email", $this->email);
+            $c1->bindParam(":id", $id);
+            $c1->execute();
+        }
     }
 
 
