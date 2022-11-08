@@ -25,11 +25,10 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
                 $episodeRender = new EpisodeRender($episode);
                 $res .= $episodeRender->render(1);
                 $res .= "
-                <form id='sign' action='?action=sign-in' method='POST'>
-                <h1>Commentaire</h1>
+                <form id='profil' action='?action=sign-in' method='POST'>
 
-                <label><b>Email</b></label>
-                <input type='email' placeholder='Entrer votre mail' name='mail' required><br>
+                <label><b>Commentaire</b></label>
+                <input type='text' placeholder='Entrer votre commentaire' name='commentaire' required height='100'><br>
         
                 <input type='submit' id='log' value='LOGIN'>
                 ";
