@@ -73,9 +73,7 @@ class Dispatcher
                     <ul>
                         <li><a href='./' id='Netvod'>NetVod</a></li>                    
                         <li><a href='?action=display-catalogue'>Afficher Catalogue</a></li>   
-                        <li><a href='?action=profil'>Profil</a></li>
-
-                        
+                        <li><a href='?action=profil'>Profil</a></li>                        
                     </ul>
                     </header>
                     <body>
