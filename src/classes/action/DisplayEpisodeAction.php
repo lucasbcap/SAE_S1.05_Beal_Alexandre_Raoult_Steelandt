@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\action;
 
+use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\render\EpisodeRender;
 use iutnc\netvod\render\SerieRender;
 use iutnc\netvod\video\Episode;
@@ -19,56 +20,83 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
     {
         $res ="";
         if($this->http_method == 'GET') $res = $this->affiche();
-        else if ($this->http_method == 'POST') $res = $this->enregistrerCom();
+        else if ($this->http_method == 'POST') {
+            $res = $this->affiche();
+            $this->enregistrerCom();
+        }
         return $res;
 
     }
 
     public function affiche() : string{
         $res="";
-        if ($this->http_method == "GET") {
-            if(isset($_GET["id"])){
-                $episode = Episode::chercherEpisode($_GET["id"]);
-                $episodeRender = new EpisodeRender($episode);
-                $res .= $episodeRender->render(1);
-                $res .= "
-                <form id='formPro' action='?action=sign-in' method='POST'>
-                <label><b>Note</b></label>
-                <select name='note'>
-            <option value='tiret'>-</option>
-            <option value='1'>1</option>
-            <option value='2'>2</option>
-            <option value='3'>3</option>
-            <option value='4'>4</option>
-            <option value='5'>5</option>
-             </select>
-              <br>
-              <br>
+        if(isset($_GET["id"])){
+            $episode = Episode::chercherEpisode($_GET["id"]);
+            $episodeRender = new EpisodeRender($episode);
+            $res .= $episodeRender->render(1);
+            $res .= "
+            <form id='formPro' action='?action=display-episode&id=".$_GET["id"]."' method='POST'>
+            <label><b>Note</b></label>
+            <select name='note'>
+        <option value='tiret'>-</option>
+        <option value='1'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option value='5'>5</option>
+         </select>
+          <br>
+          <br>
 
-                <label><b>Commentaire</b></label>
-                <input id='input2' type='text' placeholder='Entrer votre commentaire' name='commentaire' required height='100'><br>
-        
-                <input type='submit' id='log' value='Envoyer'>
-                ";
-                $user = unserialize($_SESSION['user']);
-                $user->addSQL($episode->serie,"enCours");
-            }
+            <label><b>Commentaire</b></label>
+            <input id='input2' type='text' placeholder='Entrer votre commentaire' name='commentaire' height='100'><br>
+    
+            <input type='submit' id='log' value='Envoyer'>
+            ";
+            $user = unserialize($_SESSION['user']);
+            $user->addSQL($episode->serie,"enCours");
         }
 
         return $res;
     }
 
-    public function enregistrerCom() : string{
-        $res="";
-        if(isset($_POST['note']) && isset($_POST['commentaire'])){
+    public function enregistrerCom(){
+        if(isset($_POST['note']) && DisplayEpisodeAction::notable()){
+            $com = null;
+            if(isset($_POST['commentaire'])){
+                $com = $_POST['commentaire'];
+            }
             $bdd = ConnectionFactory::makeConnection();
             $note=$_POST['note'];
-            $com = $_POST['commentaire'];
+            $chercherSerie = Episode::chercherSerie($_GET['id']);
             $emailUser = unserialize($_SESSION['user'])->getEmail();
-            $c2 = $bdd->prepare("INSERT INTO Commentaire values (?,?,?,)");
+
+            $c2 = $bdd->prepare("INSERT INTO Commentaire values (?,?,?,?)");
+            $c2->bindParam(1,$com);
+            $c2->bindParam(2,$note);
+            $c2->bindParam(3,$emailUser);
+            $c2->bindParam(4, $chercherSerie);
+            $c2 ->execute();
 
         }
-        return $res;
+    }
+
+    public static function notable():bool{
+        $bdd = ConnectionFactory::makeConnection();
+
+        $chercherSerie = Episode::chercherSerie($_GET['id']);
+        $emailUser = unserialize($_SESSION['user'])->getEmail();
+
+        $c2 = $bdd->prepare("select * from Commentaire where email=? and idSerie=?");
+        $c2->bindParam(1,$emailUser);
+        $c2->bindParam(2, $chercherSerie);
+        $c2 ->execute();
+
+        $verif = true;
+        if($c2->fetch()){
+            $verif = false;
+        }
+        return $verif;
     }
 
 }

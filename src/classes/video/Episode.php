@@ -47,6 +47,15 @@ class Episode
         return $d['id'];
     }
 
+    public static function chercherSerie(int $idEpisode):int {
+        $bdd = ConnectionFactory::makeConnection();
+        $requete = $bdd->prepare("Select serie_id from episode where id=?");
+        $requete->bindParam(1,$idEpisode);
+        $requete->execute();
+        $d = $requete->fetch();
+        return $d['serie_id'];
+    }
+
 
     public function __get(string $at):mixed {
         if (property_exists($this, $at)) {

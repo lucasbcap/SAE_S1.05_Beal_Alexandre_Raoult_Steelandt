@@ -29,8 +29,10 @@ class CatalogueRender extends Render
                     </div>";
             $array = unserialize($_SESSION['user'])->getSQL("favori");
             $trouve = false;
-            foreach ( $array as $serie){
-                if ($this->serie->id === $serie->id) $trouve = true;
+            if($array!=null) {
+                foreach ($array as $serie) {
+                    if ($this->serie->id === $serie->id) $trouve = true;
+                }
             }
              if($trouve){
                  $res .= "<center><a href='?action=prefere&id=" . $this->serie->id . "'><img src='Image/coeurplein.png' width='70' height='70'></a></center>";
