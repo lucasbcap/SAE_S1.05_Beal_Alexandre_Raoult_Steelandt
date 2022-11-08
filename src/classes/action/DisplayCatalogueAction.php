@@ -28,7 +28,7 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
                 $res = $this->afficherCatalogue();
             }
         } else if ($this->http_method == "POST") {
-            header('Location: /?action=display-catalogue&search='.$_POST['search']);
+            header('Location: ?action=display-catalogue&search='.$_POST['search']);
         }
         return $res;
     }

@@ -77,7 +77,7 @@ class Dispatcher
         if(isset($_SESSION['user'])) {
             $search ="";
             if ($this->action == 'display-catalogue'){
-                $search = "<form id='searchbar'><li id='searchbar'> <input size='30%' type ='search' 
+                $search = "<form method='post' id='searchbar' action='?action=display-catalogue'><li id='searchbar'> <input size='30%' type ='search' 
                             name='search' placeholder='Rechercher une série'></li></form>"    ;
             }
             return "<!DOCTYPE html>
