@@ -79,6 +79,24 @@ class User
         return $array;
     }
 
+    static function TrieSQL(string $nomAttribut=null){
+        $bdd = ConnectionFactory::makeConnection();
+        if ($nomAttribut != null)$query = "select id from serie order by $nomAttribut";
+        else $query ="select id from serie";
+
+
+        $c1 = $bdd->prepare($query);
+        $c1->execute();
+        $array = null;
+        while ($d = $c1->fetch()) {
+            $serie = Serie::creerSerie($d["id"]);
+            if ($serie!=null) {
+                $array[] = $serie;
+            }
+        }
+        return $array;
+    }
+
     /**
      * @return string email
      */
