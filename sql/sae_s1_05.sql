@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 08, 2022 at 03:34 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Hôte : 127.0.0.1
+-- Généré le : mar. 08 nov. 2022 à 16:02
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,16 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sae_s1.05`
+-- Base de données : `sae_s1.05`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Commentaire`
+-- Structure de la table `commentaire`
 --
 
-CREATE TABLE `Commentaire` (
+CREATE TABLE `commentaire` (
   `comm` varchar(1000) DEFAULT NULL,
   `note` int(11) NOT NULL,
   `email` varchar(256) NOT NULL,
@@ -35,34 +35,34 @@ CREATE TABLE `Commentaire` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Commentaire`
+-- Déchargement des données de la table `commentaire`
 --
 
-INSERT INTO `Commentaire` (`comm`, `note`, `email`, `idSerie`) VALUES
+INSERT INTO `commentaire` (`comm`, `note`, `email`, `idSerie`) VALUES
 ('Le plot n\'est pas si intéréssant mais l\'action y est forte et prenante', 3, 'user1@mail.com', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `enCours`
+-- Structure de la table `encours`
 --
 
-CREATE TABLE `enCours` (
+CREATE TABLE `encours` (
   `email` varchar(256) NOT NULL,
   `idSerie` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `enCours`
+-- Déchargement des données de la table `encours`
 --
 
-INSERT INTO `enCours` (`email`, `idSerie`) VALUES
+INSERT INTO `encours` (`email`, `idSerie`) VALUES
 ('user2@mail.com', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `episode`
+-- Structure de la table `episode`
 --
 
 CREATE TABLE `episode` (
@@ -76,7 +76,7 @@ CREATE TABLE `episode` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `episode`
+-- Déchargement des données de la table `episode`
 --
 
 INSERT INTO `episode` (`id`, `numero`, `titre`, `resume`, `duree`, `file`, `serie_id`) VALUES
@@ -105,37 +105,37 @@ INSERT INTO `episode` (`id`, `numero`, `titre`, `resume`, `duree`, `file`, `seri
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estFini`
+-- Structure de la table `estfini`
 --
 
-CREATE TABLE `estFini` (
+CREATE TABLE `estfini` (
   `email` varchar(256) NOT NULL,
   `idSerie` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `estFini`
+-- Déchargement des données de la table `estfini`
 --
 
-INSERT INTO `estFini` (`email`, `idSerie`) VALUES
+INSERT INTO `estfini` (`email`, `idSerie`) VALUES
 ('user1@mail.com', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estVisionne`
+-- Structure de la table `estvisionne`
 --
 
-CREATE TABLE `estVisionne` (
+CREATE TABLE `estvisionne` (
   `email` varchar(256) NOT NULL,
   `idVideo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `estVisionne`
+-- Déchargement des données de la table `estvisionne`
 --
 
-INSERT INTO `estVisionne` (`email`, `idVideo`) VALUES
+INSERT INTO `estvisionne` (`email`, `idVideo`) VALUES
 ('user1@mail.com', 1),
 ('user1@mail.com', 2),
 ('user1@mail.com', 3),
@@ -148,7 +148,7 @@ INSERT INTO `estVisionne` (`email`, `idVideo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `favori`
+-- Structure de la table `favori`
 --
 
 CREATE TABLE `favori` (
@@ -157,7 +157,7 @@ CREATE TABLE `favori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `favori`
+-- Déchargement des données de la table `favori`
 --
 
 INSERT INTO `favori` (`email`, `idSerie`) VALUES
@@ -171,7 +171,7 @@ INSERT INTO `favori` (`email`, `idSerie`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `serie`
+-- Structure de la table `serie`
 --
 
 CREATE TABLE `serie` (
@@ -186,7 +186,7 @@ CREATE TABLE `serie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `serie`
+-- Déchargement des données de la table `serie`
 --
 
 INSERT INTO `serie` (`id`, `titre`, `descriptif`, `img`, `genre`, `publicVise`, `annee`, `date_ajout`) VALUES
@@ -200,7 +200,7 @@ INSERT INTO `serie` (`id`, `titre`, `descriptif`, `img`, `genre`, `publicVise`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE `user` (
@@ -213,7 +213,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`email`, `passwd`, `nom`, `prenom`, `genrePrefere`, `role`) VALUES
@@ -224,69 +224,69 @@ INSERT INTO `user` (`email`, `passwd`, `nom`, `prenom`, `genrePrefere`, `role`) 
 ('user4@mail.com', '$2y$12$ltC0A0zZkD87pZ8K0e6TYOJPJeN/GcTSkUbpqq0kBvx6XdpFqzzqq', '', '', '', 1);
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `Commentaire`
+-- Index pour la table `commentaire`
 --
-ALTER TABLE `Commentaire`
+ALTER TABLE `commentaire`
   ADD PRIMARY KEY (`email`,`idSerie`);
 
 --
--- Indexes for table `enCours`
+-- Index pour la table `encours`
 --
-ALTER TABLE `enCours`
+ALTER TABLE `encours`
   ADD PRIMARY KEY (`email`,`idSerie`);
 
 --
--- Indexes for table `episode`
+-- Index pour la table `episode`
 --
 ALTER TABLE `episode`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `estFini`
+-- Index pour la table `estfini`
 --
-ALTER TABLE `estFini`
+ALTER TABLE `estfini`
   ADD PRIMARY KEY (`email`,`idSerie`);
 
 --
--- Indexes for table `estVisionne`
+-- Index pour la table `estvisionne`
 --
-ALTER TABLE `estVisionne`
+ALTER TABLE `estvisionne`
   ADD PRIMARY KEY (`email`,`idVideo`);
 
 --
--- Indexes for table `favori`
+-- Index pour la table `favori`
 --
 ALTER TABLE `favori`
   ADD PRIMARY KEY (`email`,`idSerie`);
 
 --
--- Indexes for table `serie`
+-- Index pour la table `serie`
 --
 ALTER TABLE `serie`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `episode`
+-- AUTO_INCREMENT pour la table `episode`
 --
 ALTER TABLE `episode`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `serie`
+-- AUTO_INCREMENT pour la table `serie`
 --
 ALTER TABLE `serie`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
