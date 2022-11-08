@@ -46,6 +46,7 @@ class Dispatcher
                 break;
             default:
                 $html = '<h2>Bienvenue !</h2>';
+                if(!isset($_SESSION['user']))  $html .= "<p>Veuillez vous connecter pour accéder au catalogue</p>";
                 break;
         }
         print($this->renderPage($html));
@@ -54,25 +55,50 @@ class Dispatcher
 
     private function renderPage(string $res): string
     {
-        return "<!DOCTYPE html>
-<html lang='fr'>
-<head>
-    <title>NetVOD</title>
-    <meta charset='UTF-8' />
-    <link rel='stylesheet' href='css/style.css'>
-</head>
-<header>
-<ul>
-    <li><a href='./' id='Netvod'>NetVod</a></li>
-    <li><a href='?action=sign-in'>Connexion</a></li>
-    <li><a href='?action=add-user'>Inscription</a></li>
-    <li><a href='?action=display-catalogue'>Afficher Catalogue</a></li>
-</ul>
-</header>
-<body>
-$res
-</body>
-</html>";
 
+        if(isset($_SESSION['user'])) {
+            return "<!DOCTYPE html>
+                    <html lang='fr'>
+                    <head>
+                        <title>NetVOD</title>
+                        <meta charset='UTF-8' />
+                        <link rel='stylesheet' href='css/style.css'>
+                    </head>
+                    <header>
+                    <ul>
+                        <li><a href='./' id='Netvod'>NetVod</a></li>
+                     
+                      
+                        <li><a href='?action=display-catalogue'>Afficher Catalogue</a></li>
+                    </ul>
+                    </header>
+                    <body>
+                    $res
+                    </body>
+                    </html>";
+        }
+        else{
+            return "<!DOCTYPE html>
+                    <html lang='fr'>
+                    <head>
+                        <title>NetVOD</title>
+                        <meta charset='UTF-8' />
+                        <link rel='stylesheet' href='css/style.css'>
+                    </head>
+                    <header>
+                    <ul>
+                        <li><a href='./' id='Netvod'>NetVod</a></li>
+                        
+                        <li><a href='?action=sign-in'>Connexion</a></li>
+                        <li><a href='?action=add-user'>Inscription</a></li>
+                    </ul>
+                    </header>
+                    <body>
+                    $res
+                    </body>
+                    </html>";
+        }
+
+        return "";
     }
 }

@@ -2,15 +2,15 @@
 
 namespace iutnc\netvod\auth;
 
-use iutnc\netvod\User\User;
+use iutnc\netvod\user\User;
 use iutnc\netvod\db\ConnectionFactory as ConnectionFactory;
 
 class Auth
 {
     public static function authenticate()
     {
-        $username = filter_var($_POST['mail'], FILTER_SANITIZE_STRING);
-        $pass = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+        $username = filter_var($_POST['mail']);
+        $pass = filter_var($_POST['password']);
         $bdd = ConnectionFactory::makeConnection();
         $c1 = $bdd->prepare("Select passwd from user where email=:mail");
         $c1->bindParam(":mail", $username);
