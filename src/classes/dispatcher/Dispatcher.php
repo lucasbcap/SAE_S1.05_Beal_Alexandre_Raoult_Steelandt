@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\Dispatcher;
+namespace iutnc\netvod\dispatcher;
 
 use iutnc\netvod\action\DisplayCatalogueAction;
 use iutnc\netvod\action\DisplayEpisodeAction;
@@ -8,6 +8,7 @@ use iutnc\netvod\action\DisplayFavoriAction;
 use iutnc\netvod\action\DisplaySerieAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\AddUserAction;
+use iutnc\netvod\action\ProfilAction;
 
 class Dispatcher
 {
@@ -45,9 +46,10 @@ class Dispatcher
                 $act = new DisplayEpisodeAction();
                 $html = $act->execute();
                 break;
-            case'profil':
+            case 'profil':
                 $act = new ProfilAction();
                 $html = $act->execute();
+                break;
             default:
                 $act = new DisplayFavoriAction();
                 $html = $act->execute();
