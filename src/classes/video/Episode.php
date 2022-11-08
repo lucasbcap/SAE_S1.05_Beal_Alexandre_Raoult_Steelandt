@@ -17,11 +17,10 @@ class Episode
      * @param int $numero
      * @param int $duree
      */
-    public function __construct(string $titre, string $source, string $image, string $resume, int $numero, int $duree)
+    public function __construct(string $titre, string $source, string $resume, int $numero, int $duree)
     {
         $this->titre = $titre;
         $this->source = $source;
-        $this->image = $image;
         $this->resume = $resume;
         $this->numero = $numero;
         $this->duree = $duree;
@@ -33,7 +32,7 @@ class Episode
         $requete->bindParam(":id",$id);
         $requete->execute();
         $d = $requete->fetch();
-        return new Episode($d['titre'],"video/".$d['file'],"Image/beach.jpg",$d['resume'],$d['numero'],$d['duree']);
+        return new Episode($d['titre'],"video/".$d['file'],$d['resume'],$d['numero'],$d['duree']);
     }
 
     public static function chercherEpisodeTitre(string $titre):int {

@@ -4,6 +4,7 @@ namespace iutnc\netvod\Dispatcher;
 
 use iutnc\netvod\action\DisplayCatalogueAction;
 use iutnc\netvod\action\DisplayEpisodeAction;
+use iutnc\netvod\action\DisplayFavoriAction;
 use iutnc\netvod\action\DisplaySerieAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\AddUserAction;
@@ -48,7 +49,8 @@ class Dispatcher
                 $act = new ProfilAction();
                 $html = $act->execute();
             default:
-                $html = '<h2>Bienvenue !</h2>';
+                $act = new DisplayFavoriAction();
+                $html = $act->execute();
                 if(!isset($_SESSION['user']))  $html .= "<p>Veuillez vous connecter pour accéder au catalogue</p>";
                 break;
         }

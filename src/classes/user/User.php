@@ -23,7 +23,7 @@ class User
         $bdd = ConnectionFactory::makeConnection();
         $c1 = $bdd->prepare("insert into $table values (:email,:id)");
         $c1->bindParam(":email",$this->email);
-        $c1->bindParam(":email",$id);
+        $c1->bindParam(":id",$id);
         $c1->execute();
     }
 
