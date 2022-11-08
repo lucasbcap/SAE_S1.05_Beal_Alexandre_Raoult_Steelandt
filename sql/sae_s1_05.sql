@@ -75,6 +75,8 @@ CREATE TABLE `serie` (
   `titre` varchar(128) NOT NULL,
   `descriptif` text NOT NULL,
   `img` varchar(256) NOT NULL,
+  `genre` varchar(256) NOT NULL,
+  `publicVise` varchar(256) NOT NULL,
   `annee` int(11) NOT NULL,
   `date_ajout` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -83,13 +85,13 @@ CREATE TABLE `serie` (
 -- Déchargement des données de la table `serie`
 --
 
-INSERT INTO `serie` (`id`, `titre`, `descriptif`, `img`, `annee`, `date_ajout`) VALUES
-(1, 'Le lac aux mystères', 'C\'est l\'histoire d\'un lac mystérieux et plein de surprises. La série, bluffante et haletante, nous entraine dans un labyrinthe d\'intrigues époustouflantes. A ne rater sous aucun prétexte !', '', 2020, '2022-10-30'),
-(2, 'L\'eau a coulé', 'Une série nostalgique qui nous invite à revisiter notre passé et à se remémorer tout ce qui s\'est passé depuis que tant d\'eau a coulé sous les ponts.', '', 1907, '2022-10-29'),
-(3, 'Chevaux fous', 'Une série sur la vie des chevals sauvages en liberté. Décoiffante.', '', 2017, '2022-10-31'),
-(4, 'A la plage', 'Le succès de l\'été 2021, à regarder sans modération et entre amis.', '', 2021, '2022-11-04'),
-(5, 'Champion', 'La vie trépidante de deux champions de surf, passionnés dès leur plus jeune age. Ils consacrent leur vie à ce sport. ', '', 2022, '2022-11-03'),
-(6, 'Une ville la nuit', 'C\'est beau une ville la nuit, avec toutes ces voitures qui passent et qui repassent. La série suit un livreur, un chauffeur de taxi, et un insomniaque. Tous parcourent la grande ville une fois la nuit venue, au volant de leur véhicule.', '', 2017, '2022-10-31');
+INSERT INTO `serie` (id, titre, descriptif, img, genre, publicVise, annee, date_ajout) VALUES
+(1, 'Le lac aux mystères', 'C\'est l\'histoire d\'un lac mystérieux et plein de surprises. La série, bluffante et haletante, nous entraine dans un labyrinthe d\'intrigues époustouflantes. A ne rater sous aucun prétexte !', 'lake.jpg','Horreur','Adulte', 2020, '2022-10-30'),
+(2, 'L\'eau a coulé', 'Une série nostalgique qui nous invite à revisiter notre passé et à se remémorer tout ce qui s\'est passé depuis que tant d\'eau a coulé sous les ponts.', 'water.jpg','Action','Adolescent', 1907, '2022-10-29'),
+(3, 'Chevaux fous', 'Une série sur la vie des chevals sauvages en liberté. Décoiffante.', 'horses.jpg','Aventure','Famille', 2017, '2022-10-31'),
+(4, 'A la plage', 'Le succès de l\'été 2021, à regarder sans modération et entre amis.', 'beach.jpg','Aventure','Famille', 2021, '2022-11-04'),
+(5, 'Champion', 'La vie trépidante de deux champions de surf, passionnés dès leur plus jeune age. Ils consacrent leur vie à ce sport. ', 'surf.jpg','Sport','Famille', 2022, '2022-11-03'),
+(6, 'Une ville la nuit', 'C\'est beau une ville la nuit, avec toutes ces voitures qui passent et qui repassent. La série suit un livreur, un chauffeur de taxi, et un insomniaque. Tous parcourent la grande ville une fois la nuit venue, au volant de leur véhicule.', 'carsbynight.jpg','Nostalgie','Adulte', 2017, '2022-10-31');
 
 -- --------------------------------------------------------
 
@@ -98,21 +100,43 @@ INSERT INTO `serie` (`id`, `titre`, `descriptif`, `img`, `annee`, `date_ajout`) 
 --
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
   `email` varchar(256) NOT NULL,
-  `passwd` varchar(256) NOT NULL
+  `passwd` varchar(256) NOT NULL,
+   `role` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `passwd`) VALUES
-(1, 'user1@mail.com', '$2y$12$e9DCiDKOGpVs9s.9u2ENEOiq7wGvx7sngyhPvKXo2mUbI3ulGWOdC'),
-(2, 'user2@mail.com', '$2y$12$4EuAiwZCaMouBpquSVoiaOnQTQTconCP9rEev6DMiugDmqivxJ3AG'),
-(3, 'user3@mail.com', '$2y$12$5dDqgRbmCN35XzhniJPJ1ejM5GIpBMzRizP730IDEHsSNAu24850S'),
-(4, 'user4@mail.com', '$2y$12$ltC0A0zZkD87pZ8K0e6TYOJPJeN/GcTSkUbpqq0kBvx6XdpFqzzqq'),
-(5, 'admin@mail.com', '$2y$12$JtV1W6MOy/kGILbNwGR2lOqBn8PAO3Z6MupGhXpmkeCXUPQ/wzD8a');
+INSERT INTO `user` (`email`, `passwd`,`role`) VALUES
+('user1@mail.com', '$2y$12$e9DCiDKOGpVs9s.9u2ENEOiq7wGvx7sngyhPvKXo2mUbI3ulGWOdC',1),
+('user2@mail.com', '$2y$12$4EuAiwZCaMouBpquSVoiaOnQTQTconCP9rEev6DMiugDmqivxJ3AG',1),
+('user3@mail.com', '$2y$12$5dDqgRbmCN35XzhniJPJ1ejM5GIpBMzRizP730IDEHsSNAu24850S',1),
+('user4@mail.com', '$2y$12$ltC0A0zZkD87pZ8K0e6TYOJPJeN/GcTSkUbpqq0kBvx6XdpFqzzqq',1),
+('admin@mail.com', '$2y$12$JtV1W6MOy/kGILbNwGR2lOqBn8PAO3Z6MupGhXpmkeCXUPQ/wzD8a',100);
+
+
+--
+-- Structure de la table `favori`
+--
+
+CREATE TABLE `favori` (
+                        `email` varchar(256) NOT NULL,
+                        `idSerie` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `favori` (email, idSerie) VALUES
+                             ('user1@mail.com', 1),
+                             ('user1@mail.com', 2),
+                             ('user1@mail.com', 4),
+                             ('user2@mail.com', 3),
+                             ('user2@mail.com', 5),
+                             ('user3@mail.com', 3);
 
 --
 -- Index pour les tables déchargées
@@ -134,7 +158,14 @@ ALTER TABLE `serie`
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Index pour la table `favori`
+--
+ALTER TABLE `favori`
+    ADD PRIMARY KEY (`email`,`idSerie`);
+
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -155,8 +186,6 @@ ALTER TABLE `serie`
 --
 -- AUTO_INCREMENT pour la table `user`
 --
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
