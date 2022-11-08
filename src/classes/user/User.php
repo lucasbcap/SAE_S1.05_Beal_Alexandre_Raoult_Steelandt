@@ -3,6 +3,8 @@
 namespace iutnc\netvod\user;
 
 use iutnc\netvod\db\ConnectionFactory as ConnectionFactory;
+use iutnc\netvod\video\Serie;
+
 class User
 {
     protected string $email, $passwrd;
@@ -17,16 +19,27 @@ class User
         $this->passwrd = $passwrd;
     }
 
-
-    function getSeries(): array
-    {
-        ConnectionFactory::setConfig("config.ini");
+    function addFavorie(int $idSerie):void{
         $bdd = ConnectionFactory::makeConnection();
-        $c1 = $bdd->prepare("select * from serie");
+        $c1 = $bdd->prepare("insert into favori values (:email,:idSerie)");
+        $c1->bindParam(":email",$this->email);
+        $c1->bindParam(":email",$idSerie);
         $c1->execute();
-        $array = [];
+    }
+
+
+    function getFavorie(): ?array
+    {
+        $bdd = ConnectionFactory::makeConnection();
+        $c1 = $bdd->prepare("select idSerie from favori where email = :email");
+        $c1->bindParam(":email",$this->email);
+        $c1->execute();
+        $array = null;
         while ($d = $c1->fetch()) {
-            array_push($array, $d['titre']);$array[] = $d['titre'];
+            $serie = Serie::creerSerie($d['idSerie']);
+            if ($serie!=null) {
+                $array[] = $serie;
+            }
         }
         return $array;
     }
