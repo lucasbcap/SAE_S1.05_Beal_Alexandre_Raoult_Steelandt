@@ -54,7 +54,7 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
             <input type='submit' id='log' value='Envoyer'>
             ";
             $user = unserialize($_SESSION['user']);
-            $user->addSQL($episode->serie,"enCours");
+            $user->addSQL($episode->serie,"enCours",$episode->numero);
         }
 
         return $res;

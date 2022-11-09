@@ -64,7 +64,6 @@ class Serie
         $req2 = $bdd->prepare("Select episode.id from serie inner join episode on serie.id = episode.serie_id where serie.id=:id");
         $req2->bindParam(":id", $id);
         $req2->execute();
-        $req2->fetch();
         while ($d = $req2->fetch()) {
             $ep = Episode::chercherEpisode($d['id']);
             $serie->ajouterEpisode($ep);
