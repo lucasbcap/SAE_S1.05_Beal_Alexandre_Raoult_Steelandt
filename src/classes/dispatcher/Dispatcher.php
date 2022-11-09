@@ -29,53 +29,52 @@ class Dispatcher
 
     public function run(): void
     {
-        switch ($this->action) {
-            case 'add-user':
-                $act = new AddUserAction();
-                $html = $act->execute();
-                break;
-            case 'sign-in':
-                $act = new SigninAction();
-                $html = $act->execute();
-                break;
-            case 'display-catalogue':
-                $act = new DisplayCatalogueAction();
-                $html = $act->execute();
-                break;
-            case 'display-serie':
-                $act = new DisplaySerieAction();
-                $html = $act->execute();
-                break;
-            case 'display-episode':
-                $act = new DisplayEpisodeAction();
-                $html = $act->execute();
-                break;
-            case 'profil':
-                $act = new ProfilAction();
-                $html = $act->execute();
-                break;
-            case 'prefere':
-                $act = new PrefereAction();
-                $html =$act->execute();
-                break;
-            case 'display-commentaire':
-                $act = new DisplayCommentaireAction();
-                $html =$act->execute();
-                break;
-            case 'mdpoub':
-                $act = new MotDePasseOubAction();
-                $html = $act->execute();
-                break;
-            default:
-
-                if(!isset($_SESSION['user'])) {
-                    $html = "<p>Veuillez vous connecter pour accéder au catalogue</p>";
-                }
-                else{
+        $act = $this->action;
+        if(!isset($_SESSION['user']) && $act!='sign-in' && $act!='add-user') {
+            $html = "<p>Veuillez vous connecter pour accéder au catalogue</p>";
+        }else {
+            switch ($act) {
+                case 'add-user':
+                    $act = new AddUserAction();
+                    $html = $act->execute();
+                    break;
+                case 'sign-in':
+                    $act = new SigninAction();
+                    $html = $act->execute();
+                    break;
+                case 'display-catalogue':
+                    $act = new DisplayCatalogueAction();
+                    $html = $act->execute();
+                    break;
+                case 'display-serie':
+                    $act = new DisplaySerieAction();
+                    $html = $act->execute();
+                    break;
+                case 'display-episode':
+                    $act = new DisplayEpisodeAction();
+                    $html = $act->execute();
+                    break;
+                case 'profil':
+                    $act = new ProfilAction();
+                    $html = $act->execute();
+                    break;
+                case 'prefere':
+                    $act = new PrefereAction();
+                    $html = $act->execute();
+                    break;
+                case 'display-commentaire':
+                    $act = new DisplayCommentaireAction();
+                    $html = $act->execute();
+                    break;
+                case 'mdpoub':
+                    $act = new MotDePasseOubAction();
+                    $html = $act->execute();
+                    break;
+                default:
                     $act = new DisplayPrincipaleAction();
                     $html = $act->execute();
-                }
-                break;
+                    break;
+            }
         }
         print($this->renderPage($html));
     }

@@ -60,7 +60,7 @@ class AddUserAction extends Action
                     break;
 
                 case 2:
-                    $res .= "<p style='color:red'>Votre mot de passe doit faire au moins 10 caractères avec un nombre, une minuscule et une majuscule</p><br>";
+                    $res .= "<p style='color:red'>Votre mot de passe doit faire au moins 5 caractères avec un nombre, une minuscule et une majuscule</p><br>";
                     break;
 
                 case 3:
