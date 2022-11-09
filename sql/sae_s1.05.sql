@@ -190,22 +190,23 @@ CREATE TABLE `user` (
   `nom` varchar(20) DEFAULT NULL,
   `prenom` varchar(20) DEFAULT NULL,
   `genrePrefere` varchar(20) DEFAULT NULL,
-  `role` int(11) NOT NULL
+  `role` int(11) NOT NULL,
+  `token` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`email`, `passwd`, `nom`, `prenom`, `genrePrefere`, `role`) VALUES
-('admin@mail.com', '$2y$12$JtV1W6MOy/kGILbNwGR2lOqBn8PAO3Z6MupGhXpmkeCXUPQ/wzD8a', NULL, NULL, NULL, 100),
-('beal.lucas@gmail.com', '$2y$12$MufN.kfbr06ws40gAKhdZOBDT0jPCwBcRZiDqoRjTLl3NnligxL5i', NULL, NULL, NULL, 1),
-('juju@mail.com', '$2y$12$t0H7dTfOKmSAgNe8gETHROL81GPPPe/OWW3Mn.3N9O1iFAVNuGbRu', NULL, NULL, NULL, 1),
-('romain.alexandre@mail.com', '$2y$12$VNd0gBVa6R28FTxb9YZriO/xcI7zMZ.Tf3ppOc5MDbD34Smt0oOf2', NULL, NULL, NULL, 1),
-('user1@mail.com', '$2y$12$e9DCiDKOGpVs9s.9u2ENEOiq7wGvx7sngyhPvKXo2mUbI3ulGWOdC', NULL, NULL, NULL, 1),
-('user2@mail.com', '$2y$12$4EuAiwZCaMouBpquSVoiaOnQTQTconCP9rEev6DMiugDmqivxJ3AG', NULL, NULL, NULL, 1),
-('user3@mail.com', '$2y$12$5dDqgRbmCN35XzhniJPJ1ejM5GIpBMzRizP730IDEHsSNAu24850S', NULL, NULL, NULL, 1),
-('user4@mail.com', '$2y$12$ltC0A0zZkD87pZ8K0e6TYOJPJeN/GcTSkUbpqq0kBvx6XdpFqzzqq', NULL, NULL, NULL, 1);
+INSERT INTO `user` (`email`, `passwd`, `nom`, `prenom`, `genrePrefere`, `role`,`token`) VALUES
+('admin@mail.com', '$2y$12$JtV1W6MOy/kGILbNwGR2lOqBn8PAO3Z6MupGhXpmkeCXUPQ/wzD8a', NULL, NULL, NULL, 100,'b23n9rmci456h3ej07ynl36tik4n8b34ba4359dvsj7sb2ail8'),
+('beal.lucas@gmail.com', '$2y$12$MufN.kfbr06ws40gAKhdZOBDT0jPCwBcRZiDqoRjTLl3NnligxL5i', NULL, NULL, NULL, 1,'hmd29nkv1i70m2x2e3uftkn92nt779pwu518fdeagv94v2x1ee'),
+('juju@mail.com', '$2y$12$t0H7dTfOKmSAgNe8gETHROL81GPPPe/OWW3Mn.3N9O1iFAVNuGbRu', NULL, NULL, NULL, 1,'892ba1mmu5082j83gmhiy1u3ckd2x6pk71dp49e1j85phwrj1a'),
+('romain.alexandre@mail.com', '$2y$12$VNd0gBVa6R28FTxb9YZriO/xcI7zMZ.Tf3ppOc5MDbD34Smt0oOf2', NULL, NULL, NULL, 1,'5i3yxgbxfxvc8lh11ahe48xauvfht97i657w9y6u3lrr987f80'),
+('user1@mail.com', '$2y$12$e9DCiDKOGpVs9s.9u2ENEOiq7wGvx7sngyhPvKXo2mUbI3ulGWOdC', NULL, NULL, NULL, 1,'96k82e39g50wy0clrvdd2ypw5yu6951vknjd4ru5b3ch1hih1k'),
+('user2@mail.com', '$2y$12$4EuAiwZCaMouBpquSVoiaOnQTQTconCP9rEev6DMiugDmqivxJ3AG', NULL, NULL, NULL, 1,'9aymg2v32l23l84pns8nv6qf2a2kev082j1l59fy83427trly9'),
+('user3@mail.com', '$2y$12$5dDqgRbmCN35XzhniJPJ1ejM5GIpBMzRizP730IDEHsSNAu24850S', NULL, NULL, NULL, 1,'hmcgr07a8mv41eh4dwt5b4q3dpdi5gre41s5l79blb534993q8'),
+('user4@mail.com', '$2y$12$ltC0A0zZkD87pZ8K0e6TYOJPJeN/GcTSkUbpqq0kBvx6XdpFqzzqq', NULL, NULL, NULL, 1,'dab6ah3v73ejylj2tph41nj3m7i7lujy2171q49cv144k1cfwt');
 
 --
 -- Indexes for dumped tables

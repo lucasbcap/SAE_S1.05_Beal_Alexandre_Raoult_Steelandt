@@ -43,15 +43,6 @@ class Serie
         $this->listEpisode[$this->nmbEpisode] = $d;
     }
 
-    public function __get(string $at): mixed
-    {
-        if (property_exists($this, $at)) {
-            return $this->$at;
-        } else {
-            throw new \Exception("$at: invalid property");
-        }
-    }
-
     public static function creerSerie(int $id): Serie
     {
         $bdd = ConnectionFactory::makeConnection();
@@ -71,5 +62,13 @@ class Serie
         return $serie;
     }
 
+    public function __get(string $at): mixed
+    {
+        if (property_exists($this, $at)) {
+            return $this->$at;
+        } else {
+            throw new \Exception("$at: invalid property");
+        }
+    }
 
 }

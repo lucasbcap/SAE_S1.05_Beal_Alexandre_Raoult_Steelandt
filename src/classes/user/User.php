@@ -13,10 +13,11 @@ class User
      * @param string $email
      * @param string $passwrd
      */
-    public function __construct(string $email, string $passwrd)
+    public function __construct(string $email, string $passwrd, string $token)
     {
         $this->email = $email;
         $this->passwrd = $passwrd;
+        $this->token = $token;
     }
 
     function suppSQL(int $id,string $table){
@@ -100,11 +101,12 @@ class User
         return $array;
     }
 
-    /**
-     * @return string email
-     */
-    public function getEmail(): string
+    public function __get(string $at): mixed
     {
-        return $this->email;
+        if (property_exists($this, $at)) {
+            return $this->$at;
+        } else {
+            throw new \Exception("$at: invalid property");
+        }
     }
 }
