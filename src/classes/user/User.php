@@ -22,9 +22,6 @@ class User
     function suppSQL(int $id,string $table){
         $bdd = ConnectionFactory::makeConnection();
         $val = "idSerie";
-        if ($table=="estvisionne"){
-            $val = "idVideo";
-        }
 
         $c1 = $bdd->prepare("DELETE FROM $table WHERE email=:mail AND $val=:id;");
         $c1->bindParam(":mail", $this->email);
@@ -32,18 +29,23 @@ class User
         $c1->execute();
     }
 
-    function addSQL(int $id, string $table):void{
+    function addSQL(int $id, string $table, int $idEpisode = 0):void{
         $bdd = ConnectionFactory::makeConnection();
         $val = "idSerie";
-        if ($table=="estvisionne"){
-            $val = "idVideo";
+        $query ="Select * from $table where email=:mail and $val=:id";
+        $insert = "insert into $table values (:email,:id)";
+        if ($table==="enCours"){
+            $query = "Select * from $table where email=:mail and $val=:id and idEpisode=:idEpisode";
+            $insert = "insert into $table values (:email,:id,:idepisode)";
         }
 
-        $bdd = ConnectionFactory::makeConnection();
 
-        $c = $bdd->prepare("Select * from $table where email=:mail and $val=:id");
+        $c = $bdd->prepare($query);
         $c->bindParam(":mail", $this->email);
         $c->bindParam(":id", $id);
+        if ($table==="enCours"){
+            $c->bindParam(":idEpisode",$idEpisode);
+        }
         $c->execute();
         $verif = true;
         while ($d = $c->fetch()) {
@@ -51,9 +53,13 @@ class User
         }
 
         if($verif) {
-            $c1 = $bdd->prepare("insert into $table values (:email,:id)");
+            $c1 = $bdd->prepare($insert);
             $c1->bindParam(":email", $this->email);
             $c1->bindParam(":id", $id);
+            if ($table==="enCours"){
+                $c1->bindParam(":idepisode",$idEpisode);
+            }
+
             $c1->execute();
         }
     }
@@ -63,7 +69,7 @@ class User
     {
         $bdd = ConnectionFactory::makeConnection();
         $val = "idSerie";
-        if ($table=="estvisionne"){
+        if ($table=="encours"){
             $val = "idVideo";
         }
         $c1 = $bdd->prepare("select $val from $table where email = :email");

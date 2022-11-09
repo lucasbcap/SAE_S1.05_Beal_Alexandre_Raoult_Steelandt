@@ -70,6 +70,7 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
             while($da = $c3->fetch()){
                 $i= $da['id'];
             }
+            $user->addSQL($episode->serie,"enCours",$episode->numero);
         }
         echo $i;
 
