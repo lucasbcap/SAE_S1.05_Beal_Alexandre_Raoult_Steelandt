@@ -5,6 +5,7 @@ namespace iutnc\netvod\action;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\render\EpisodeRender;
 use iutnc\netvod\render\SerieRender;
+use iutnc\netvod\user\User;
 use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
 
@@ -56,8 +57,38 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
             <input type='submit' id='log' value='Envoyer'>
             ";
             $user = unserialize($_SESSION['user']);
-            $user->addSQL($episode->serie,"enCours",$episode->numero);
+            $user->addSQL($episode->serie,"encours",$episode->numero);
+
+            $idSerie = Episode::chercherEpisode($_GET['id'])->serie;
+
+            $c3 =$bdd->prepare("SELECT count(id) as id from episode where serie_id = ?");
+            $c3->bindParam(1,$idSerie);
+            $c3->execute();
+            while($da = $c3->fetch()){
+                $i= $da['id'];
+            }
+
+
+            $c4 =$bdd->prepare("SELECT count(idEpisode) as id2 from encours where idSerie =? and email =?;");
+            $c4->bindParam(1,$idSerie);
+            $mail = $user->getemail();
+            $c4->bindParam(2,$mail);
+            $c4->execute();
+            while($d = $c4->fetch()){
+                $j= $d['id2'];
+            }
+
+            if($i === $j){
+                $user->suppSQL($idSerie,"encours");
+                $c5 = $bdd->prepare("INSERT INTO estfini values(?,?)");
+                $c5->bindParam(1,$mail);
+                $c5->bindParam(2,$idSerie);
+                $c5->execute();
+
+
+            }
         }
+
         return $res;
     }
 
