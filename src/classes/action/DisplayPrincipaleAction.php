@@ -36,7 +36,7 @@ class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
         $res .= "<h2>Liste des séries en cours : </h2><br>";
         $user = unserialize($_SESSION['user']);
         if ($this->http_method == "GET") {
-            $array = $user->getSQL("enCours");
+            $array = $user->getSQL("encours");
             if ($array!=null) {
                 foreach ($array as $d) {
                     $serieCouranteRenderer = new CatalogueRender($d);
