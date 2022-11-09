@@ -23,10 +23,12 @@ class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
         if ($this->http_method == "GET") {
             $array = $user->getSQL("favori");
             if ($array!=null) {
+                $res .= "<div class='listeGeneral'>";
                 foreach ($array as $d) {
                     $serieCouranteRenderer = new CatalogueRender($d);
                     $res .= $serieCouranteRenderer->render(3);
                 }
+                $res .= "</div>";
             }else{
                 $res .= "Aucune série en favori";
             }
@@ -53,10 +55,13 @@ class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
 
 
             if ($array!=null) {
+                $res .= "<div class='listeGeneral'>";
                 foreach ($array as $d) {
                     $serieCouranteRenderer = new CatalogueRender($d);
                     $res .= $serieCouranteRenderer->render(2);
                 }
+                $res .= "</div>";
+
             }else{
                 $res .= "Aucune série en cours";
 
@@ -69,10 +74,12 @@ class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
         if ($this->http_method == "GET") {
             $array = $user->getSQL("estfini");
             if ($array!=null) {
+                $res .= "<div class='listeGeneral'>";
                 foreach ($array as $d) {
                     $serieCouranteRenderer = new CatalogueRender($d);
                     $res .= $serieCouranteRenderer->render(3);
                 }
+                $res .= "</div>";
             }else{
                 $res .= "Aucune série en cours";
 

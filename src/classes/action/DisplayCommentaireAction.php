@@ -28,7 +28,7 @@ class DisplayCommentaireAction extends \iutnc\netvod\action\Action
                 $bdd = ConnectionFactory::makeConnection();
 
 
-                $c2 = $bdd->prepare("select email,note,comm from Commentaire where idSerie=?");
+                $c2 = $bdd->prepare("select email,note,comm from commentaire where idSerie=?");
                 $c2->bindParam(1, $_GET['id']);
                 $c2->execute();
                 $count = 0;
@@ -36,7 +36,7 @@ class DisplayCommentaireAction extends \iutnc\netvod\action\Action
                     if ($d['comm'] != null) {
                         $count++;
                         $res .= $d['email'] . "  Note " . $d['note'] . " sur 5 : <br>";
-                        $res .= "<p STYLE='padding:0 0 0 20px'>".$d['comm'] . "</p><br><br>";
+                        $res .= "<p id='commentaire' STYLE='padding:0 0 0 20px'>".$d['comm'] . "</p><br><br>";
                     }
                 }
 
