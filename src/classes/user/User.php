@@ -69,9 +69,6 @@ class User
     {
         $bdd = ConnectionFactory::makeConnection();
         $val = "idSerie";
-        if ($table=="encours"){
-            $val = "idVideo";
-        }
         $c1 = $bdd->prepare("select $val from $table where email = :email");
         $c1->bindParam(":email",$this->email);
         $c1->execute();

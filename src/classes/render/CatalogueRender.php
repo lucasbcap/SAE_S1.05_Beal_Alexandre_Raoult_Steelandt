@@ -54,9 +54,17 @@ class CatalogueRender extends Render
         }
 
         if($selector===2){
+
+            $query = "select max(idEpisode) as epCourant from encours where idSerie=:numeroSerie";
+            $c = $bdd->prepare($query);
+            $id = $this->serie->id;
+            $c->bindParam(":numeroSerie", $id);
+            $c->execute();
+            $numEp = $c->fetch()['epCourant'];
+
             $res = "<div class='liste'><a href='?action=display-serie&id=" . $this->serie->id . "'>";
             $res .= "<h4>" . $this->serie->titre . "</h4>";
-            $res .= "<a href='?action=display-serie&id=" . $this->serie->id . "' id='lien'><div class=zoom>
+            $res .= "<a href='?action=display-episode&id=" . $numEp . "' id='lien'><div class=zoom>
                     <div class=image>
                     <img src='Image/" . $this->serie->img . "' width='200' height='120'></a>
                     </div>
