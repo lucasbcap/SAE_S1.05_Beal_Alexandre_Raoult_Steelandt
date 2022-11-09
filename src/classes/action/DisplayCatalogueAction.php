@@ -48,14 +48,28 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
                     $res .= $serieCouranteRenderer->render(1);
                 }
             }
-
-            if ($rendu == ""){
-                $rendu = "<h3>Aucune série n'existe sous ce nom</h3>";
+            if ($search != "") {
+                $res = $this->rechercher($search);
             }
-            $res .= $rendu;
         }
         return $res;
+
+
     }
 
-
+    public function rechercher(string $search):string{
+        $bdd = ConnectionFactory::makeConnection();
+        $c1 = $bdd->query("SELECT * from serie where titre like '%$search%'");
+        $c1->execute();
+        $rendu = "";
+        while ($d = $c1->fetch()) {
+            $serie = new Serie($d['titre'], $d['img'], $d['genre'], $d['publicVise'], $d['descriptif'], $d['annee'], $d['date_ajout'], $d['id']);
+            $render = new CatalogueRender($serie);
+            $rendu .= $render->render();
+        }
+        if ($rendu == "") {
+            $rendu = "<h3>Aucune série n'existe sous ce nom</h3>";
+        }
+        return $rendu;
+    }
 }
