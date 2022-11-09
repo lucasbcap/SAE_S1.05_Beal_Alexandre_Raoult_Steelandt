@@ -47,9 +47,10 @@ class CatalogueRender extends Render
                 }
             }
              if($trouve){
-                 $res .= "<center><a href='?action=prefere&id=" . $this->serie->id . "'><img src='Image/coeurplein.png' width='70' height='70'></a></center>";
+                 $res .= "<center><a href='?action=prefere&fav=oui&id=" . $this->serie->id . "'><img src='Image/coeurplein.png' width='70' height='70'></a></center>";
+
              }else {
-                 $res .= "<center><a href='?action=prefere&id=" . $this->serie->id . "'><img src='Image/coeurvide.png' width='70' height='70'></a></center>";
+                 $res .= "<center><a href='?action=prefere&fav=non&id=" . $this->serie->id . "'><img src='Image/coeurvide.png' width='70' height='70'></a></center>";
              }
         }
 
@@ -62,9 +63,24 @@ class CatalogueRender extends Render
             $c->execute();
             $numEp = $c->fetch()['epCourant'];
 
-            $res = "<div class='liste'><a href='?action=display-serie&id=" . $this->serie->id . "'>";
+            $IdEp = Episode::chercherEpisodeNumero($numEp,$id);
+
+            $res = "<div class='liste'><a href='?action=display-serie&id=" . $id . "'>";
             $res .= "<h4>" . $this->serie->titre . "</h4>";
-            $res .= "<a href='?action=display-episode&id=" . $numEp . "' id='lien'><div class=zoom>
+            $res .= "<a href='?action=display-episode&id=" . $IdEp . "' id='lien'><div class=zoom>
+                    <div class=image>
+                    <img src='Image/" . $this->serie->img . "' width='200' height='120'></a>
+                    </div>
+                    </div>
+                    </div>";
+        }
+
+        if($selector===3){
+
+
+            $res = "<div class='liste'><a href='?action=display-serie&id=" . $id . "'>";
+            $res .= "<h4>" . $this->serie->titre . "</h4>";
+            $res .= "<a href='?action=display-serie&id=" . $id . "' id='lien'><div class=zoom>
                     <div class=image>
                     <img src='Image/" . $this->serie->img . "' width='200' height='120'></a>
                     </div>

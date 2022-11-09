@@ -40,7 +40,6 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
         $res = "";
         if ($this->http_method == "GET") {
             $res = "<h2>Catalogue : </h2>";
-            $rendu = "";
             $array = User::TrieSQL();
             if ($array!=null) {
                 foreach ($array as $d) {
