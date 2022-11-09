@@ -101,10 +101,36 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
         if($trie==="date ajout") $trie = "date_ajout";
         if($trie==="public vise") $trie = "publicvise";
         if($trie==="---") $trie = null;
+
         $res = "";
         if ($this->http_method == "GET") {
             $res = "<h2>Catalogue : </h2>";
-            $array = User::TrieSQL($trie);
+            if($trie!=="moyenne") {
+                $array = User::TrieSQL($trie);
+            }
+            else{
+                $query = "select idSerie from commentaire group by idSerie ORDER BY avg(note) DESC ";
+                $bdd = ConnectionFactory::makeConnection();
+                $c1 = $bdd->prepare($query);
+                $c1->execute();
+                $array = null;
+                while ($d = $c1->fetch()) {
+                    $serie = Serie::creerSerie($d["idSerie"]);
+                    if ($serie!=null) {
+                        $array[] = $serie;
+                    }
+                }
+
+                $query = "select id from serie where id not IN (select idSerie from commentaire); ";
+                $c1 = $bdd->prepare($query);
+                $c1->execute();
+                while ($d = $c1->fetch()) {
+                    $serie = Serie::creerSerie($d["id"]);
+                    if ($serie!=null) {
+                        $array[] = $serie;
+                    }
+                }
+            }
             if ($array!=null) {
                 foreach ($array as $d) {
                     $serieCouranteRenderer = new CatalogueRender($d);

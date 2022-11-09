@@ -102,6 +102,7 @@ class Dispatcher
                             <option value='public vise'>Public Visé</option>
                             <option value='annee'>Année</option>
                             <option value='date ajout'>Date Ajout</option>
+                            <option value='moyenne'>Moyenne</option>
                             </select>
                             <button name='bnt1'>Trier</button>
                             </li></form>";
