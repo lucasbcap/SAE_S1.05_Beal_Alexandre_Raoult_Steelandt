@@ -138,7 +138,7 @@ class Dispatcher
                     </head>
                     <header>
                     <ul>
-                        <li><a href='./'><img src='image/logo.png' id='logo'></a></li>                    
+                        <div id='logodiv'><li><a href='./' id='logo'><img src='image/logo.png' id='logo'></a></li></div>                 
                         <li><a href='?action=display-catalogue' id='navbar'>Afficher Catalogue</a></li>   
                         <li><a href='?action=profil' id='navbar'>Profil </a></li>  
                         <li><a href='?action=deconnexion' id='navbar'>Deconnexion</a></li>
@@ -160,7 +160,7 @@ class Dispatcher
                     </head>
                     <header>
                     <ul>
-                        <li><a href='./'><img src='image/logo.png' id='logo'></a></li>     
+                        <div id='logodiv'><li><a href='./'><img src='image/logo.png' id='logo'></a></li></div>     
                         <li><a href='?action=sign-in' id='navbar'>Connexion</a></li>
                         <li><a href='?action=add-user' id='navbar'>Inscription</a></li>
                     </ul>
