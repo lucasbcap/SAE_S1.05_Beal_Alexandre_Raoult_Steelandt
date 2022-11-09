@@ -7,6 +7,8 @@ use iutnc\netvod\db\ConnectionFactory as ConnectionFactory;
 
 class Auth
 {
+
+    public static string $token = "";
     public static function authenticate()
     {
         $username = filter_var($_POST['mail']);
@@ -87,13 +89,42 @@ class Auth
 
     public static function changerMDP(string $mailUser,string $newMDP):string{
         $bdd = ConnectionFactory::makeConnection();
-        $r=false;
         $c3 = $bdd->prepare("Update user set passwd =:mdp
                             where email=:email");
+        $pass = password_hash($newMDP, PASSWORD_DEFAULT, ['cost' => 12]);
         $c3->bindParam(":email",$mailUser);
-        $c3->bindParam(":mdp",$newMDP);
+        $c3->bindParam(":mdp",$pass);
         $c3->execute();
-        return "<h2>Votre mot de pass a bien été modifié</h2>";
+        $_SESSION['mail'] = null;
+        return "<h2>Votre mot de passe a bien été modifié</h2>";
+    }
+
+    public static function generateToken(string $email):string{
+        $exist = false;
+        $res = "";
+        $bdd = ConnectionFactory::makeConnection();
+        $req1 = $bdd->prepare("Select * from user where email=:email");
+        $req1->bindParam(":email", $email);
+        $req1->execute();
+        while ($d = $req1->fetch()){
+            $exist = true;
+        }
+        if ($exist) {
+            $chaine = "a0b1c2d3e4f5g6h7i8j9klmnpqrstuvwxy123456789";
+            for ($i = 0; $i < 30; $i++) {
+                self::$token .= $chaine[rand() % strlen($chaine)];
+            }
+            $res = "valide";
+        }
+        return $res;
+    }
+
+    public static function activate(string $token):bool{
+        if (self::$token!=$token && $token!=""){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
