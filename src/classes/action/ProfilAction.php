@@ -49,7 +49,7 @@ class ProfilAction extends \iutnc\netvod\action\Action
             $nom = filter_var($_POST['nom']);
             $prenom = filter_var($_POST['prenom']);
             $genrepref = filter_var($_POST['genrepref']);
-            $emailUser = unserialize($_SESSION['user'])->getEmail();
+            $emailUser = unserialize($_SESSION['user'])->email;
             $c2 = $bdd->prepare("update user set nom= ? , prenom=?, genrePrefere = ? where email = ?");
             $c2->bindParam(1,$nom);
             $c2->bindParam(2,$prenom);
