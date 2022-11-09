@@ -85,4 +85,15 @@ class Auth
         return $r;
     }
 
+    public static function changerMDP(string $mailUser,string $newMDP):string{
+        $bdd = ConnectionFactory::makeConnection();
+        $r=false;
+        $c3 = $bdd->prepare("Update user set passwd =:mdp
+                            where email=:email");
+        $c3->bindParam(":email",$mailUser);
+        $c3->bindParam(":mdp",$newMDP);
+        $c3->execute();
+        return "<h2>Votre mot de pass a bien été modifié</h2>";
+    }
+
 }
