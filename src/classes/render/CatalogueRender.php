@@ -28,9 +28,9 @@ class CatalogueRender extends Render
 
         $res = "";
         if($selector===1) {
-            $res = "<div class='liste'><a href='?action=display-serie&id=" . $id . "'>";
-            $res .= "<h4><center>" . $this->serie->titre ."</h4>";
-            $res .= "<h4><center><a href='?action=display-commentaire&id=" . $this->serie->id . "' id='lien' <a>Note moyenne : $moyenne</h4>";
+            $res = "<div class='liste'><a href='?action=display-serie&id=" . $id . "' id='lienVid'><h2><center>" . $this->serie->titre ."</h2></a>";
+            $res .= "";
+            $res .= "<h3><center><a href='?action=display-commentaire&id=" . $this->serie->id . "' id='lien'>Note moyenne : $moyenne</a></h3>";
 
             $res .= "<center><a href='?action=display-serie&id=" . $this->serie->id . "' id='lien'><div class=zoom>
                     <div class=image>

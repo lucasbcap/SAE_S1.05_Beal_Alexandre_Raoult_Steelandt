@@ -156,10 +156,13 @@ li {
 
 #lien:visited {
     color: black;
-
 }
 
-lien:hover {
+#stars{
+    width: 20px;
+}
+
+#lien:hover {
     border-bottom: 1px solid;
     background: #CDFEAA;
 }

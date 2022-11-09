@@ -55,7 +55,7 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
     {
         $res = "";
         if ($this->http_method == "GET") {
-            $res = "<h2>Catalogue : </h2>";
+            $res = "<h1>Catalogue : </h1>";
             $array = User::TrieSQL();
             if ($array!=null) {
                 foreach ($array as $d) {
@@ -143,7 +143,9 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
 
     public function rechercher(string $search):string{
         $bdd = ConnectionFactory::makeConnection();
-        $c1 = $bdd->query("SELECT * from serie where titre like '%$search%'");
+        $c1 = $bdd->prepare("SELECT * from serie where titre like :s");
+        $search = "%".$search."%";
+        $c1->bindParam(":s",$search);
         $c1->execute();
         $rendu = "";
         while ($d = $c1->fetch()) {
