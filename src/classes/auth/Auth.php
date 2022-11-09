@@ -57,23 +57,6 @@ class Auth
 
     }
 
-    public static function verifUser(string $mailUser): bool
-    {
-        $bdd = ConnectionFactory::makeConnection();
-        $r = false;
-        $c3 = $bdd->prepare("select count(*) as compte from user 
-                            where email=?");
-        $c3->bindParam(1, $mailUser);
-        $c3->execute();
-        $compte = 0;
-        while ($d = $c3->fetch()) {
-            $compte = $d['compte'];
-        }
-
-        if ($compte != 0 || $mailUser === "admin@mail.com") $r = true;
-        return $r;
-    }
-
     public static function changerMDP(string $mailUser, string $newMDP): string
     {
         $bdd = ConnectionFactory::makeConnection();
@@ -129,6 +112,7 @@ class Auth
                 $res = true;
             }
         }
-        return true;
+        self::generateToken($_SESSION['mail']);
+        return $res;
     }
 }
