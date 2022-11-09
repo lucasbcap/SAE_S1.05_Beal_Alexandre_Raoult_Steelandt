@@ -32,13 +32,13 @@ class CatalogueRender extends Render
             $res .= "<h4><center>" . $this->serie->titre ."</h4>";
             $res .= "<h4><center><a href='?action=display-commentaire&id=" . $this->serie->id . "' id='lien' <a>Note moyenne : $moyenne</h4>";
 
-
             $res .= "<center><a href='?action=display-serie&id=" . $this->serie->id . "' id='lien'><div class=zoom>
                     <div class=image>
                     <img src='Image/" . $this->serie->img . "' width='600' height='380'></a></center><br>
                     </div>
                     </div>
                     </div>";
+
             $array = unserialize($_SESSION['user'])->getSQL("favori");
             $trouve = false;
             if($array!=null) {
