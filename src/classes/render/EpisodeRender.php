@@ -24,7 +24,9 @@ class EpisodeRender extends Render
                 "<p><video controls src='{$this->ep->source}' type='video/mp4'></video></p>";
         }
         if($selector===2){
-            $html = "<a href='?action=display-episode&id=" . Episode::chercherEpisodeTitre($this->ep->titre) . "' id='lien'>{$this->ep->titre}    | Durée : {$this->ep->duree} min</a>";
+            $html = "<a href='?action=display-episode&id=" . Episode::chercherEpisodeTitre($this->ep->titre) . "' id='lien'>{$this->ep->titre}    | Durée : {$this->ep->duree} min</a>
+                     <img src='Image/" . $this->ep->img . "' width='600' height='380'>
+                     ";
         }
 
 

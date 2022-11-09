@@ -18,6 +18,5 @@ class PrefereAction extends \iutnc\netvod\action\Action
         unserialize($_SESSION['user'])->addSQL($_GET['id'],"favori");
         header("Location:?action=display-catalogue");
         return "";
-
     }
 }
