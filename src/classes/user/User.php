@@ -7,7 +7,7 @@ use iutnc\netvod\video\Serie;
 
 class User
 {
-    protected string $email, $passwrd;
+    protected string $email, $passwrd, $token;
 
     /**
      * @param string $email
