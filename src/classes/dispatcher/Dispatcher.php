@@ -86,8 +86,19 @@ class Dispatcher
         if(isset($_SESSION['user'])) {
             $search ="";
             if ($this->action == 'display-catalogue'){
-                $search = "<form method='post' id='searchbar' action='?action=display-catalogue'><li id='searchbar'> <input size='30%' type ='search' 
-                            name='search' placeholder='Rechercher une série'></li></form>"    ;
+                $search = "<form method='post' action='?action=display-catalogue'><li id='searchbar'><input size='30%' type ='search' 
+                            name='search' placeholder='Rechercher une série'></li></form>";
+
+                $search.="<form method='post' action='?action=display-catalogue'><ul id='btn'><li id='filtre'>
+                           <button name='bnt1'>Trier</button>
+                            <select name='filter'>
+                            <option value='---'>---</option>
+                            <option value='titre'>Titre</option>
+                            <option value='genre'>Genre</option>
+                            <option value='public vise'>Public Visé</option>
+                            <option value='annee'>Année</option>
+                            <option value='date ajout'>Date Ajout</option>
+                            </select></li></ul></form>";
             }
             return "<!DOCTYPE html>
                     <html lang='fr'>    

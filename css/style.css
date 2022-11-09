@@ -79,6 +79,14 @@ li {
     padding-right: 5%;
 }
 
+#filtre{
+    float: right;
+    padding-right: 2%;
+}
+#btn{
+    list-style-type:none;
+}
+
 li a {
     display: block;
     color: white;

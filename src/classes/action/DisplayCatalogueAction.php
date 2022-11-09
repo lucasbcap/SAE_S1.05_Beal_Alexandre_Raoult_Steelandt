@@ -23,20 +23,30 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
     {
         $res = "";
         if ($this->http_method == "GET") {
+
             if (isset($_GET['search'])) {
                 $res = $this->afficherCatalogue($_GET['search']);
+            }
+            elseif(isset($_GET['filter'])){
+                $res=$this->Filtre($_GET['filter']);
             }else{
-                $res = $this->afficherCatalogue();
+                $res .= $this->afficherCatalogue();
             }
         } else if ($this->http_method == "POST") {
-            header('Location: ?action=display-catalogue&search='.$_POST['search']);
+            if(isset($_POST['search'])){
+                header('Location: ?action=display-catalogue&search='.$_POST['search']);
+            }
+
+            if(isset($_POST['filter'])){
+                header('Location: ?action=display-catalogue&filter='.$_POST['filter']);
+            }
         }
+
         return $res;
     }
 
-    public function afficherCatalogue(string $search = ""): string
+    public function afficherCatalogue(string $search =""): string
     {
-        $bdd = ConnectionFactory::makeConnection();
         $res = "";
         if ($this->http_method == "GET") {
             $res = "<h2>Catalogue : </h2>";
@@ -52,8 +62,26 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
             }
         }
         return $res;
+    }
 
-
+    public function Filtre(string $filtre =""): string
+    {
+        if($filtre==="date ajout") $filtre = "date_ajout";
+        if($filtre==="public vise") $filtre = "publicvise";
+        if($filtre==="---") $filtre = null;
+        $bdd = ConnectionFactory::makeConnection();
+        $res = "";
+        if ($this->http_method == "GET") {
+            $res = "<h2>Catalogue : </h2>";
+            $array = User::TrieSQL($filtre);
+            if ($array!=null) {
+                foreach ($array as $d) {
+                    $serieCouranteRenderer = new CatalogueRender($d);
+                    $res .= $serieCouranteRenderer->render(1);
+                }
+            }
+        }
+        return $res;
     }
 
     public function rechercher(string $search):string{
