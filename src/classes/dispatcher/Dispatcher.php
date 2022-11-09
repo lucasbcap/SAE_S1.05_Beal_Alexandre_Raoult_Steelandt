@@ -108,14 +108,14 @@ class Dispatcher
 
                 $search .= "<form method='post' action='?action=display-catalogue'><li id='filtre'>
 
-                            <select name='filtre'>
+                            <select name='filtre1'>
                             <option value='public viseF'>Type de publique</option>
                             <option value='adulte'>Adulte</option>
-                            <option value='damille'>Famille</option>
+                            <option value='famille'>Famille</option>
                             <option value='adolescent'>Adolescent</option>
                             </select>
                             
-                            <select name='filtre'>
+                            <select name='filtre2'>
                             <option value='genreF'>Genre</option>
                             <option value='horreur'>Horreur</option>
                             <option value='action'>Action</option>

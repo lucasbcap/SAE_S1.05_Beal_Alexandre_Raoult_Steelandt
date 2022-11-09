@@ -28,9 +28,9 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
                 $res = $this->afficherCatalogue($_GET['search']);
             }
             elseif(isset($_GET['trie'])){
-                $res=$this->Filtre($_GET['trie']);
-            }elseif(isset($_GET['filter'])) {
-                $res = $this->Filtre($_GET['filter']);
+                $res=$this->Trie($_GET['trie']);
+            }elseif(isset($_GET['genre']) && isset($_GET['type'])) {
+                $res = $this->Filtre($_GET['type'],$_GET['genre']);
             }else{
                 $res .= $this->afficherCatalogue();
             }
@@ -41,6 +41,10 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
 
             if(isset($_POST['trie'])){
                 header('Location: ?action=display-catalogue&trie='.$_POST['trie']);
+            }
+
+            if(isset($_POST['filtre1']) && isset($_POST['filtre2'])){
+                header('Location: ?action=display-catalogue&type='.$_POST['filtre1'].'&genre='.$_POST['filtre2']);
             }
         }
 
@@ -66,16 +70,41 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
         return $res;
     }
 
-    public function Filtre(string $filtre =""): string
+    public function Filtre(string $type ="" , string $genre=""): string
     {
-        if($filtre==="date ajout") $filtre = "date_ajout";
-        if($filtre==="public vise") $filtre = "publicvise";
-        if($filtre==="---") $filtre = null;
-        $bdd = ConnectionFactory::makeConnection();
+
         $res = "";
         if ($this->http_method == "GET") {
             $res = "<h2>Catalogue : </h2>";
-            $array = User::TrieSQL($filtre);
+
+
+            if($genre !=="genreF" && $type !=="public viseF")$array = Serie::SerieArgs($genre,$type);
+            elseif ($genre !=="genreF") $array = Serie::SerieArgs($genre);
+            elseif ($type !=="public viseF")$array = Serie::SerieArgs("",$type);
+
+
+            if ($array!=null) {
+                foreach ($array as $d) {
+                    $serieCouranteRenderer = new CatalogueRender($d);
+                    $res .= $serieCouranteRenderer->render(1);
+                }
+            }
+            else{
+                header('Location: ?action=display-catalogue');
+            }
+        }
+        return $res;
+    }
+
+    public function Trie(string $trie =""): string
+    {
+        if($trie==="date ajout") $trie = "date_ajout";
+        if($trie==="public vise") $trie = "publicvise";
+        if($trie==="---") $trie = null;
+        $res = "";
+        if ($this->http_method == "GET") {
+            $res = "<h2>Catalogue : </h2>";
+            $array = User::TrieSQL($trie);
             if ($array!=null) {
                 foreach ($array as $d) {
                     $serieCouranteRenderer = new CatalogueRender($d);

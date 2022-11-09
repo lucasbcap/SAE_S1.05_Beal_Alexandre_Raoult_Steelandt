@@ -62,6 +62,30 @@ class Serie
         return $serie;
     }
 
+    static function SerieArgs(string $genre="", string $type=""): ?array
+    {
+        if($genre !=="" && $type !=="") $query = "select id from serie where genre = :args1 and publicVise = :args2";
+        elseif ($genre !=="")$query = "select id from serie where genre = :args1";
+        elseif ($type !=="")$query = "select id from serie where publicVise = :args2";
+
+        $bdd = ConnectionFactory::makeConnection();
+        $c1 = $bdd->prepare($query);
+        if ($genre !=="") $c1->bindParam(":args1",$genre);
+        if ($type !=="")  $c1->bindParam(":args2",$type);
+        $c1->execute();
+        $array = null;
+        while ($d = $c1->fetch()) {
+            if(isset($d["id"])) {
+                $serie = Serie::creerSerie($d["id"]);
+                if ($serie != null) {
+                    $array[] = $serie;
+                }
+            }
+        }
+        return $array;
+    }
+
+
     public function __get(string $at): mixed
     {
         if (property_exists($this, $at)) {
