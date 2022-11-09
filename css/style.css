@@ -79,10 +79,18 @@ li {
     padding-right: 5%;
 }
 
-#filtre{
+#trie{
     float: right;
-    padding-right: 2%;
+    padding-top: 1%;
+    padding-right: 5%;
 }
+
+#filtre{
+    padding-top: 1%;
+    float: right;
+    padding-right: 5%;
+}
+
 #btn{
     list-style-type:none;
 }

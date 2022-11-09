@@ -91,19 +91,43 @@ class Dispatcher
         if(isset($_SESSION['user'])) {
             $search ="";
             if ($this->action == 'display-catalogue'){
-                $search = "<form method='post' action='?action=display-catalogue'><li id='searchbar'><input size='30%' type ='search' 
+                $search = "<div id='catalogue'><form method='post' action='?action=display-catalogue'><li id='searchbar'><input size='30%' type ='search' 
                             name='search' placeholder='Rechercher une série'></li></form>";
 
-                $search.="<form method='post' action='?action=display-catalogue'><ul id='btn'><li id='filtre'>
-                           <button name='bnt1'>Trier</button>
-                            <select name='filter'>
+                $search.="<form method='post' action='?action=display-catalogue'><li id='trie'>
+                            <select name='trie'>
                             <option value='---'>---</option>
                             <option value='titre'>Titre</option>
                             <option value='genre'>Genre</option>
                             <option value='public vise'>Public Visé</option>
                             <option value='annee'>Année</option>
                             <option value='date ajout'>Date Ajout</option>
-                            </select></li></ul></form>";
+                            </select>
+                            <button name='bnt1'>Trier</button>
+                            </li></form>";
+
+                $search.="<form method='post' action='?action=display-catalogue'><li id='filtre'>
+
+                            <select name='filtre'>
+                            <option value='public viseF'>Type de publique</option>
+                            <option value='adulte'>Adulte</option>
+                            <option value='damille'>Famille</option>
+                            <option value='adolescent'>Adolescent</option>
+                            </select>
+                            
+                            <select name='filtre'>
+                            <option value='genreF'>Genre</option>
+                            <option value='horreur'>Horreur</option>
+                            <option value='action'>Action</option>
+                            <option value='aventure'>Aventure</option>
+                            <option value='sport'>Sport</option>
+                            <option value='nostalgie'>Nostalgie</option>
+                            </select>
+                            <button name='bnt1'>Filtré</button>
+                            </li>
+                            </form></div>";
+
+
             }
             return "<!DOCTYPE html>
                     <html lang='fr'>    

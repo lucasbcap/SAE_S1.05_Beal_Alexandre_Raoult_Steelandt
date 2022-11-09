@@ -27,8 +27,10 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
             if (isset($_GET['search'])) {
                 $res = $this->afficherCatalogue($_GET['search']);
             }
-            elseif(isset($_GET['filter'])){
-                $res=$this->Filtre($_GET['filter']);
+            elseif(isset($_GET['trie'])){
+                $res=$this->Filtre($_GET['trie']);
+            }elseif(isset($_GET['filter'])) {
+                $res = $this->Filtre($_GET['filter']);
             }else{
                 $res .= $this->afficherCatalogue();
             }
@@ -37,8 +39,8 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
                 header('Location: ?action=display-catalogue&search='.$_POST['search']);
             }
 
-            if(isset($_POST['filter'])){
-                header('Location: ?action=display-catalogue&filter='.$_POST['filter']);
+            if(isset($_POST['trie'])){
+                header('Location: ?action=display-catalogue&trie='.$_POST['trie']);
             }
         }
 
