@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 09, 2022 at 02:20 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Hôte : 127.0.0.1
+-- Généré le : mer. 09 nov. 2022 à 14:29
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sae_s1.05`
+-- Base de données : `sae_s1.05`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commentaire`
+-- Structure de la table `commentaire`
 --
 
 CREATE TABLE `commentaire` (
@@ -35,7 +35,7 @@ CREATE TABLE `commentaire` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `commentaire`
+-- Déchargement des données de la table `commentaire`
 --
 
 INSERT INTO `commentaire` (`comm`, `note`, `email`, `idSerie`) VALUES
@@ -44,31 +44,30 @@ INSERT INTO `commentaire` (`comm`, `note`, `email`, `idSerie`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `encours`
+-- Structure de la table `encours`
 --
 
 CREATE TABLE `encours` (
-  `email` varchar(256) NOT NULL,
-  `idSerie` int(11) NOT NULL,
-  `dernierEp` int(2) NOT NULL,
-  `nbEpisode` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `encoursepisode`
---
-
-CREATE TABLE `encoursepisode` (
+  `email` varchar(30) NOT NULL,
   `idSerie` int(3) NOT NULL,
   `idEpisode` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `encours`
+--
+
+INSERT INTO `encours` (`email`, `idSerie`, `idEpisode`) VALUES
+('beal.lucas@gmail.com', 1, 0),
+('beal.lucas@gmail.com', 1, 1),
+('beal.lucas@gmail.com', 3, 3),
+('beal.lucas@gmail.com', 4, 1),
+('beal.lucas@gmail.com', 4, 2);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `episode`
+-- Structure de la table `episode`
 --
 
 CREATE TABLE `episode` (
@@ -83,36 +82,36 @@ CREATE TABLE `episode` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `episode`
+-- Déchargement des données de la table `episode`
 --
 
 INSERT INTO `episode` (`id`, `numero`, `titre`, `resume`, `duree`, `file`, `serie_id`, `image`) VALUES
-(1, 1, 'Le lac', 'Le lac se révolte ', 8, 'lake.mp4', 1, 'lake.jpg'),
-(2, 2, 'Le lac : les mystères de l\'eau trouble', 'Un grand mystère, l\'eau du lac est trouble. Jack trouvera-t-il la solution ?', 8, 'lake.mp4', 1, 'lake.jpg'),
-(3, 3, 'Le lac : les mystères de l\'eau sale', 'Un grand mystère, l\'eau du lac est sale. Jack trouvera-t-il la solution ?', 8, 'lake.mp4', 1, 'lake.jpg'),
-(4, 3, 'Le lac : les mystères de l\'eau chaude', 'Un grand mystère, l\'eau du lac est chaude. Jack trouvera-t-il la solution ?', 8, 'lake.mp4', 1, 'lake.jpg'),
-(5, 3, 'Le lac : les mystères de l\'eau froide', 'Un grand mystère, l\'eau du lac est froide. Jack trouvera-t-il la solution ?', 8, 'lake.mp4', 1, 'lake.jpg'),
-(6, 1, 'Eau calme', 'L\'eau coule tranquillement au fil du temps.', 15, 'water.mp4', 2, 'water.jpg'),
-(7, 2, 'Eau calme 2', 'Le temps a passé, l\'eau coule toujours tranquillement.', 15, 'water.mp4', 2, 'water.jpg'),
-(8, 3, 'Eau moins calme', 'Le temps des tourments est pour bientôt, l\'eau s\'agite et le temps passe.', 15, 'water.mp4', 2, 'water.jpg'),
-(9, 4, 'la tempête', 'C\'est la tempête, l\'eau est en pleine agitation. Le temps passe mais rien n\'y fait. Jack trouvera-t-il la solution ?', 15, 'water.mp4', 2, 'water.jpg'),
-(10, 5, 'Le calme après la tempête', 'La tempête est passée, l\'eau retrouve son calme. Le temps passe et Jack part en vacances.', 15, 'water.mp4', 2, 'water.jpg'),
-(11, 1, 'les chevaux s\'amusent', 'Les chevaux s\'amusent bien, ils ont apportés les raquettes pour faire un tournoi de badmington.', 7, 'horses.mp4', 3, 'horses.jpg'),
-(12, 2, 'les chevals fous', '- Oh regarde, des beaux chevals !!\r\n- non, des chevaux, des CHEVAUX !\r\n- oh, bin ça alors, ça ressemble drôlement à des chevals ?!!?', 7, 'horses.mp4', 3, 'horses.jpg'),
-(13, 3, 'les chevaux de l\'étoile noire', 'Les chevaux de l\'Etoile Noire débrquent sur terre et mangent toute l\'herbe !', 7, 'horses.mp4', 3, 'horses.jpg'),
-(14, 1, 'Tous à la plage', 'C\'est l\'été, tous à la plage pour profiter du soleil et de la mer.', 18, 'beach.mp4', 4, 'beach.jpg'),
-(15, 2, 'La plage le soir', 'A la plage le soir, il n\'y a personne, c\'est tout calme', 18, 'beach.mp4', 4, 'beach.jpg'),
-(16, 3, 'La plage le matin', 'A la plage le matin, il n\'y a personne non plus, c\'est tout calme et le jour se lève.', 18, 'beach.mp4', 4, 'beach.jpg'),
-(17, 1, 'champion de surf', 'Jack fait du surf le matin, le midi le soir, même la nuit. C\'est un pro.', 11, 'surf.mp4', 5, 'surf.jpg'),
-(18, 2, 'surf détective', 'Une planche de surf a été volée. Jack mène l\'enquête. Parviendra-t-il à confondre le brigand ?', 11, 'surf.mp4', 5, 'surf.jpg'),
-(19, 3, 'surf amitié', 'En fait la planche n\'avait pas été volée, c\'est Jim, le meilleur ami de Jack, qui lui avait fait une blague. Les deux amis partagent une menthe à l\'eau pour célébrer leur amitié sans faille.', 11, 'surf.mp4', 5, 'surf.jpg'),
-(20, 1, 'Ça roule, ça roule', 'Ça roule, ça roule toute la nuit. Jack fonce dans sa camionnette pour rejoindre le spot de surf.', 27, 'cars-by-night.mp4', 6, 'carsbynight.jpg'),
-(21, 2, 'Ça roule, ça roule toujours', 'Ça roule la nuit, comme chaque nuit. Jim fonce avec son taxi, pour rejoindre Jack à la plage. De l\'eau a coulé sous les ponts. Le mystère du Lac trouve sa solution alors que les chevaux sont de retour après une virée sur l\'Etoile Noire.', 27, 'cars-by-night.mp4', 6, 'carsbynight.jpg');
+(1, 1, 'Le lac', 'Le lac se révolte ', 8, 'lake.mp4', 1, ''),
+(2, 2, 'Le lac : les mystères de l\'eau trouble', 'Un grand mystère, l\'eau du lac est trouble. Jack trouvera-t-il la solution ?', 8, 'lake.mp4', 1, ''),
+(3, 3, 'Le lac : les mystères de l\'eau sale', 'Un grand mystère, l\'eau du lac est sale. Jack trouvera-t-il la solution ?', 8, 'lake.mp4', 1, ''),
+(4, 3, 'Le lac : les mystères de l\'eau chaude', 'Un grand mystère, l\'eau du lac est chaude. Jack trouvera-t-il la solution ?', 8, 'lake.mp4', 1, ''),
+(5, 3, 'Le lac : les mystères de l\'eau froide', 'Un grand mystère, l\'eau du lac est froide. Jack trouvera-t-il la solution ?', 8, 'lake.mp4', 1, ''),
+(6, 1, 'Eau calme', 'L\'eau coule tranquillement au fil du temps.', 15, 'water.mp4', 2, ''),
+(7, 2, 'Eau calme 2', 'Le temps a passé, l\'eau coule toujours tranquillement.', 15, 'water.mp4', 2, ''),
+(8, 3, 'Eau moins calme', 'Le temps des tourments est pour bientôt, l\'eau s\'agite et le temps passe.', 15, 'water.mp4', 2, ''),
+(9, 4, 'la tempête', 'C\'est la tempête, l\'eau est en pleine agitation. Le temps passe mais rien n\'y fait. Jack trouvera-t-il la solution ?', 15, 'water.mp4', 2, ''),
+(10, 5, 'Le calme après la tempête', 'La tempête est passée, l\'eau retrouve son calme. Le temps passe et Jack part en vacances.', 15, 'water.mp4', 2, ''),
+(11, 1, 'les chevaux s\'amusent', 'Les chevaux s\'amusent bien, ils ont apportés les raquettes pour faire un tournoi de badmington.', 7, 'horses.mp4', 3, ''),
+(12, 2, 'les chevals fous', '- Oh regarde, des beaux chevals !!\r\n- non, des chevaux, des CHEVAUX !\r\n- oh, bin ça alors, ça ressemble drôlement à des chevals ?!!?', 7, 'horses.mp4', 3, ''),
+(13, 3, 'les chevaux de l\'étoile noire', 'Les chevaux de l\'Etoile Noire débrquent sur terre et mangent toute l\'herbe !', 7, 'horses.mp4', 3, ''),
+(14, 1, 'Tous à la plage', 'C\'est l\'été, tous à la plage pour profiter du soleil et de la mer.', 18, 'beach.mp4', 4, ''),
+(15, 2, 'La plage le soir', 'A la plage le soir, il n\'y a personne, c\'est tout calme', 18, 'beach.mp4', 4, ''),
+(16, 3, 'La plage le matin', 'A la plage le matin, il n\'y a personne non plus, c\'est tout calme et le jour se lève.', 18, 'beach.mp4', 4, ''),
+(17, 1, 'champion de surf', 'Jack fait du surf le matin, le midi le soir, même la nuit. C\'est un pro.', 11, 'surf.mp4', 5, ''),
+(18, 2, 'surf détective', 'Une planche de surf a été volée. Jack mène l\'enquête. Parviendra-t-il à confondre le brigand ?', 11, 'surf.mp4', 5, ''),
+(19, 3, 'surf amitié', 'En fait la planche n\'avait pas été volée, c\'est Jim, le meilleur ami de Jack, qui lui avait fait une blague. Les deux amis partagent une menthe à l\'eau pour célébrer leur amitié sans faille.', 11, 'surf.mp4', 5, ''),
+(20, 1, 'Ça roule, ça roule', 'Ça roule, ça roule toute la nuit. Jack fonce dans sa camionnette pour rejoindre le spot de surf.', 27, 'cars-by-night.mp4', 6, ''),
+(21, 2, 'Ça roule, ça roule toujours', 'Ça roule la nuit, comme chaque nuit. Jim fonce avec son taxi, pour rejoindre Jack à la plage. De l\'eau a coulé sous les ponts. Le mystère du Lac trouve sa solution alors que les chevaux sont de retour après une virée sur l\'Etoile Noire.', 27, 'cars-by-night.mp4', 6, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estfini`
+-- Structure de la table `estfini`
 --
 
 CREATE TABLE `estfini` (
@@ -121,7 +120,7 @@ CREATE TABLE `estfini` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `estfini`
+-- Déchargement des données de la table `estfini`
 --
 
 INSERT INTO `estfini` (`email`, `idSerie`) VALUES
@@ -130,32 +129,7 @@ INSERT INTO `estfini` (`email`, `idSerie`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estvisionne`
---
-
-CREATE TABLE `estvisionne` (
-  `email` varchar(256) NOT NULL,
-  `idVideo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `estvisionne`
---
-
-INSERT INTO `estvisionne` (`email`, `idVideo`) VALUES
-('user1@mail.com', 1),
-('user1@mail.com', 2),
-('user1@mail.com', 3),
-('user1@mail.com', 4),
-('user1@mail.com', 5),
-('user2@mail.com', 6),
-('user2@mail.com', 7),
-('user2@mail.com', 8);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `favori`
+-- Structure de la table `favori`
 --
 
 CREATE TABLE `favori` (
@@ -164,7 +138,7 @@ CREATE TABLE `favori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `favori`
+-- Déchargement des données de la table `favori`
 --
 
 INSERT INTO `favori` (`email`, `idSerie`) VALUES
@@ -178,7 +152,7 @@ INSERT INTO `favori` (`email`, `idSerie`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `serie`
+-- Structure de la table `serie`
 --
 
 CREATE TABLE `serie` (
@@ -193,7 +167,7 @@ CREATE TABLE `serie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `serie`
+-- Déchargement des données de la table `serie`
 --
 
 INSERT INTO `serie` (`id`, `titre`, `descriptif`, `img`, `genre`, `publicVise`, `annee`, `date_ajout`) VALUES
@@ -207,7 +181,7 @@ INSERT INTO `serie` (`id`, `titre`, `descriptif`, `img`, `genre`, `publicVise`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE `user` (
@@ -217,7 +191,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`email`, `passwd`, `role`) VALUES
@@ -230,63 +204,63 @@ INSERT INTO `user` (`email`, `passwd`, `role`) VALUES
 ('user4@mail.com', '$2y$12$ltC0A0zZkD87pZ8K0e6TYOJPJeN/GcTSkUbpqq0kBvx6XdpFqzzqq', 1);
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `commentaire`
+-- Index pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
   ADD PRIMARY KEY (`email`,`idSerie`);
 
 --
--- Indexes for table `episode`
+-- Index pour la table `encours`
+--
+ALTER TABLE `encours`
+  ADD PRIMARY KEY (`email`,`idSerie`,`idEpisode`);
+
+--
+-- Index pour la table `episode`
 --
 ALTER TABLE `episode`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `estfini`
+-- Index pour la table `estfini`
 --
 ALTER TABLE `estfini`
   ADD PRIMARY KEY (`email`,`idSerie`);
 
 --
--- Indexes for table `estvisionne`
---
-ALTER TABLE `estvisionne`
-  ADD PRIMARY KEY (`email`,`idVideo`);
-
---
--- Indexes for table `favori`
+-- Index pour la table `favori`
 --
 ALTER TABLE `favori`
   ADD PRIMARY KEY (`email`,`idSerie`);
 
 --
--- Indexes for table `serie`
+-- Index pour la table `serie`
 --
 ALTER TABLE `serie`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `episode`
+-- AUTO_INCREMENT pour la table `episode`
 --
 ALTER TABLE `episode`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `serie`
+-- AUTO_INCREMENT pour la table `serie`
 --
 ALTER TABLE `serie`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
