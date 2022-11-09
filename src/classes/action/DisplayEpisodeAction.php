@@ -56,24 +56,8 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
             <input type='submit' id='log' value='Envoyer'>
             ";
             $user = unserialize($_SESSION['user']);
-            $user->addSQL($episode->serie,"enCours");
-            $c3 =$bdd->prepare("SELECT count(id) as id from episode where serie_id = ?");
-            $c3->bindParam(1,$_GET['id']);
-            $c3->execute();
-            while($da = $c3->fetch()){
-                $i= $da['id'];
-            }
-
-            $c4 =$bdd->prepare("SELECT count(id) as id from episode where serie_id = ?");
-            $c4->bindParam(1,$_GET['id']);
-            $c4->execute();
-            while($da = $c3->fetch()){
-                $i= $da['id'];
-            }
             $user->addSQL($episode->serie,"enCours",$episode->numero);
         }
-        echo $i;
-
         return $res;
     }
 

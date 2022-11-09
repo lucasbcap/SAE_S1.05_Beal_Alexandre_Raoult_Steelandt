@@ -36,7 +36,22 @@ class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
         $res .= "<h2>Liste des séries en cours : </h2><br>";
         $user = unserialize($_SESSION['user']);
         if ($this->http_method == "GET") {
-            $array = $user->getSQL("enCours");
+
+
+            $bdd = ConnectionFactory::makeConnection();
+            $c1 = $bdd->prepare("select idSerie from enCours where email = :email and idEpisode=1;");
+            $mail = $user->getemail();
+            $c1->bindParam(":email",$mail);
+            $c1->execute();
+            $array = null;
+            while ($d = $c1->fetch()) {
+                $serie = Serie::creerSerie($d['idSerie']);
+                if ($serie!=null) {
+                    $array[] = $serie;
+                }
+            }
+
+
             if ($array!=null) {
                 foreach ($array as $d) {
                     $serieCouranteRenderer = new CatalogueRender($d);

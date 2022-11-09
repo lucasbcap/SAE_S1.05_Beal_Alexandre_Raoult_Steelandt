@@ -47,6 +47,16 @@ class Episode
         return $d['id'];
     }
 
+    public static function chercherEpisodeNumero(int $numero,int $idSerie):int {
+        $bdd = ConnectionFactory::makeConnection();
+        $requete = $bdd->prepare("Select id from episode where numero=? and serie_id=?");
+        $requete->bindParam(1,$numero);
+        $requete->bindParam(2,$idSerie);
+        $requete->execute();
+        $d = $requete->fetch();
+        return $d['id'];
+    }
+
     public static function chercherSerie(int $idEpisode):int {
         $bdd = ConnectionFactory::makeConnection();
         $requete = $bdd->prepare("Select serie_id from episode where id=?");
