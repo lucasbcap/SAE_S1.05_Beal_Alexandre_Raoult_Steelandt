@@ -11,6 +11,7 @@ use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\AddUserAction;
 use iutnc\netvod\action\ProfilAction;
 use iutnc\netvod\action\PrefereAction;
+use iutnc\netvod\action\MotDePasseOubAction;
 
 
 class Dispatcher
@@ -60,6 +61,10 @@ class Dispatcher
             case 'display-commentaire':
                 $act = new DisplayCommentaireAction();
                 $html =$act->execute();
+                break;
+            case 'mdpoub':
+                $act = new MotDePasseOubAction();
+                $html = $act->execute();
                 break;
             default:
 

@@ -32,6 +32,7 @@ class SigninAction extends Action
         <label><b>Mot de passe</b></label>
         <input type='password' placeholder='Entrer le mot de passe' name='password' required><br>
 
+        <a href='?action=mdpoub' id='mdpoublier'>Mot de passe oublié</a>
         <input type='submit' id='log' value='LOGIN'>
         ";
 
