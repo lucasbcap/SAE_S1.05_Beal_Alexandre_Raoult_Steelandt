@@ -39,17 +39,7 @@ class DisplayCatalogueAction extends \iutnc\netvod\action\Action
         $bdd = ConnectionFactory::makeConnection();
         $res = "";
         if ($this->http_method == "GET") {
-            $res = "<div>
-                        <li><h2>Catalogue : </h2> </li>
-                        <li><select multiple>
-                            <option value='titre'>Titre</option>
-                            <option value='genre'>Genre</option>
-                            <option value='public vise'>Public Visé</option>
-                            <option value='annee'>Année</option>
-                            <option value='date ajout'>Date Ajout</option>
-                    </select></li>
-                    </div>";
-            
+            $res = "<h2>Catalogue : </h2>";
             $rendu = "";
             $array = User::TrieSQL();
             if ($array!=null) {
