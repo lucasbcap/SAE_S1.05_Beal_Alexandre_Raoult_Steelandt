@@ -4,7 +4,9 @@ namespace iutnc\netvod\db;
 
 use PDO;
 
-
+/**
+ * Class ConnectionFactory vue en cours
+ */
 
 class ConnectionFactory
 {
