@@ -20,13 +20,7 @@ class MotDePasseOubAction extends \iutnc\netvod\action\Action
         } else if ($this->http_method == 'POST')
             if (isset($_SESSION['mail'])) {
                 if (isset($_GET['token']) && Auth::activate($_GET['token'])) {
-                    if ($_POST['mdp'] != $_POST['verifmdp']) {
-                        header("Location : ?action=mdpoub&token=" . $_GET['token'] . "&error=3");
-                    }
-                    $res = Auth::changerMDP($_SESSION['mail'], $_POST['mdp']);
-                    if ($res == "") {
-                        header("Location : ?action=mdpoub&token=" . $_GET['token'] . "&error=2");
-                    }
+                    $res = $this->changerMdp();
                 }
             } else {
                 $res = $this->envoieToken($_POST['mail']);
@@ -64,6 +58,18 @@ class MotDePasseOubAction extends \iutnc\netvod\action\Action
             header("Location: ?action=mdpoub&error=1");
         } else {
             $res = "<a href='?action=mdpoub&token=$res'>Lien de reset mot de passe</a>";
+        }
+        return $res;
+    }
+
+    function changerMdp():string{
+        if ($_POST['mdp'] == $_POST['verifmdp']) {
+            $res = Auth::changerMDP($_SESSION['mail'], $_POST['mdp']);
+            if ($res == "") {
+                header("location: ?action=mdpoub&token=" . $_GET['token'] . "&error=2");
+            }
+        }else{
+            header("location: ?action=mdpoub&token=".$_GET['token']."&error=3");
         }
         return $res;
     }

@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\dispatcher;
 
+use iutnc\netvod\action\Deconnexion;
 use iutnc\netvod\action\DisplayCatalogueAction;
 use iutnc\netvod\action\DisplayCommentaireAction;
 use iutnc\netvod\action\DisplayEpisodeAction;
@@ -70,6 +71,10 @@ class Dispatcher
                     $act = new MotDePasseOubAction();
                     $html = $act->execute();
                     break;
+                case 'deconnexion':
+                    $act = new Deconnexion();
+                    $html = $act->execute();
+                    break;
                 default:
                     $act = new DisplayPrincipaleAction();
                     $html = $act->execute();
@@ -112,6 +117,7 @@ class Dispatcher
                         <li><a href='./' id='Netvod'>NetVod</a></li>                    
                         <li><a href='?action=display-catalogue'>Afficher Catalogue</a></li>   
                         <li><a href='?action=profil'>Profil</a></li>  
+                        <li><a href='?action=deconnexion'>Deconnexion</a></li>
                         $search
                              
                     </ul>
