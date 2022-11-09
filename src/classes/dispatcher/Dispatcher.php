@@ -31,9 +31,9 @@ class Dispatcher
     public function run(): void
     {
         $act = $this->action;
-        if(!isset($_SESSION['user']) && $act!='sign-in' && $act!='add-user' && $act!='mdpoub') {
-            $html = "<p>Veuillez vous connecter pour accéder au catalogue</p>";
-        }else {
+        if (!isset($_SESSION['user']) && $act != 'sign-in' && $act != 'add-user' && $act != 'mdpoub') {
+            $html = "<div class='grayscale'><div id='st'></dib><img src='image/logo.png' id='bienvenue'></div></div><h1 id='wel'>Bienvenue</h1>          ";
+        } else {
             switch ($act) {
                 case 'add-user':
                     $act = new AddUserAction();
@@ -88,13 +88,13 @@ class Dispatcher
     private function renderPage(string $res): string
     {
 
-        if(isset($_SESSION['user'])) {
-            $search ="";
-            if ($this->action == 'display-catalogue'){
+        if (isset($_SESSION['user'])) {
+            $search = "";
+            if ($this->action == 'display-catalogue') {
                 $search = "<div id='catalogue'><form method='post' action='?action=display-catalogue'><li id='searchbar'><input size='30%' type ='search' 
                             name='search' placeholder='Rechercher une série'></li></form>";
 
-                $search.="<form method='post' action='?action=display-catalogue'><li id='trie'>
+                $search .= "<form method='post' action='?action=display-catalogue'><li id='trie'>
                             <select name='trie'>
                             <option value='---'>---</option>
                             <option value='titre'>Titre</option>
@@ -106,7 +106,7 @@ class Dispatcher
                             <button name='bnt1'>Trier</button>
                             </li></form>";
 
-                $search.="<form method='post' action='?action=display-catalogue'><li id='filtre'>
+                $search .= "<form method='post' action='?action=display-catalogue'><li id='filtre'>
 
                             <select name='filtre'>
                             <option value='public viseF'>Type de publique</option>
@@ -138,7 +138,7 @@ class Dispatcher
                     </head>
                     <header>
                     <ul>
-                        <li><a href='./' id='logo'><img src='image/logo.png' id='logo'></a></li>                    
+                        <li><a href='./'><img src='image/logo.png' id='logo'></a></li>                    
                         <li><a href='?action=display-catalogue' id='navbar'>Afficher Catalogue</a></li>   
                         <li><a href='?action=profil' id='navbar'>Profil </a></li>  
                         <li><a href='?action=deconnexion' id='navbar'>Deconnexion</a></li>
@@ -150,8 +150,7 @@ class Dispatcher
                     $res
                     </body>
                     </html>";
-        }
-        else{
+        } else {
             return "<!DOCTYPE html>
                     <html lang='fr'>
                     <head>
@@ -161,7 +160,7 @@ class Dispatcher
                     </head>
                     <header>
                     <ul>
-                        <li><a href='./' id='logo'><img src='image/logo.png' id='logo'></a></li>     
+                        <li><a href='./'><img src='image/logo.png' id='logo'></a></li>     
                         <li><a href='?action=sign-in' id='navbar'>Connexion</a></li>
                         <li><a href='?action=add-user' id='navbar'>Inscription</a></li>
                     </ul>

@@ -1,5 +1,4 @@
 
-
 a {
     height: 20px;
     outline: none;
@@ -7,31 +6,35 @@ a {
     padding: 2px 1px 0;
 }
 
-.track{
+.track {
     text-align: center;
 }
-h1{
+
+h1 {
     padding-top: 10px;
     padding-left: 25px;
     padding-bottom: 10px;
 }
-h2{
+
+h2 {
     padding: 10px;
 }
-h3{
+
+h3 {
     padding: 10px;
 }
-h4{
+
+h4 {
     padding: 10px;
     margin-bottom: 3px;
     margin-top: 3px;
 }
 
 
-
-p{
-    padding : 12px;
+p {
+    padding: 12px;
 }
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -40,24 +43,54 @@ ul {
     background-color: #333;
     height: 60px;
 }
+
 .image {
     width: 100%;
     height: 100%;
     padding-left: 30px;
 }
 
-#logo{
+#logo {
     float: left;
     padding-left: 5px;
     padding-right: 5px;
-    margin:
+    margin-right: 5px;
     width: 100px;
     height: 60px;
 }
+
+#bienvenue {
+    text-align: center;
+    width: 65%;
+}
+
+#st {
+    text-align: center;
+}
+
+.grayscale img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.grayscale :hover img {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+
+#wel {
+    font-size: 50px;
+    text-align: center;
+}
+
 .zoom {
     width: 50%;
     height: 20%;
 }
+
 .image img {
     /* La transition s'applique à la fois sur la largeur et la hauteur, avec une durée d'une seconde. */
     -webkit-transition: all 1s ease; /* Safari et Chrome */
@@ -66,48 +99,52 @@ ul {
     -o-transition: all 1s ease; /* Opera */
     transition: all 1s ease;
 }
+
 .image:hover img {
     /* L'image est grossie de 25% */
-    -webkit-transform:scale(1.1); /* Safari et Chrome */
-    -moz-transform:scale(1.1); /* Firefox */
-    -ms-transform:scale(1.1); /* Internet Explorer 9 */
-    -o-transform:scale(1.1); /* Opera */
-    transform:scale(1.1);
+    -webkit-transform: scale(1.1); /* Safari et Chrome */
+    -moz-transform: scale(1.1); /* Firefox */
+    -ms-transform: scale(1.1); /* Internet Explorer 9 */
+    -o-transform: scale(1.1); /* Opera */
+    transform: scale(1.1);
 }
-.duree{
-    float :right;
+
+.duree {
+    float: right;
     padding-right: 9%;
 }
-.resume{
+
+.resume {
     float: left;
     padding-left: 9%;
 }
+
 li {
     float: left;
 }
 
-#searchbar{
+#searchbar {
     float: right;
     padding-right: 5%;
 }
 
-#trie{
+#trie {
     float: right;
     padding-top: 1%;
     padding-right: 5%;
 }
 
-#filtre{
+#filtre {
     padding-top: 1%;
     float: right;
     padding-right: 5%;
 }
 
-#btn{
-    list-style-type:none;
+#btn {
+    list-style-type: none;
 }
 
-#navbar{
+#navbar {
     display: block;
     color: white;
     text-align: center;
@@ -116,11 +153,11 @@ li {
     font-size: 20px;
 }
 
-#Netvod{
-    color:#B30F0FFF;
+#Netvod {
+    color: #B30F0FFF;
 }
 
-#lien:visited{
+#lien:visited {
     color: black;
 
 }
@@ -134,27 +171,31 @@ li a:hover {
     background-color: #111;
 }
 
-body{
+body {
     background: #E5E7E9;
 }
 
-#container{
-    width:400px;
+#container {
+    width: 400px;
     margin: auto;
 }
-#input{
+
+#input {
     width: 40%;
     padding: 8px 14px;
 }
-#input2{
+
+#input2 {
     height: 100px;
 }
-#profil{
+
+#profil {
     height: 100px;
 }
-#formPro{
+
+#formPro {
     background: #fff;
-    padding :30px;
+    padding: 30px;
     width: 60%;
     margin-left: auto;
     margin-right: auto;
@@ -172,12 +213,13 @@ body{
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-#container h1{
+#container h1 {
     width: 38%;
     margin: 0 auto;
     padding-bottom: 10px;
 }
-#commentaire{
+
+#commentaire {
     border: solid;
 }
 
@@ -187,7 +229,7 @@ div.listeGeneral {
 }
 
 /* Full-width inputs */
-input[type=text], input[type=password], input[type=email], input[type=search]{
+input[type=text], input[type=password], input[type=email], input[type=search] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -206,6 +248,7 @@ input[type=submit] {
     cursor: pointer;
     width: 100%;
 }
+
 input[type=submit]:hover {
     background-color: white;
     color: #B30F0FFF;

@@ -54,7 +54,7 @@ class SigninAction extends Action
             if (unserialize($_SESSION['user']) == null) {
                 header("Location: ?action=sign-in&error=1");
             } else {
-                $res = "Vous êtes connecte en tant que " . $_POST['mail'];
+                header('location: ./');
             }
         }
         return $res;
