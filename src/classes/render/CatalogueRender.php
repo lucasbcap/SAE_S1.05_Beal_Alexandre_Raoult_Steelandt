@@ -75,6 +75,19 @@ class CatalogueRender extends Render
                     </div>";
         }
 
+        if($selector===3){
+
+
+            $res = "<div class='liste'><a href='?action=display-serie&id=" . $id . "'>";
+            $res .= "<h4>" . $this->serie->titre . "</h4>";
+            $res .= "<a href='?action=display-serie&id=" . $id . "' id='lien'><div class=zoom>
+                    <div class=image>
+                    <img src='Image/" . $this->serie->img . "' width='200' height='120'></a>
+                    </div>
+                    </div>
+                    </div>";
+        }
+
         return $res;
     }
 }
