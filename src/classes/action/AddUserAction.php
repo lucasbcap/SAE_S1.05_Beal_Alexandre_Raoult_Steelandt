@@ -14,9 +14,14 @@ class AddUserAction extends Action
 
     public function execute(): string
     {
-        $res ="";
-        if($this->http_method == 'GET') $res = $this->inscription();
-        else if ($this->http_method == 'POST') $res = $this->inscrit();
+        $res = "";
+        if ($this->http_method == 'GET') {
+            if (isset($_GET['valide'])) {
+                $res = $this->confirmerInscrit();
+            } else {
+                $res = $this->inscription();
+            }
+        } else if ($this->http_method == 'POST') $res = $this->inscrit();
         return $res;
     }
 
@@ -25,7 +30,8 @@ class AddUserAction extends Action
         $mail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $pass = $_POST['pass'];
         $pass2 = $_POST['pass2'];
-        $res = Auth::register($mail, $pass,$pass2);
+        $_SESSION['mail'] = $mail;
+        $res = Auth::register($mail, $pass, $pass2);
         switch ($res) {
             case "EmailExist":
                 header("Location: ?action=add-user&error=1");
@@ -37,10 +43,15 @@ class AddUserAction extends Action
                 header("Location: ?action=add-user&error=3");
                 break;
             case "Log":
-                $res="Vous êtes connecté";
+                header("Location: ?action=add-user&valide=1");
                 break;
         }
         return $res;
+    }
+
+    function confirmerInscrit():string{
+        $res = Auth::generateToken("new");
+        return "<a href='?action=add-user&token=".$res."'>Confirmer compte</a>";
     }
 
 

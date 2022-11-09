@@ -44,11 +44,15 @@ class Auth
                 }
                 if ($verif) {
                     $token = Auth::generateToken($email);
-                    $c2 = $bdd->prepare("insert into user values(:email,:pass,null,null,null,1,$token);");
+                    $c2 = $bdd->prepare("insert into user values(:email,:pass,null,null,null,1,:token);");
                     $c2->bindParam(":email", $email,);
                     $pass = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 12]);
                     $c2->bindParam(":pass", $pass);
+                    $c2->bindParam(":token", $token);
                     $c2->execute();
+                    $_POST['mail'] = $email;
+                    $_POST['password'] = $pass;
+                    Auth::authenticate();
                 } else {
                     $r = "EmailExist";
                 }
@@ -119,7 +123,7 @@ class Auth
             $verif = true;
         }
         $res = "";
-        if ($verif) {
+        if ($verif || $email=="new") {
             $chaine = "a0b1c2d3e4f5g6h7i8j9klmnpqrstuvwxy123456789";
             for ($i = 0; $i < 50; $i++) {
                 $token .= $chaine[rand() % strlen($chaine)];
@@ -147,5 +151,4 @@ class Auth
         }
         return true;
     }
-
 }
