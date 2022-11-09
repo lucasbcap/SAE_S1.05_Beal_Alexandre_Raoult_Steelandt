@@ -16,7 +16,11 @@ class ProfilAction extends \iutnc\netvod\action\Action
     {
         $res ="";
         if($this->http_method == 'GET') $res = $this->modifProfil();
-        else if ($this->http_method == 'POST') $res = $this->enregistrerProfil();
+        else if ($this->http_method == 'POST') {
+            $res = $this->modifProfil();
+            $res .= $this->enregistrerProfil();
+            $res .="<h3 style='color:green'>Profile enregistré</h3>";
+        }
         return $res;
     }
 
