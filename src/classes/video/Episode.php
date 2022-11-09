@@ -35,7 +35,7 @@ class Episode
         $requete->bindParam(":id",$id);
         $requete->execute();
         $d = $requete->fetch();
-        return new Episode($d['titre'],"video/".$d['file'],"Image/beach.jpg",$d['resume'],$d['numero'],$d['duree'],$d['serie_id']);
+        return new Episode($d['titre'],"video/".$d['file'],$d['image'],$d['resume'],$d['numero'],$d['duree'],$d['serie_id']);
     }
 
     public static function chercherEpisodeTitre(string $titre):int {

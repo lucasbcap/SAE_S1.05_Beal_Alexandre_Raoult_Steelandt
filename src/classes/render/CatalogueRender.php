@@ -18,7 +18,7 @@ class CatalogueRender extends Render
     public function render(int $selector = 1): string
     {
         $bdd = ConnectionFactory::makeConnection();
-        $c2 = $bdd->prepare("select AVG(note) as moyenne from Commentaire where  idSerie=?");
+        $c2 = $bdd->prepare("select AVG(note) as moyenne from commentaire where  idSerie=?");
         $id = $this->serie->id;
         $c2->bindParam(1, $id);
         $c2 ->execute();
