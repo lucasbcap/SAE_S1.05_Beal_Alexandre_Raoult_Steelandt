@@ -24,7 +24,7 @@ class CatalogueRender extends Render
         $c2 ->execute();
         $moyenne = $c2->fetch()['moyenne'];
         if($moyenne === null) $moyenne = "Non notée";
-        else $moyenne =round($moyenne,2) . " sur 5";
+        else $moyenne =round($moyenne,2) . " <img id ='stars' src='image/stars.png'>/ 5";
 
         $res = "";
         if($selector===1) {

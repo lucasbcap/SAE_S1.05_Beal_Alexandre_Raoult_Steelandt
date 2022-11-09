@@ -221,6 +221,7 @@ body {
 
 #commentaire {
     border: solid;
+    margin: 20px;
 }
 
 div.listeGeneral {

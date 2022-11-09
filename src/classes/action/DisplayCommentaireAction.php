@@ -30,7 +30,8 @@ class DisplayCommentaireAction extends \iutnc\netvod\action\Action
                 $bdd = ConnectionFactory::makeConnection();
 
 
-                $c2 = $bdd->prepare("select email,note,comm,titre from commentaire inner join Serie on commentaire.idSerie = serie.id where idSerie=?");
+                $c2 = $bdd->prepare("select commentaire.email,note,comm,titre,nom, prenom from commentaire inner join Serie on commentaire.idSerie = serie.id
+                             inner join user on commentaire.email = user.email where idSerie=?");
                 $c2->bindParam(1, $_GET['id']);
                 $c2->execute();
                 $count = 0;
@@ -39,8 +40,15 @@ class DisplayCommentaireAction extends \iutnc\netvod\action\Action
                     if ($d['comm'] != null) {
                         $count++;
                         $titre = $d['titre'];
-                        $comm .= $d['email'] . "  Note " . $d['note'] . " sur 5 : <br>";
-                        $comm .= "<p id='commentaire' STYLE='padding:0 0 0 20px'>".$d['comm'] . "</p><br><br>";
+                        $compte = $d['email'];
+                        if ($d['nom']!=""){
+                            $compte = $d['nom']." ";
+                        }
+                        if ($d['prenom']!=""){
+                            $compte .= $d['prenom'];
+                        }
+                        $comm .= "<div id='commentaire'><h2> ".$compte . "  Note " . $d['note'] . " <img id ='stars' src='image/stars.png'>/ 5 : </h2>";
+                        $comm .= "<p STYLE='padding:0 0 0 10px'>".$d['comm'] . "</p><br><br></div>";
                         $moy+=$d['note'];
                     }
                 }
@@ -49,7 +57,7 @@ class DisplayCommentaireAction extends \iutnc\netvod\action\Action
                     $res = "<h2>Pas de commentaires</h2>";
                 }else{
                     $moy/=$count;
-                    $res .="<h3><div id='note'> Moyenne pour la série '".$titre."' : ".$moy." <img id ='stars' src='image/stars.png'> <p>Commentaires :</p> </div></h3>";
+                    $res .="<h3><div id='note'> Moyenne pour la série '".$titre."' : ".$moy." <img id ='stars' src='image/stars.png'>/5 <p>Commentaires :</p> </div></h3>";
                     $res .= $comm;
                 }
 
