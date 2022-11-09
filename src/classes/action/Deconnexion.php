@@ -16,6 +16,7 @@ class Deconnexion extends Action
     {
         $res ="";
         session_destroy();
+        header('location: ./');
         return $res;
     }
 }
