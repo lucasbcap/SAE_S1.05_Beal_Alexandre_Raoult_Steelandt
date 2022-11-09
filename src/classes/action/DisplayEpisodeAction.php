@@ -56,7 +56,7 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
             <input type='submit' id='log' value='Envoyer'>
             ";
             $user = unserialize($_SESSION['user']);
-            $user->addSQL($episode->serie,"enCours");
+            $user->addSQL($episode->serie,"encours");
             $c3 =$bdd->prepare("SELECT count(id) as id from episode where serie_id = ?");
             $c3->bindParam(1,$_GET['id']);
             $c3->execute();
@@ -70,9 +70,8 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
             while($da = $c3->fetch()){
                 $i= $da['id'];
             }
-            $user->addSQL($episode->serie,"enCours",$episode->numero);
+            $user->addSQL($episode->serie,"encours",$episode->numero);
         }
-        echo $i;
 
         return $res;
     }
@@ -88,7 +87,7 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
             $chercherSerie = Episode::chercherSerie($_GET['id']);
             $emailUser = unserialize($_SESSION['user'])->getEmail();
 
-            $c2 = $bdd->prepare("INSERT INTO Commentaire values (?,?,?,?)");
+            $c2 = $bdd->prepare("INSERT INTO commentaire values (?,?,?,?)");
             $c2->bindParam(1,$com);
             $c2->bindParam(2,$note);
             $c2->bindParam(3,$emailUser);
@@ -104,7 +103,7 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
         $chercherSerie = Episode::chercherSerie($_GET['id']);
         $emailUser = unserialize($_SESSION['user'])->getEmail();
 
-        $c2 = $bdd->prepare("select * from Commentaire where email=? and idSerie=?");
+        $c2 = $bdd->prepare("select * from commentaire where email=? and idSerie=?");
         $c2->bindParam(1,$emailUser);
         $c2->bindParam(2, $chercherSerie);
         $c2 ->execute();
