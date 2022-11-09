@@ -138,10 +138,10 @@ class Dispatcher
                     </head>
                     <header>
                     <ul>
-                        <li><a href='./' id='Netvod'>NetVod</a></li>                    
-                        <li><a href='?action=display-catalogue'>Afficher Catalogue</a></li>   
-                        <li><a href='?action=profil'>Profil</a></li>  
-                        <li><a href='?action=deconnexion'>Deconnexion</a></li>
+                        <li><a href='./' id='logo'><img src='image/logo.png' id='logo'></a></li>                    
+                        <li><a href='?action=display-catalogue' id='navbar'>Afficher Catalogue</a></li>   
+                        <li><a href='?action=profil' id='navbar'>Profil </a></li>  
+                        <li><a href='?action=deconnexion' id='navbar'>Deconnexion</a></li>
                         $search
                              
                     </ul>
@@ -161,9 +161,9 @@ class Dispatcher
                     </head>
                     <header>
                     <ul>
-                        <li><a href='./' id='Netvod'>NetVod</a></li>
-                        <li><a href='?action=sign-in'>Connexion</a></li>
-                        <li><a href='?action=add-user'>Inscription</a></li>
+                        <li><a href='./' id='logo'><img src='image/logo.png' id='logo'></a></li>     
+                        <li><a href='?action=sign-in' id='navbar'>Connexion</a></li>
+                        <li><a href='?action=add-user' id='navbar'>Inscription</a></li>
                     </ul>
                     </header>
                     <body>
