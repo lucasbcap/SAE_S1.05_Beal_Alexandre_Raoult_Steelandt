@@ -79,11 +79,23 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
             }
 
             if($i === $j){
-                $user->suppSQL($idSerie,"encours");
-                $c5 = $bdd->prepare("INSERT INTO estfini values(?,?)");
-                $c5->bindParam(1,$mail);
-                $c5->bindParam(2,$idSerie);
-                $c5->execute();
+
+                $c4 =$bdd->prepare("SELECT count(*) as id2 from encours where idSerie =? and email =?;");
+                $c4->bindParam(1,$idSerie);
+                $mail = $user->email;
+                $c4->bindParam(2,$mail);
+                $c4->execute();
+                $verif=true;
+                while($d = $c4->fetch()){
+                    $verif = false;
+                }
+                if($verif) {
+                    $user->suppSQL($idSerie, "encours");
+                    $c5 = $bdd->prepare("INSERT INTO estfini values(?,?)");
+                    $c5->bindParam(1, $mail);
+                    $c5->bindParam(2, $idSerie);
+                    $c5->execute();
+                }
 
 
             }
