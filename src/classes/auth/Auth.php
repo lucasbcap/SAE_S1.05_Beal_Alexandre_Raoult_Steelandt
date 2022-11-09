@@ -31,38 +31,18 @@ class Auth
 
     public static function register(string $email, string $pass, string $pass2): string
     {
-        $r = "Log";
-        if ($pass == $pass2) {
-            if (self::checkPasswordStrength($pass, 4)) {
-                $bdd = ConnectionFactory::makeConnection();
-                $c1 = $bdd->prepare("Select * from user where email=:mail");
-                $c1->bindParam(":mail", $email);
-                $c1->execute();
-                $verif = true;
-                while ($d = $c1->fetch()) {
-                    $verif = false;
-                }
-                if ($verif) {
-                    $token = Auth::generateToken($email);
-                    $c2 = $bdd->prepare("insert into user values(:email,:pass,null,null,null,1,:token);");
-                    $c2->bindParam(":email", $email,);
-                    $pass = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 12]);
-                    $c2->bindParam(":pass", $pass);
-                    $c2->bindParam(":token", $token);
-                    $c2->execute();
-                    $_POST['mail'] = $email;
-                    $_POST['password'] = $pass;
-                    Auth::authenticate();
-                } else {
-                    $r = "EmailExist";
-                }
-            } else {
-                $r = "MdpWrong";
-            }
-        } else {
-            $r = "NotSameMdp";
-        }
-        return $r;
+        $bdd = ConnectionFactory::makeConnection();
+        $token = Auth::generateToken($email);
+        $c2 = $bdd->prepare("insert into user values(:email,:pass,null,null,null,1,:token);");
+        $c2->bindParam(":email", $email,);
+        $pass = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 12]);
+        $c2->bindParam(":pass", $pass);
+        $c2->bindParam(":token", $token);
+        $c2->execute();
+        $_POST['mail'] = $email;
+        $_POST['password'] = $pass;
+        Auth::authenticate();
+        return "Log";
     }
 
     public static function checkPasswordStrength(string $pass, int $minimumLength): bool
