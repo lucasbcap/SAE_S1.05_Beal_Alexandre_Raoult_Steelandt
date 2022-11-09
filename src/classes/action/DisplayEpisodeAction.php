@@ -72,7 +72,7 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
             $chercherSerie = Episode::chercherSerie($_GET['id']);
             $emailUser = unserialize($_SESSION['user'])->getEmail();
 
-            $c2 = $bdd->prepare("INSERT INTO Commentaire values (?,?,?,?)");
+            $c2 = $bdd->prepare("INSERT INTO commentaire values (?,?,?,?)");
             $c2->bindParam(1,$com);
             $c2->bindParam(2,$note);
             $c2->bindParam(3,$emailUser);
@@ -88,7 +88,7 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
         $chercherSerie = Episode::chercherSerie($_GET['id']);
         $emailUser = unserialize($_SESSION['user'])->getEmail();
 
-        $c2 = $bdd->prepare("select * from Commentaire where email=? and idSerie=?");
+        $c2 = $bdd->prepare("select * from commentaire where email=? and idSerie=?");
         $c2->bindParam(1,$emailUser);
         $c2->bindParam(2, $chercherSerie);
         $c2 ->execute();

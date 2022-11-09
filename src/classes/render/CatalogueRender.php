@@ -47,9 +47,10 @@ class CatalogueRender extends Render
                 }
             }
              if($trouve){
-                 $res .= "<center><a href='?action=prefere&id=" . $this->serie->id . "'><img src='Image/coeurplein.png' width='70' height='70'></a></center>";
+                 $res .= "<center><a href='?action=prefere&fav=oui&id=" . $this->serie->id . "'><img src='Image/coeurplein.png' width='70' height='70'></a></center>";
+
              }else {
-                 $res .= "<center><a href='?action=prefere&id=" . $this->serie->id . "'><img src='Image/coeurvide.png' width='70' height='70'></a></center>";
+                 $res .= "<center><a href='?action=prefere&fav=non&id=" . $this->serie->id . "'><img src='Image/coeurvide.png' width='70' height='70'></a></center>";
              }
         }
 

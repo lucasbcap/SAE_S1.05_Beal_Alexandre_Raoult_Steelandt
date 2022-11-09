@@ -7,7 +7,7 @@ use iutnc\netvod\video\Serie;
 
 class User
 {
-    protected string $email, $passwrd;
+    protected string $email, $passwrd, $token;
 
     /**
      * @param string $email
@@ -34,7 +34,7 @@ class User
         $val = "idSerie";
         $query ="Select * from $table where email=:mail and $val=:id";
         $insert = "insert into $table values (:email,:id)";
-        if ($table==="enCours"){
+        if ($table==="encours"){
             $query = "Select * from $table where email=:mail and $val=:id and idEpisode=:idEpisode";
             $insert = "insert into $table values (:email,:id,:idepisode)";
         }
@@ -43,7 +43,7 @@ class User
         $c = $bdd->prepare($query);
         $c->bindParam(":mail", $this->email);
         $c->bindParam(":id", $id);
-        if ($table==="enCours"){
+        if ($table==="encours"){
             $c->bindParam(":idEpisode",$idEpisode);
         }
         $c->execute();
@@ -56,7 +56,7 @@ class User
             $c1 = $bdd->prepare($insert);
             $c1->bindParam(":email", $this->email);
             $c1->bindParam(":id", $id);
-            if ($table==="enCours"){
+            if ($table==="encours"){
                 $c1->bindParam(":idepisode",$idEpisode);
             }
 

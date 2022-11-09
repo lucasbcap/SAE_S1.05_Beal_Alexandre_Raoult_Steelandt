@@ -30,7 +30,7 @@ class Dispatcher
     public function run(): void
     {
         $act = $this->action;
-        if(!isset($_SESSION['user']) && $act!='sign-in' && $act!='add-user') {
+        if(!isset($_SESSION['user']) && $act!='sign-in' && $act!='add-user' && $act!='mdpoub') {
             $html = "<p>Veuillez vous connecter pour accéder au catalogue</p>";
         }else {
             switch ($act) {
@@ -130,7 +130,5 @@ class Dispatcher
                     </body>
                     </html>";
         }
-
-        return "";
     }
 }
