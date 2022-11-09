@@ -40,7 +40,7 @@ class DisplayPrincipaleAction extends \iutnc\netvod\action\Action
 
             $bdd = ConnectionFactory::makeConnection();
             $c1 = $bdd->prepare("select idSerie from encours where email = :email and idEpisode=1;");
-            $mail = $user->getemail();
+            $mail = $user->email;
             $c1->bindParam(":email",$mail);
             $c1->execute();
             $array = null;
