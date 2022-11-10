@@ -24,7 +24,7 @@ class CatalogueRender extends Render
         $c2 ->execute();
         $moyenne = $c2->fetch()['moyenne'];
         if($moyenne === null) $moyenne = "Non notée";
-        else $moyenne =round($moyenne,2) . " <img id ='stars' src='image/stars.png'>/ 5";
+        else $moyenne =round($moyenne,2) . " <img id ='stars' src='Image/stars.png'>/ 5";
 
         $res = "";
         if($selector===1) {
@@ -33,7 +33,7 @@ class CatalogueRender extends Render
             $res .= "<h3><center><a href='?action=display-commentaire&id=" . $this->serie->id . "' id='lien'>Note moyenne : $moyenne</a></h3>";
 
             $res .= "<center><a href='?action=display-serie&id=" . $this->serie->id . "' id='lien'><div class=zoom>
-                    <div class=image>
+                    <div class=image2>
                     <img src='Image/" . $this->serie->img . "' width='600' height='380'></a></center><br>
                     </div>
                     </div>

@@ -4,7 +4,7 @@ namespace iutnc\netvod\action;
 
 use iutnc\netvod\auth\Auth;
 
-class Deconnexion extends Action
+class DeconnexionAction extends Action
 {
 
     public function __construct()
@@ -15,8 +15,8 @@ class Deconnexion extends Action
     public function execute(): string
     {
         $res ="";
-        session_destroy();
-        header('location: ./');
+        session_destroy();                  // on detruit la session
+        header('location: ./');      // et on reviens a l'accueil
         return $res;
     }
 }
