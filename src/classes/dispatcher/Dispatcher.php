@@ -2,7 +2,7 @@
 
 namespace iutnc\netvod\dispatcher;
 
-use iutnc\netvod\action\Deconnexion;
+use iutnc\netvod\action\DeconnexionAction;
 use iutnc\netvod\action\DisplayCatalogueAction;
 use iutnc\netvod\action\DisplayCommentaireAction;
 use iutnc\netvod\action\DisplayEpisodeAction;
@@ -28,54 +28,58 @@ class Dispatcher
         $this->action = $_GET['action'] ?? null;
     }
 
+    /**
+     * fonction principale qui est appele dans l'index
+     * @return void
+     */
     public function run(): void
     {
         $act = $this->action;
-        if (!isset($_SESSION['user']) && $act != 'sign-in' && $act != 'add-user' && $act != 'mdpoub') {
-            $html = "<div class='grayscale'><div id='st'></dib><img src='image/logo.png' id='bienvenue'></div></div><h1 id='wel'>Bienvenue</h1>          ";
+        if (!isset($_SESSION['user']) && $act != 'sign-in' && $act != 'add-user' && $act != 'mdpoub') {    //si l'utilisateur n'est pas connecté et si il n'esssaye pas de s'inscrire ou de se connecter
+            $html = "<div class='grayscale'><div id='st'></dib><img src='Image/logo.png' id='bienvenue'></div></div><h1 id='wel'>Bienvenue</h1>          ";     // affichage de bienvenue
         } else {
             switch ($act) {
-                case 'add-user':
+                case 'add-user':                // inscription
                     $act = new AddUserAction();
                     $html = $act->execute();
                     break;
-                case 'sign-in':
+                case 'sign-in':                 //connexion
                     $act = new SigninAction();
                     $html = $act->execute();
                     break;
-                case 'display-catalogue':
+                case 'display-catalogue':       // affichage catalogue
                     $act = new DisplayCatalogueAction();
                     $html = $act->execute();
                     break;
-                case 'display-serie':
+                case 'display-serie':           // affichage series
                     $act = new DisplaySerieAction();
                     $html = $act->execute();
                     break;
-                case 'display-episode':
+                case 'display-episode':         // affichage episodes
                     $act = new DisplayEpisodeAction();
                     $html = $act->execute();
                     break;
-                case 'profil':
+                case 'profil':                  // gestion du profil
                     $act = new ProfilAction();
                     $html = $act->execute();
                     break;
-                case 'prefere':
+                case 'prefere':                 // gestion de la liste des preferes
                     $act = new PrefereAction();
                     $html = $act->execute();
                     break;
-                case 'display-commentaire':
+                case 'display-commentaire':     // affichage des commentaires et gestion
                     $act = new DisplayCommentaireAction();
                     $html = $act->execute();
                     break;
-                case 'mdpoub':
+                case 'mdpoub':                  // gestion mot de passe oublie lors de l'inscription
                     $act = new MotDePasseOubAction();
                     $html = $act->execute();
                     break;
-                case 'deconnexion':
-                    $act = new Deconnexion();
+                case 'deconnexion':             // gestion de la deconnexion
+                    $act = new DeconnexionAction();
                     $html = $act->execute();
                     break;
-                default:
+                default:                        // accueil
                     $act = new DisplayPrincipaleAction();
                     $html = $act->execute();
                     break;
@@ -88,14 +92,14 @@ class Dispatcher
     private function renderPage(string $res): string
     {
 
-        if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['user'])) {         // si l'utilisateur est connecte
             $search = "";
-            if ($this->action == 'display-catalogue') {
+            if ($this->action == 'display-catalogue') {         //si affichage du catalogue
                 $search = "<div id='catalogue'><form method='post' action='?action=display-catalogue'><li id='searchbar'><input size='30%' type ='search' 
-                            name='search' placeholder='Rechercher une série'></li></form>";
+                            name='search' placeholder='Rechercher une série'></li></form>";     // barre de recherche
 
-                $search .= "<form method='post' action='?action=display-catalogue'><li id='trie'>
-                            <select name='trie'>
+                $search .= "<form method='post' action='?action=display-catalogue'><li id='trie'>       
+                            <select name='trie'>                                                   
                             <option value='---'>---</option>
                             <option value='titre'>Titre</option>
                             <option value='genre'>Genre</option>
@@ -105,7 +109,9 @@ class Dispatcher
                             <option value='moyenne'>Moyenne</option>
                             </select>
                             <button name='bnt1'>Trier</button>
-                            </li></form>";
+                            </li></form>";                                      // Choix du tri a effectuer dans l'affichage du catalogue
+
+                // choix du type de public
 
                 $search .= "<form method='post' action='?action=display-catalogue'><li id='filtre'>
 
@@ -114,7 +120,7 @@ class Dispatcher
                             <option value='adulte'>Adulte</option>
                             <option value='famille'>Famille</option>
                             <option value='adolescent'>Adolescent</option>
-                            </select>
+                            </select>                                       
                             
                             <select name='filtre2'>
                             <option value='genreF'>Genre</option>
@@ -126,11 +132,15 @@ class Dispatcher
                             </select>
                             <button name='bnt1'>Filtré</button>
                             </li>
-                            </form></div>";
+                            </form></div>";                                 // choix du genre de series
 
 
             }
-            return "<!DOCTYPE html>
+            // affichage de l'accueil
+            // peut afficher le catalogue
+            // modifier son profil
+            // se deconnecter
+            return "<!DOCTYPE html>                     
                     <html lang='fr'>    
                     <head>
                         <title>NetVOD</title>
@@ -139,10 +149,10 @@ class Dispatcher
                     </head>
                     <header>
                     <ul>
-                        <div id='logodiv'><li><a href='./' id='logo'><img src='image/logo.png' id='logo'></a></li></div>                 
-                        <li><a href='?action=display-catalogue' id='navbar'>Afficher Catalogue</a></li>   
-                        <li><a href='?action=profil' id='navbar'>Profil </a></li>  
-                        <li><a href='?action=deconnexion' id='navbar'>Deconnexion</a></li>
+                        <div id='logodiv'><li><a href='./' id='logo'><img src='Image/logo.png' id='logo'></a></li></div>                 
+                        <li><a href='?action=display-catalogue' id='navbar'>Afficher Catalogue</a></li>             
+                        <li><a href='?action=profil' id='navbar'>Profil </a></li>                                   
+                        <li><a href='?action=deconnexion' id='navbar'>Déconnexion</a></li>                         
                         $search
                              
                     </ul>
@@ -151,7 +161,10 @@ class Dispatcher
                     $res
                     </body>
                     </html>";
-        } else {
+        } else {                    // si l'user n'est pas connecte
+
+            // peut se connecter
+            // ou s'inscrire
             return "<!DOCTYPE html>
                     <html lang='fr'>
                     <head>
@@ -161,9 +174,9 @@ class Dispatcher
                     </head>
                     <header>
                     <ul>
-                        <div id='logodiv'><li><a href='./' id='logo'><img src='image/logo.png' id='logo'></a></li></div>        
-                        <li><a href='?action=sign-in' id='navbar'>Connexion</a></li>
-                        <li><a href='?action=add-user' id='navbar'>Inscription</a></li>
+                        <div id='logodiv'><li><a href='./' id='logo'><img src='Image/logo.png' id='logo'></a></li></div>        
+                        <li><a href='?action=sign-in' id='navbar'>Connexion</a></li>                
+                        <li><a href='?action=add-user' id='navbar'>Inscription</a></li>              
                     </ul>
                     </header>
                     <body>
