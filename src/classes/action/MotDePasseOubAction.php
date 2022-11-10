@@ -12,7 +12,7 @@ class MotDePasseOubAction extends \iutnc\netvod\action\Action
 {
 
     /**
-     * Execute une methode selon si la methode http est un GET ou un POST
+     * Execute une methode selon si la methode http si c'est un GET ou un POST
      * @return string
      */
     public function execute(): string
