@@ -71,15 +71,12 @@ class DisplayEpisodeAction extends \iutnc\netvod\action\Action
                 $mail = $user->email;
                 $c4->bindParam(2,$mail);
                 $c4->execute();
-                $verif=true;
-                while($c4->fetch()){
-                    $verif = false;
-                }
+                $compte = $c4->fetch()['id2'];
                 // et on supprime la serie poour le user dans la table en cours
                 $user->suppSQL($idSerie, "encours");
 
                 // si non on l ajoute la serie a estFini
-                if($verif) {
+                if($compte===0) {
                     $c5 = $bdd->prepare("INSERT INTO estfini values(?,?)");
                     $c5->bindParam(1, $mail);
                     $c5->bindParam(2, $idSerie);
