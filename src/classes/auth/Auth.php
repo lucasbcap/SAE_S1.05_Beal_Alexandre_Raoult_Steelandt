@@ -46,6 +46,9 @@ class Auth
     {
         $bdd = ConnectionFactory::makeConnection();
         $token = Auth::generateToken($email);
+        if ($token==""){
+           $token = $_SESSION['token'];
+        }
         $c2 = $bdd->prepare("insert into user values(:email,:pass,null,null,null,1,:token);");
         $c2->bindParam(":email", $email,);
         $pass = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 12]);
@@ -123,6 +126,9 @@ class Auth
             for ($i = 0; $i < 50; $i++) {
                 $token .= $chaine[rand() % strlen($chaine)];
             }
+            if ($email == "new"){
+                $_SESSION['token'] = $token;
+            }
             $res = $token;
             $req2 = $bdd->prepare("update user set token=:token where email=:email");
             $req2->bindParam(":email", $email);
@@ -148,6 +154,9 @@ class Auth
             if ($d['token'] == $token && $token != "") {
                 $res = true;
             }
+        }
+        if (isset($_SESSION['token']) && $_SESSION['token'] == $token && $token != "") {
+            $res = true;
         }
         return $res;
     }
