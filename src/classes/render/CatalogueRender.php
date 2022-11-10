@@ -33,7 +33,7 @@ class CatalogueRender extends Render
             $res .= "<h3><center><a href='?action=display-commentaire&id=" . $this->serie->id . "' id='lien'>Note moyenne : $moyenne</a></h3>";
 
             $res .= "<center><a href='?action=display-serie&id=" . $this->serie->id . "' id='lien'><div class=zoom>
-                    <div class=image>
+                    <div class=image2>
                     <img src='Image/" . $this->serie->img . "' width='600' height='380'></a></center><br>
                     </div>
                     </div>
