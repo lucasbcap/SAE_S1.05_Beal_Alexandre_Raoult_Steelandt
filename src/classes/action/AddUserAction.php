@@ -5,27 +5,39 @@ namespace iutnc\netvod\action;
 use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory as ConnectionFactory;
 
+/**
+ * Action d'inscription d'un compte
+ */
 class AddUserAction extends Action
 {
 
+    /**
+     * Constructeur
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
+    /**
+     * Execute une methode selon si la methode http est un GET ou un POST
+     * @return string
+     */
     public function execute(): string
     {
         $res = "";
         if ($this->http_method == 'GET') {
-            if (isset($_GET['valide'])) {
+            //Selon ce que le get contient, une methode different sera lance
+            if (isset($_GET['valide'])) {   //Lien de validation
                 $res = $this->confirmerInscrit();
-            } else if(isset($_GET['token']) && Auth::activate($_GET['token'])) {
+            } else if(isset($_GET['token']) && Auth::activate($_GET['token'])) {    //Inscrit si le token est exacte
                 $res = $this->inscrit();
-            }else{
+            }else{ //Formulaire
                 $res = $this->inscription();
             }
         }else if ($this->http_method == 'POST') {
-            switch ($this->verifInscription()){
+            switch ($this->verifInscription()){ //Verification des donnees entree et renvoie vers un lien selon le resultat
+                //Renvoie le formlaire avec une erreur
                 case "EmailExist":
                     header("Location: ?action=add-user&error=1");
                     break;
@@ -36,6 +48,7 @@ class AddUserAction extends Action
                 case "NotSameMdp":
                     header("Location: ?action=add-user&error=3");
                     break;
+                //Renvoie le lien de confirmation
                 case "Log":
                     header("Location: ?action=add-user&valide=1");;
                     break;
@@ -44,6 +57,10 @@ class AddUserAction extends Action
         return $res;
     }
 
+    /**
+     * Ajoute le compte a la base de donnee
+     * @return string balise qui valide l'inscription
+     */
     function inscrit(): string
     {
         $mail = filter_var($_SESSION['email'], FILTER_SANITIZE_EMAIL);
@@ -51,14 +68,22 @@ class AddUserAction extends Action
         $pass2 = $_SESSION['pass2'];
         session_destroy();
         Auth::register($mail, $pass, $pass2);
+        Auth::generateToken($mail);
         return "<h2> Vous êtes Inscrit ! </h2>";
     }
 
+    /**
+     * Verifie si le compte cree a un mot de passe correct, s'il n'a deja pas de compte, et renvoie s'il n'y a aucun probleme
+     * renvoie log
+     * @return string resultat de ce que l'utilisateur a entree
+     */
     function verifInscription():string{
         $r = "Log";
+        //On garde en session ce que l'utilisateur a ecrit pour plus tard
         $_SESSION['email'] = $_POST['email'];
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['pass2'] = $_POST['pass2'];
+        //On verifie que toutes les donnees entre sont bonnes
         if ($_SESSION['pass'] == $_SESSION['pass2']) {
             if (Auth::checkPasswordStrength($_SESSION['pass'], 4)) {
                 $bdd = ConnectionFactory::makeConnection();
@@ -83,14 +108,23 @@ class AddUserAction extends Action
         return $r;
     }
 
+    /**
+     * Renvoie un lien pour que l'utilisateur creer son compte
+     * @return string lien de validation
+     */
     function confirmerInscrit():string{
         $res = Auth::generateToken("new");
         return "<a href='?action=add-user&token=".$res."'>Confirmer compte</a>";
     }
 
 
+    /**
+     * Formulaire d'inscription
+     * @return string le formulaire
+     */
     function inscription(): string
     {
+        //Formulaire
         $res = "
 <form id='sign' method='post' action='?action=add-user'>
 <h1>Inscription</h1>
@@ -98,6 +132,7 @@ class AddUserAction extends Action
                     <label><b>Mot de passe</b> <input type='password' name='pass' placeholder='Mot de passe'></label>
                     <label><b>Entrer à nouveau votre mot de passe</b> <input type='password' name='pass2' placeholder='Entrer à nouveau votre mot de passe'></label>
                     <input type='submit' id='log' value='INSCRIPTION'>";
+        //S'il y a des erreurs on ajoutera une ligne supplementaire selon la nature de l'erreur renvoye
         if (isset($_GET['error'])) {
             switch ($_GET['error']) {
                 case 1:

@@ -2,8 +2,6 @@
 
 namespace iutnc\netvod\action;
 
-use iutnc\netvod\user\User;
-
 class PrefereAction extends \iutnc\netvod\action\Action
 {
 

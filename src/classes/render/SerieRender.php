@@ -2,8 +2,6 @@
 
 namespace iutnc\netvod\render;
 
-use iutnc\netvod\db\ConnectionFactory;
-use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
 
 /**

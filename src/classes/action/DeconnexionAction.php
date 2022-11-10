@@ -2,8 +2,6 @@
 
 namespace iutnc\netvod\action;
 
-use iutnc\netvod\auth\Auth;
-
 class DeconnexionAction extends Action
 {
 
