@@ -2,12 +2,7 @@
 
 namespace iutnc\netvod\action;
 
-use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
-use iutnc\netvod\render\CatalogueRender;
-use iutnc\netvod\user\User;
-use iutnc\netvod\video\Episode;
-use iutnc\netvod\video\Serie;
 
 class DisplayCommentaireAction extends \iutnc\netvod\action\Action
 {
@@ -56,7 +51,9 @@ class DisplayCommentaireAction extends \iutnc\netvod\action\Action
                 if($count===0){                 // si pas de commentaires
                     $res = "<h2>Pas de commentaires</h2>";
                 }else{
-                    $moy/=$count;               // sinon on calcul la moyenne et on l'affiche
+                    // sinon on calcul la moyenne et on l'affiche
+                    $moy/=$count;
+                    $moy = round($moy,2);
                     $res .="<h3><div id='note'> Moyenne pour la série '".$titre."' : ".$moy." <img id ='stars' src='Image/stars.png'>/5 <p>Commentaires :</p> </div></h3>";
                     $res .= $comm;                  
                 }

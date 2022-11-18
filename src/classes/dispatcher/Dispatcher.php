@@ -146,6 +146,7 @@ class Dispatcher
                         <title>NetVOD</title>
                         <meta charset='UTF-8' />
                         <link rel='stylesheet' href='css/style.css'>
+                        <link rel='icon' type='image/png' sizes='16x16' href='Image/logoWeb.png'>
                     </head>
                     <header>
                     <ul>
@@ -171,6 +172,7 @@ class Dispatcher
                         <title>NetVOD</title>
                         <meta charset='UTF-8' />
                         <link rel='stylesheet' href='css/style.css'>
+                        <link rel='icon' type='image/png' sizes='16x16' href='Image/logoWeb.png'>
                     </head>
                     <header>
                     <ul>

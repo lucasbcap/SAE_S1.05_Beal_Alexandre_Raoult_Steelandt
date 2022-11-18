@@ -4,7 +4,6 @@ namespace iutnc\netvod\action;
 
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\render\CatalogueRender;
-use iutnc\netvod\render\SerieRender;
 use iutnc\netvod\video\Serie;
 
 class DisplayPrincipaleAction extends \iutnc\netvod\action\Action

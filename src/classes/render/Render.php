@@ -1,5 +1,5 @@
 <?php
-namespace iutnc\netvod\Render;
+namespace iutnc\netvod\render;
 abstract class Render
 {
 
